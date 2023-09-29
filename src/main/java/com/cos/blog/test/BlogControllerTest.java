@@ -1,4 +1,4 @@
-package com.cos.blog.host;
+package com.cos.blog.test;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
