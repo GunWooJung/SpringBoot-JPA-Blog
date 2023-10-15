@@ -2,18 +2,21 @@
 <%@ include file="../layout/header.jsp"%>
 
 <div class="container">
-	<form action="/user/join">
+	<form >
 		<div class="form-group">
-			<label for="username">username:</label> <input type="text" class="form-control" placeholder="Enter username" id="username">
+			<label for="username">username:</label> 
+			<input type="text" class="form-control" placeholder="Enter username" id="username">
 		</div>
 		<div class="form-group">
-			<label for="password">Password:</label> <input type="password" class="form-control" placeholder="Enter password" id="password">
+			<label for="password">Password:</label> 
+			<input type="password" class="form-control" placeholder="Enter password" id="password">
 		</div>
 		<div class="form-group">
-			<label for="email">Email address:</label> <input type="email" class="form-control" placeholder="Enter email" id="email">
+			<label for="email">Email address:</label> 
+			<input type="email" class="form-control" placeholder="Enter email" id="email">
 		</div>
 	</form>
 	<button id="btn-save" class="btn btn-primary">회원가입 완료</button>
 </div>
-<script src="/blog/js/user.js"></script>
+<script src="/js/user.js"></script>
 <%@ include file="../layout/footer.jsp"%>

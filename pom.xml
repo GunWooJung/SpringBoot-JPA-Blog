@@ -20,7 +20,7 @@
 	<!-- 추가 라이브러리 시작 -->
 	
 	<!-- 시큐리티 태그 라이브러리 -->
-	<!-- <dependency>
+ 	<!-- <dependency>
 	  <groupId>org.springframework.security</groupId>
 	  <artifactId>spring-security-taglibs</artifactId>
 	</dependency> -->
@@ -38,14 +38,10 @@
 	</dependency>
 	<!-- 추가 라이브러리종료 -->
 	
-		 	<dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<!--  <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -72,11 +68,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		 -->
 	</dependencies>
 
 	<build>
