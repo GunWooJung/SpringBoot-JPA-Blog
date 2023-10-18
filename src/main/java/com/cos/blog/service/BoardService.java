@@ -29,10 +29,20 @@ public class BoardService {
 			board.setUser(user);
 			boardRepository.save(board);
 	}
-	
+	@Transactional(readOnly=true)
 	public Page<Board> list(Pageable pageable){
 		return boardRepository.findAll(pageable);
 	}
-	
+	@Transactional(readOnly=true)
+	public Board showDetail(int id) {
+		return boardRepository.findById(id)
+				.orElseThrow(()->{
+					return new IllegalArgumentException("글을 상세 볼 수 없습니다.");
+				});
+	}
+	@Transactional
+	public void deleteById(int id) {
+		boardRepository.deleteById(id);
+	}
 
 }

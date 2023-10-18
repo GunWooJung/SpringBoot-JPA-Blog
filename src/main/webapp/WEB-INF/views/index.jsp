@@ -7,8 +7,8 @@
 			<img class="card-img-top" src="img_avatar1.png" alt="Card image">
 			<div class="card-body">
 				<h4 class="card-title">${board.title}</h4>
-				<p class="card-text">${board.content}</p>
-				<a href="#" class="btn btn-primary">상세보기</a>
+
+				<a href="/board/${board.id}" class="btn btn-primary">상세보기</a>
 			</div>
 		</div>
 	</c:forEach>

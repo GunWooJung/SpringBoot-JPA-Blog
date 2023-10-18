@@ -27,7 +27,6 @@ public class UserApiController {
 			session.setAttribute("principal", principal);
 		}
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
-
 	}
 	
 	@PostMapping("/auth/joinProc")
