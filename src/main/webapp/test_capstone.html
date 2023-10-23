@@ -41,8 +41,8 @@
             return dbData.map(entry => {
                 return {
                     name: entry.name,
-                    lat: parseFloat(entry.location_y),
-                    lng: parseFloat(entry.location_x)
+                    lat: parseFloat(entry.latitude),
+                    lng: parseFloat(entry.longitude)
                 };
             });
         }
@@ -123,25 +123,13 @@
                 });
         }
 
-        function updateCenterAndSearch() {
-            var center = map.getCenter();
-            clearMarkers();
-            fetchPlacesFromBackend(center.getLat(), center.getLng());
-           // searchNearby('StarBucks', center);
-        }
-
-        function updateCenterAndSearch() {
-            var center = map.getCenter();
-            clearMarkers();
-            fetchPlacesFromBackend(center.getLat(), center.getLng());
-            searchNearby('StarBucks', center);
-        }
+    
         function updateCenterAndSearch() {
         
             var center = map.getCenter();
             clearMarkers();
            fetchPlacesFromBackend(center.getLat(), center.getLng());// Fetch places from the backend
-           searchNearby('StarBucks', center); // Fetch Starbucks locations from Kakao Map
+         //  searchNearby('StarBucks', center); // Fetch Starbucks locations from Kakao Map
         }
  
       kakao.maps.event.addListener(map, 'dragend', function() {

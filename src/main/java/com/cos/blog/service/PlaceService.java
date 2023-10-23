@@ -33,7 +33,7 @@ public class PlaceService {
 		try {
 			places = new CsvToBeanBuilder<Place>(new FileReader(csvFile)).withType(Place.class).build().parse();
 			places.forEach(place -> System.out
-					.println(place.getName() + ", " + place.getLocation_x() + ", " + place.getLocation_y()));
+					.println(place.getName() + ", " + place.getLongitude() + ", " + place.getLatitude()));
 			// 콘솔에 리스트 출력
 			placeRepository.saveAll(places);
 		} catch (IllegalStateException | FileNotFoundException e) {
@@ -55,19 +55,19 @@ public class PlaceService {
 			Boolean lng_In_Max = false;
 			// 1km부근
 			if (cur_location_lng - Double.parseDouble("0.011319259720414284905767162827551") < Double
-					.parseDouble(place.getLocation_x())) {
+					.parseDouble(place.getLongitude())) {
 				lng_In_Min = true;
 			}
 			if (cur_location_lng + Double.parseDouble("0.011319259720414284905767162827551") > Double
-					.parseDouble(place.getLocation_x())) {
+					.parseDouble(place.getLongitude())) {
 				lng_In_Max = true;
 			}
 			if (cur_location_lat - Double.parseDouble("0.0090100236513120846942223223335961 ") < Double
-					.parseDouble(place.getLocation_y())) {
+					.parseDouble(place.getLatitude())) {
 				lat_In_Min = true;
 			}
 			if (cur_location_lat + Double.parseDouble("0.0090100236513120846942223223335961 ") > Double
-					.parseDouble(place.getLocation_y())) {
+					.parseDouble(place.getLatitude())) {
 				lat_In_Max = true;
 			}
 

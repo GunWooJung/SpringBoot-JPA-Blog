@@ -37,13 +37,21 @@ public class Place {
 	@Column
 	private String name;	//화장실 이름
 	
+	@Column
+	private String address;
+	
 	@Lob // 화장실 추가 내용
 	private String content;
 
 	@Column
-	private String location_x;
+	private String longitude;
 	
 	@Column
-	private String location_y;
+	private String latitude;
 	
+	@Column
+	private HasToilet disabled; //장애인용
+	
+	@Column
+	private HasToilet diaperChange; //기저귀교환대 유무
 }
