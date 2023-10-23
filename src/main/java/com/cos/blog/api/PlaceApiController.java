@@ -12,9 +12,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.blog.dto.ResponseDto;
@@ -53,30 +55,16 @@ public class PlaceApiController {
 	// csv파일을 DB에 등록하는 처리
 	@GetMapping("/addplace")
 	public String addPlace() {
-		
-        String csvFile = "C:\\workspacespring\\project\\src\\main\\resources\\gonggongPlace.csv";
-        //공공데이터 csv파일
-        Charset.forName("UTF-8");
-        List<Place> places;
-		try {
-			places = new CsvToBeanBuilder<Place>(new FileReader(csvFile))
-			        .withType(Place.class)
-			        .build()
-			        .parse();
-		      places.forEach(place -> System.out.println(place.getName() + ", " + place.getLocation_x()+ ", "+place.getLocation_y()));
-		      //콘솔에 리스트 출력
-		      placeService.addPlace(places);
-		      //레파지스토리에 place 리스트 넣기
-		} catch (IllegalStateException | FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String starbucks = "starbucks";
+		String gonggong1 = "gonggong1";
+		placeService.addPlace(starbucks);
+		placeService.addPlace(gonggong1);
 		return "addplace"; //addplace.jsp 결과 페이지로 이동
 	}
 	
-	//모든 장소 리스트 json 객체를 반환
+	// request로 현재 위치를 받아서 주변 장소를 리턴
 	@GetMapping("/showplace")
-	public List<Place> showPlace() {
-		return placeService.list();
+	public List<Place> showPlace(@RequestParam("lat") double lat, @RequestParam("lng") double lng) {
+		return placeService.list(lat,lng);
 	} 
 }
