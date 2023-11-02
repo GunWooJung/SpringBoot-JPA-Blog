@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.blog.model.Board;
 import com.cos.blog.model.Place;
+import com.cos.blog.model.Similarity;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.BoardRepository;
 import com.cos.blog.repository.PlaceRepository;
@@ -24,18 +25,65 @@ public class PlaceService {
 	@Autowired
 	private PlaceRepository placeRepository;
 
+	@Transactional // 위도 경도
+	public void deletePlace() {
+		placeRepository.deleteAll();
+	}
+	
 	// 모든 place를 jpa에 등록하기
-	@Transactional
+	@Transactional // 위도 경도
 	public void addPlace(String fileName) {
 		String csvFile = "C:\\workspacespring\\project\\src\\main\\resources\\" + fileName + ".csv";
 		Charset.forName("UTF-8");
-		List<Place> places;
+
 		try {
-			places = new CsvToBeanBuilder<Place>(new FileReader(csvFile)).withType(Place.class).build().parse();
-			places.forEach(place -> System.out
-					.println(place.getName() + ", " + place.getLongitude() + ", " + place.getLatitude()));
-			// 콘솔에 리스트 출력
-			placeRepository.saveAll(places);
+
+			List<Place> newPlaces = newPlaces = new CsvToBeanBuilder<Place>(new FileReader(csvFile))
+					.withType(Place.class).build().parse();
+			for (Place newplace : newPlaces) {
+				List<Place> places = placeRepository.findAll();
+				Boolean isUnique = true;
+				for (Place place : places) { // 이미 존재하는 곳
+					Boolean lat_In_Min = false;
+					Boolean lat_In_Max = false;
+					Boolean lng_In_Min = false;
+					Boolean lng_In_Max = false;
+					if (Double // 10m안에
+							.parseDouble(place.getLongitude())
+							- Double.parseDouble("0.011319259720414284905767162827551") < Double
+									.parseDouble(newplace.getLongitude())) {
+						lng_In_Min = true;
+					}
+					if (Double.parseDouble(place.getLongitude())
+							+ Double.parseDouble("0.011319259720414284905767162827551") > Double
+									.parseDouble(newplace.getLongitude())) {
+						lng_In_Max = true;
+					}
+					if (Double.parseDouble(place.getLatitude())
+							- Double.parseDouble("0.0090100236513120846942223223335961 ") < Double
+									.parseDouble(newplace.getLatitude())) {
+						lat_In_Min = true;
+					}
+					if (Double.parseDouble(place.getLatitude())
+							+ Double.parseDouble("0.0090100236513120846942223223335961 ") > Double
+									.parseDouble(newplace.getLatitude())) {
+						lat_In_Max = true;
+					}
+					if (lat_In_Min && lat_In_Max && lng_In_Min && lng_In_Max) {
+						if (newplace.getName().replaceAll("\\s", "")
+								.indexOf(place.getName().replaceAll("\\s", "")) != -1) {
+							isUnique = false;
+						}
+					if (Similarity.Similarity(newplace.getName().replaceAll("(개방|화장실)", ""), place.getName().replaceAll("(개방|화장실)", "")) >= 0.7) {
+							isUnique = false;
+						}
+					}
+				}
+				if (isUnique) {
+					placeRepository.save(newplace);
+				}
+			}
+			// placeRepository.saveAll(places);
 		} catch (IllegalStateException | FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

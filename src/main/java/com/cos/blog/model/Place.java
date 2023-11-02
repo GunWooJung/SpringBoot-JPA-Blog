@@ -31,27 +31,24 @@ public class Place {
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private int id; 	//식별자
 	
 	@Column
 	private String name;	//화장실 이름
-	
-	@Column
-	private String address;
-	
+		
 	@Lob // 화장실 추가 내용
 	private String content;
 
-	@Column
+	@ColumnDefault("0")
 	private String longitude;
 	
-	@Column
+	@ColumnDefault("0")
 	private String latitude;
 	
-	@Column
-	private HasToilet disabled; //장애인용
+	//@Column
+	//private HasToilet disabled; //장애인용
 	
-	@Column
-	private HasToilet diaperChange; //기저귀교환대 유무
+	//@Column
+	//private HasToilet diaperChange; //기저귀교환대 유무
 }
