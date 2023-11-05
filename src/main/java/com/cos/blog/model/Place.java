@@ -1,22 +1,11 @@
 package com.cos.blog.model;
 
-import java.sql.Timestamp;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,24 +20,31 @@ public class Place {
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id; 	//식별자
 	
 	@Column
-	private String name;	//화장실 이름
+	private String name = "정보 없음";	//화장실 이름
 		
-	@Lob // 화장실 추가 내용
-	private String content;
+	@Column
+	private String longitude = "0";
+	
+	@Column
+	private String latitude = "0";
+	
+	@Column
+	private String disabled_man = "정보 없음"; //남자장애인용 엑셀정보
+	
+	@Column
+	private String disabled_woman = "정보 없음"; //여자장애인용 엑셀정보
+	
+	@Column
+	private String diaper = "정보 없음"; //기저귀교환대 유무 엑셀정보
 
-	@ColumnDefault("0")
-	private String longitude;
+	@Column
+	private String opentime = "정보 없음"; 
 	
-	@ColumnDefault("0")
-	private String latitude;
-	
-	//@Column
-	//private HasToilet disabled; //장애인용
-	
-	//@Column
-	//private HasToilet diaperChange; //기저귀교환대 유무
+	@Column
+	private int error_count = 0; 
+	// 장소에 존재하지 않아 신고한 횟수 3이상이면 delete
 }
