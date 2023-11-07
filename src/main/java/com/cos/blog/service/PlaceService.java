@@ -32,7 +32,7 @@ public class PlaceService {
 
 		try {
 
-			List<Place> newPlaces = newPlaces = new CsvToBeanBuilder<Place>(new FileReader(csvFile))
+			List<Place> newPlaces = new CsvToBeanBuilder<Place>(new FileReader(csvFile))
 					.withType(Place.class).build().parse();
 			for (Place newplace : newPlaces) {
 				List<Place> places = placeRepository.findAll();
@@ -68,7 +68,7 @@ public class PlaceService {
 								.indexOf(place.getName().replaceAll("\\s", "")) != -1) {
 							isUnique = false;
 						}
-					if (Similarity.Similarity(newplace.getName().replaceAll("(개방|화장실)", ""), place.getName().replaceAll("(개방|화장실)", "")) >= 0.7) {
+					if (Similarity.Similarity(newplace.getName().replaceAll("\\s", "").replaceAll("(개방|화장실)", ""), place.getName().replaceAll("\\s", "").replaceAll("(개방|화장실)", "")) >= 0.5) {
 							isUnique = false;
 						}
 					if(newplace.getLatitude().equals(place.getLatitude()) && newplace.getLongitude().equals(place.getLongitude())) {
@@ -257,5 +257,33 @@ public class PlaceService {
 			}
 		}
 		return aroundPlaces;
+	}
+	
+	@Transactional(readOnly = true)
+	public void updatePlace(String fileName) {
+		String csvFile = "C:\\workspacespring\\project\\src\\main\\resources\\" + fileName + ".csv";
+		Charset.forName("UTF-8");
+		List<Place> places = placeRepository.findAll();
+	
+		try {
+
+			List<Place> newPlaces  = new CsvToBeanBuilder<Place>(new FileReader(csvFile))
+					.withType(Place.class).build().parse();
+			for (Place newplace : newPlaces) {
+				
+				for (Place place : places) { // 이미 존재하는 곳
+				if(newplace.getName().indexOf(place.getName())!=-1||place.getName().indexOf(newplace.getName())!=-1) {
+					place.setLatitude(newplace.getLatitude());
+					place.setLongitude(newplace.getLongitude());
+					placeRepository.save(place);
+					System.out.println("2");
+				}
+				}
+			}
+		}
+		catch (IllegalStateException | FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

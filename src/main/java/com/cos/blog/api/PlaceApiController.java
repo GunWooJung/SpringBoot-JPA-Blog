@@ -22,12 +22,18 @@ public class PlaceApiController {
 	String s = "gonggong_hang";
 	String starbucks = "starbucks";
 	String gonggong_seoul = "gonggong_seoul";
-	//placeService.addPlace(s);
-	//placeService.addPlace(starbucks);
+	placeService.addPlace(s);
+	placeService.addPlace(starbucks);
 	placeService.addPlace(gonggong_seoul);
 		return "addplace"; //addplace.jsp 결과 페이지로 이동
 	}
 	
+	@GetMapping("/updateplace")
+	public String updatePlace() {
+	String gonggong_seoul = "gonggong_seoul";
+	placeService.updatePlace(gonggong_seoul);
+		return "updateplace"; //addplace.jsp 결과 페이지로 이동
+	}
 	// request로 현재 위치를 받아서 주변 장소를 리턴
 	
 	@GetMapping("/showplace")
