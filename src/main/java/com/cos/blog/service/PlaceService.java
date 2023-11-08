@@ -121,7 +121,9 @@ public class PlaceService {
 	// 모든 place를 불러오기
 
 	@Transactional(readOnly = true)
-	public List<Place> list(double cur_location_lat, double cur_location_lng) {
+	public List<Place> list(double cur_location_lat, double cur_location_lng, String changing_table_man,
+			String changing_table_woman,String disabled_person
+    		,String emergency_bell_disabled, String emergency_bell_man,String emergency_bell_woman) {
 		List<Place> places = placeRepository.findAll();
 		List<Place> aroundPlaces = new ArrayList<Place>();
 		for (Place place : places) {
@@ -148,112 +150,32 @@ public class PlaceService {
 			}
 
 			if (lat_In_Min && lat_In_Max && lng_In_Min && lng_In_Max) {
-				aroundPlaces.add(place);
-			}
-		}
-		return aroundPlaces;
-	}
-
-	@Transactional(readOnly = true)
-	public List<Place> listDisabled(double cur_location_lat, double cur_location_lng) {
-		List<Place> places = placeRepository.findAll();
-		List<Place> aroundPlaces = new ArrayList<Place>();
-		for (Place place : places) {
-			Boolean lat_In_Min = false;
-			Boolean lat_In_Max = false;
-			Boolean lng_In_Min = false;
-			Boolean lng_In_Max = false;
-			// 1km부근
-			if (cur_location_lng - Double.parseDouble("0.011319259720414284905767162827551") < Double
-					.parseDouble(place.getLongitude())) {
-				lng_In_Min = true;
-			}
-			if (cur_location_lng + Double.parseDouble("0.011319259720414284905767162827551") > Double
-					.parseDouble(place.getLongitude())) {
-				lng_In_Max = true;
-			}
-			if (cur_location_lat - Double.parseDouble("0.0090100236513120846942223223335961 ") < Double
-					.parseDouble(place.getLatitude())) {
-				lat_In_Min = true;
-			}
-			if (cur_location_lat + Double.parseDouble("0.0090100236513120846942223223335961 ") > Double
-					.parseDouble(place.getLatitude())) {
-				lat_In_Max = true;
-			}
-
-			if (lat_In_Min && lat_In_Max && lng_In_Min && lng_In_Max) {
-				if(place.getDisabled_man().equals("있음")||place.getDisabled_woman().equals("있음"))
-				aroundPlaces.add(place);
-			}
-		}
-		return aroundPlaces;
-	}
-	
-	@Transactional(readOnly = true)
-	public List<Place> listDiaperWoman(double cur_location_lat, double cur_location_lng) {
-		List<Place> places = placeRepository.findAll();
-		List<Place> aroundPlaces = new ArrayList<Place>();
-		for (Place place : places) {
-			Boolean lat_In_Min = false;
-			Boolean lat_In_Max = false;
-			Boolean lng_In_Min = false;
-			Boolean lng_In_Max = false;
-			// 1km부근
-			if (cur_location_lng - Double.parseDouble("0.011319259720414284905767162827551") < Double
-					.parseDouble(place.getLongitude())) {
-				lng_In_Min = true;
-			}
-			if (cur_location_lng + Double.parseDouble("0.011319259720414284905767162827551") > Double
-					.parseDouble(place.getLongitude())) {
-				lng_In_Max = true;
-			}
-			if (cur_location_lat - Double.parseDouble("0.0090100236513120846942223223335961 ") < Double
-					.parseDouble(place.getLatitude())) {
-				lat_In_Min = true;
-			}
-			if (cur_location_lat + Double.parseDouble("0.0090100236513120846942223223335961 ") > Double
-					.parseDouble(place.getLatitude())) {
-				lat_In_Max = true;
-			}
-
-			if (lat_In_Min && lat_In_Max && lng_In_Min && lng_In_Max) {
-				if(place.getDiaper().equals("여자")||place.getDiaper().equals("남여"))
-				aroundPlaces.add(place);
-			}
-		}
-		return aroundPlaces;
-	}
-	
-	@Transactional(readOnly = true)
-	public List<Place> listDiaperMan(double cur_location_lat, double cur_location_lng) {
-		List<Place> places = placeRepository.findAll();
-		List<Place> aroundPlaces = new ArrayList<Place>();
-		for (Place place : places) {
-			Boolean lat_In_Min = false;
-			Boolean lat_In_Max = false;
-			Boolean lng_In_Min = false;
-			Boolean lng_In_Max = false;
-			// 1km부근
-			if (cur_location_lng - Double.parseDouble("0.011319259720414284905767162827551") < Double
-					.parseDouble(place.getLongitude())) {
-				lng_In_Min = true;
-			}
-			if (cur_location_lng + Double.parseDouble("0.011319259720414284905767162827551") > Double
-					.parseDouble(place.getLongitude())) {
-				lng_In_Max = true;
-			}
-			if (cur_location_lat - Double.parseDouble("0.0090100236513120846942223223335961 ") < Double
-					.parseDouble(place.getLatitude())) {
-				lat_In_Min = true;
-			}
-			if (cur_location_lat + Double.parseDouble("0.0090100236513120846942223223335961 ") > Double
-					.parseDouble(place.getLatitude())) {
-				lat_In_Max = true;
-			}
-
-			if (lat_In_Min && lat_In_Max && lng_In_Min && lng_In_Max) {
-				if(place.getDiaper().equals("남자")||place.getDiaper().equals("남여"))
-				aroundPlaces.add(place);
+				Boolean check = true;
+				if(disabled_person.equals("true")){
+					if(!(place.getDisabled_man().equals("있음")||place.getDisabled_woman().equals("있음")))
+					check = false;
+				}
+				if(changing_table_man.equals("true")){
+					if(!(place.getDiaper().equals("남자")||place.getDisabled_woman().equals("남여")))
+					check = false;
+				}
+				if(changing_table_woman.equals("true")){
+					if(!(place.getDiaper().equals("여자")||place.getDisabled_woman().equals("남여")))
+					check = false;
+				}
+				if(emergency_bell_disabled.equals("true")){
+					if(!(place.getEmergency_bell().indexOf("장애")!=-1))
+					check = false;
+				}
+				if(emergency_bell_man.equals("true")){
+					if(!(place.getEmergency_bell().indexOf("남자")!=-1))
+					check = false;
+				}
+				if(emergency_bell_woman.equals("true")){
+					if(!(place.getEmergency_bell().indexOf("여자")!=-1))
+					check = false;
+				}
+				if(check) aroundPlaces.add(place);
 			}
 		}
 		return aroundPlaces;

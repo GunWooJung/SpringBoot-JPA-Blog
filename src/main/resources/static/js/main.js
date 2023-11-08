@@ -140,15 +140,36 @@ function performNewSearch(keyword) {
 
 //백엔드에서 정보 가져오기
 function fetchPlacesFromBackend(lat, lng) {
-    fetch(`/showplace?lat=${lat}&lng=${lng}`)
-        .then(response => response.json())
-        .then(data => {
-            const convertedData = convertToPlaceFormat(data);
-            markPlaces(convertedData);
+
+
+    var center = map.getCenter();
+    fetch(`/showplace`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+         disabled_person: document.getElementById('disabled_person').checked,
+        changing_table_man: document.getElementById('changing_table_man').checked,
+        changing_table_woman: document.getElementById('changing_table_woman').checked,
+        emergency_bell_man: document.getElementById('emergency_bell_man').checked,
+        emergency_bell_woman: document.getElementById('emergency_bell_woman').checked,
+        emergency_bell_disabled: document.getElementById('emergency_bell_disabled').checked,
+                lat: center.getLat(),
+                lng: center.getLng()
         })
-        .catch(error => {
-            console.error("Error fetching places:", error);
-        });
+    })
+    .then(response => response.json())
+    .then(data => {
+        // convertToPlaceFormat 함수를 이용해 백엔드로부터 받은 데이터를 마커로 변환
+        const convertedData = convertToPlaceFormat(data);
+        markPlaces(convertedData);
+    })
+    .catch(error => {
+        console.error('Error fetching filtered places:', error);
+    });
+
+
 }
 
 function updateCenterAndSearch(keyword) {
@@ -186,4 +207,3 @@ function fetchAndUpdatePlaces() {
 // });
 
 updateCenterAndSearch();
-

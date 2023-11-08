@@ -68,39 +68,33 @@ document.getElementById('reset-filter').addEventListener('click', function () {
 // 적용 버튼
 document.getElementById('apply-filter').addEventListener('click', function () {
     // Create an object to hold the state of the checkboxes
-    var filters = {
-        disabled_person: document.getElementById('disabled_person').checked,
-        changing_table_man: document.getElementById('changing_table_man').checked,
-        changing_table_woman: document.getElementById('changing_table_woman').checked,
-        emergency_bell_man: document.getElementById('emergency_bell_man').checked,
-        emergency_bell_woman: document.getElementById('emergency_bell_woman').checked,
-        emergency_bell_disabled: document.getElementById('emergency_bell_disabled').checked
-    };
-
-    // Log the filters object to the console
-    console.log('Filters to send:', filters);
-
-    // Clear existing markers
+    var center = map.getCenter();
     clearMarkers();
-
-    // Assume that /apply-filters endpoint will return the filtered places
-    fetch('/apply-filter', {
+    fetch(`/showplace`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(filters)
+        body: JSON.stringify({
+         disabled_person: document.getElementById('disabled_person').checked,
+        changing_table_man: document.getElementById('changing_table_man').checked,
+        changing_table_woman: document.getElementById('changing_table_woman').checked,
+        emergency_bell_man: document.getElementById('emergency_bell_man').checked,
+        emergency_bell_woman: document.getElementById('emergency_bell_woman').checked,
+        emergency_bell_disabled: document.getElementById('emergency_bell_disabled').checked,
+                lat: center.getLat(),
+                lng: center.getLng()
+        })
     })
     .then(response => response.json())
     .then(data => {
-        // Assume the backend returns the data in the format expected by convertToPlaceFormat
+        // convertToPlaceFormat 함수를 이용해 백엔드로부터 받은 데이터를 마커로 변환
         const convertedData = convertToPlaceFormat(data);
         markPlaces(convertedData);
     })
     .catch(error => {
         console.error('Error fetching filtered places:', error);
     });
-
     // Close the modal
     modal.style.display = 'none';
 });

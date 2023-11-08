@@ -45,6 +45,9 @@ public class Place {
 	private String opentime = "정보 없음"; 
 	
 	@Column
+	private String emergency_bell = "없음"; 
+	
+	@Column
 	private int error_count = 0; 
 	// 장소에 존재하지 않아 신고한 횟수 3이상이면 delete
 }

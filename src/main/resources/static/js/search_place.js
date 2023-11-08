@@ -4,7 +4,7 @@ document.getElementById('search-button').addEventListener('click', function () {
     if (keyword.trim() !== '') {
         var center = map.getCenter();
         clearMarkers();
-     //   searchNearby(keyword, center);
+        searchNearby(keyword, center);
     } else {
         alert('Please enter a keyword to search.');
     }
