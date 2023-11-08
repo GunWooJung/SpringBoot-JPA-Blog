@@ -134,7 +134,7 @@ function performNewSearch(keyword) {
     var center = map.getCenter();
     clearMarkers();
     initialSearchDone = false; // Reset the flag so the map will center on new searches
-    //searchNearby(keyword, center);
+    searchNearby(keyword, center);
 }
 
 
@@ -176,7 +176,8 @@ function updateCenterAndSearch(keyword) {
     var center = map.getCenter();
     clearMarkers();
     fetchPlacesFromBackend(center.getLat(), center.getLng());
-  // searchNearby(keyword || 'StarBucks', center); // Use the provided keyword or default to 'StarBucks'
+   //searchNearby(keyword || 'StarBucks', center); // Use the provided keyword or default to 'StarBucks'
+   searchNearby(keyword , center); 
 }
 
 
