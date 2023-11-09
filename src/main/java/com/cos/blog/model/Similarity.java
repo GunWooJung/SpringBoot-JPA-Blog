@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Similarity {
-	public static double Similarity(String str1, String str2) {
+	public static double CalculateSimilarity(String str1, String str2) {
 		// 문자열을 문자(또는 음절)의 집합으로 변환
 		Set<Character> set1 = new HashSet<>();
 		Set<Character> set2 = new HashSet<>();

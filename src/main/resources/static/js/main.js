@@ -94,39 +94,19 @@ function markPlaces(places) {
 var initialSearchDone = false;
 
 function searchNearby(keyword, location, page = 1) {
-    var ps = new kakao.maps.services.Places();
-    ps.keywordSearch(keyword, function (data, status, pagination) {
-        if (status === kakao.maps.services.Status.OK) {
-            var placesWithCoordinates = data.map(function (item) {
-                return {
-                    name: item.place_name,
-                    lat: parseFloat(item.y),
-                    lng: parseFloat(item.x)
-                };
-            });
-            console.log(placesWithCoordinates);
-
-            markPlaces(placesWithCoordinates);
-
-            // 부드럽게 지도를 첫 번째 마커 위치로 이동시키기, 근데 첫 페이지에서만
-            if (!initialSearchDone && placesWithCoordinates.length > 0) {
-                map.panTo(new kakao.maps.LatLng(placesWithCoordinates[0].lat, placesWithCoordinates[0].lng));
-                initialSearchDone = true; // Set the flag so map doesn't re-center on subsequent data fetches
+    fetch(`/searchbykeyword?keyword=${keyword}`)
+        .then(response => response.json())
+        .then(data => {
+            const convertedData = convertToPlaceFormat(data);
+            markPlaces(convertedData);
+            if (!initialSearchDone && convertedData.length > 0) {
+                map.panTo(new kakao.maps.LatLng(convertedData[0].lat, convertedData[0].lng));
+                initialSearchDone = true; // Set the flag so the map doesn't re-center on subsequent data fetches
             }
-
-            // 다음 페이지가 있다면 다음 검색 결과도 로드
-            if (pagination.hasNextPage) {
-                setTimeout(() => {
-                 //   searchNearby(keyword, location, page + 1);
-                }, 300);
-            }
-
-        } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-            alert('No results found');
-        } else {
-            console.error('Search result error: ' + status);
-        }
-    }, { location: location, page: page, radius: 20000 });
+        })
+        .catch(error => {
+            console.error("Error fetching places:", error);
+        });
 }
 
 // Call this function when you want to perform a new search and reset the initial search flag

@@ -1,7 +1,5 @@
 package com.cos.blog.dto;
 
-import javax.persistence.Column;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,10 +15,15 @@ public class RequestBodyDto {
 	private String lat ;
 	
 	private String changing_table_man;
+	
 	private String changing_table_woman;
+	
 	private String disabled_person;
+	
 	private String emergency_bell_disabled;
+	
 	private String emergency_bell_man;
+	
 	private String emergency_bell_woman;
 
 }

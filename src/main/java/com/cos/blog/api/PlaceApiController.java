@@ -1,15 +1,12 @@
 package com.cos.blog.api;
 
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.cos.blog.dto.RequestBodyDto;
 import com.cos.blog.model.Place;
 import com.cos.blog.service.PlaceService;
@@ -34,14 +31,7 @@ public class PlaceApiController {
 		return "addplace"; //addplace.jsp 결과 페이지로 이동
 	}
 	
-	@GetMapping("/updateplace")
-	public String updatePlace() {
-	String gonggong_seoul = "gonggong_seoul";
-	placeService.updatePlace(gonggong_seoul);
-		return "updateplace"; //addplace.jsp 결과 페이지로 이동
-	}
-	// request로 현재 위치를 받아서 주변 장소를 리턴
-	
+	//지도 중심기준 주변 화장실 불러오기
 	@PostMapping("/showplace")
 	public List<Place> showPlace(@RequestBody RequestBodyDto request) {
 	    double lat = Double.parseDouble(request.getLat());
@@ -55,22 +45,14 @@ public class PlaceApiController {
 	    return placeService.list(lat, lng,changing_table_man,changing_table_woman,disabled_person
 	    		,emergency_bell_disabled,emergency_bell_man,emergency_bell_woman);
 	}
-
 	
-	/*
-	 * @GetMapping("/showplace/diaperman") public List<Place>
-	 * showPlaceDiaperMan(@RequestParam("lat") double lat, @RequestParam("lng")
-	 * double lng) { return placeService.listDiaperMan(lat,lng); }
-	 * 
-	 * @GetMapping("/showplace/diaperwoman") public List<Place>
-	 * showPlaceDiaperWoman(@RequestParam("lat") double lat, @RequestParam("lng")
-	 * double lng) { return placeService.listDiaperWoman(lat,lng); }
-	 * 
-	 * @GetMapping("/showplace/disabled") public List<Place>
-	 * showPlaceDisabled(@RequestParam("lat") double lat, @RequestParam("lng")
-	 * double lng) { return placeService.listDisabled(lat,lng); }
-	 */
+	//키워드만 추출
+	@GetMapping("/searchbykeyword")
+	public List<Place> searchByKeyword(@RequestParam("keyword") String keyword) {
+		return placeService.listSearchByKeyword(keyword);
+	}
 	
+	//전체 목록 삭제
 	@GetMapping("/deleteplace")
 	public String deletePlace() {
 		placeService.deletePlace();
