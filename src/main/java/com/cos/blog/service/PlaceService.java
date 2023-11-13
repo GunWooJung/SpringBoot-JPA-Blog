@@ -30,7 +30,7 @@ public class PlaceService {
 	// 모든 place를 jpa에 등록하기
 	@Transactional
 	public void addPlace(String fileName) {
-		String csvFile = "C:\\workspacespring\\project\\src\\main\\resources\\" + fileName + ".csv";
+		String csvFile = "C:\\workspacespring\\project_local\\src\\main\\resources\\" + fileName + ".csv";
 		Charset.forName("UTF-8");
 
 		try {
