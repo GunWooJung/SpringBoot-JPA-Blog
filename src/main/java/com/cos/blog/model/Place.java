@@ -48,6 +48,6 @@ public class Place {
 	private String emergency_bell = "없음"; 
 	
 	@Column
-	private int error_count = 0; 
+	private double average_score = 0; 
 	// 장소에 존재하지 않아 신고한 횟수 3이상이면 delete
 }

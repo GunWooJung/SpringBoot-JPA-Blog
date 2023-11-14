@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RequestBodyDto {
+public class RequestBodyPlaceDto {
 	
 	private String lng ;
 	

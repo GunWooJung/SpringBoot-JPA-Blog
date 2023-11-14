@@ -22,14 +22,77 @@ public class PlaceService {
 	@Autowired
 	private PlaceRepository placeRepository;
 
-	@Transactional // 모든 DB 삭제
-	public void deletePlace() {
-		placeRepository.deleteAll();
+	@Transactional(readOnly = true)
+	public List<Place> placeShow(
+		double cur_location_lat,
+		double cur_location_lng, 
+		String changing_table_man,
+		String changing_table_woman, 
+		String disabled_person,
+		String emergency_bell_disabled, 
+		String emergency_bell_man, 
+		String emergency_bell_woman
+		) {
+		List<Place> places = placeRepository.findAll();
+		List<Place> aroundPlaces = new ArrayList<Place>();
+		for (Place place : places) {
+			Boolean lat_In_Min = false;
+			Boolean lat_In_Max = false;
+			Boolean lng_In_Min = false;
+			Boolean lng_In_Max = false;
+			// 1km부근
+			if (cur_location_lng - Double.parseDouble("0.011319259720414284905767162827551") < Double
+					.parseDouble(place.getLongitude())) {
+				lng_In_Min = true;
+			}
+			if (cur_location_lng + Double.parseDouble("0.011319259720414284905767162827551") > Double
+					.parseDouble(place.getLongitude())) {
+				lng_In_Max = true;
+			}
+			if (cur_location_lat - Double.parseDouble("0.0090100236513120846942223223335961 ") < Double
+					.parseDouble(place.getLatitude())) {
+				lat_In_Min = true;
+			}
+			if (cur_location_lat + Double.parseDouble("0.0090100236513120846942223223335961 ") > Double
+					.parseDouble(place.getLatitude())) {
+				lat_In_Max = true;
+			}
+			//필터링 조건에 부합하는 결과 찾기
+			if (lat_In_Min && lat_In_Max && lng_In_Min && lng_In_Max) {
+				Boolean check = true;
+				if (disabled_person.equals("true")) {
+					if (!(place.getDisabled_man().equals("있음") || place.getDisabled_woman().equals("있음")))
+						check = false;
+				}
+				if (changing_table_man.equals("true")) {
+					if (!(place.getDiaper().equals("남자") || place.getDisabled_woman().equals("남여")))
+						check = false;
+				}
+				if (changing_table_woman.equals("true")) {
+					if (!(place.getDiaper().equals("여자") || place.getDisabled_woman().equals("남여")))
+						check = false;
+				}
+				if (emergency_bell_disabled.equals("true")) {
+					if (!(place.getEmergency_bell().indexOf("장애") != -1))
+						check = false;
+				}
+				if (emergency_bell_man.equals("true")) {
+					if (!(place.getEmergency_bell().indexOf("남자") != -1))
+						check = false;
+				}
+				if (emergency_bell_woman.equals("true")) {
+					if (!(place.getEmergency_bell().indexOf("여자") != -1))
+						check = false;
+				}
+				if (check)
+					aroundPlaces.add(place);
+			}
+		}
+		return aroundPlaces;
 	}
-
 	// 모든 place를 jpa에 등록하기
 	@Transactional
-	public void addPlace(String fileName) {
+	public void placeAdd(String fileName) {
 		String csvFile = "C:\\workspacespring\\project_local\\src\\main\\resources\\" + fileName + ".csv";
 		Charset.forName("UTF-8");
 
@@ -125,70 +188,10 @@ public class PlaceService {
 	}
 	// 모든 place를 불러오기
 
-	@Transactional(readOnly = true)
-	public List<Place> list(double cur_location_lat, double cur_location_lng, String changing_table_man,
-			String changing_table_woman, String disabled_person, String emergency_bell_disabled,
-			String emergency_bell_man, String emergency_bell_woman) {
-		List<Place> places = placeRepository.findAll();
-		List<Place> aroundPlaces = new ArrayList<Place>();
-		for (Place place : places) {
-			Boolean lat_In_Min = false;
-			Boolean lat_In_Max = false;
-			Boolean lng_In_Min = false;
-			Boolean lng_In_Max = false;
-			// 1km부근
-			if (cur_location_lng - Double.parseDouble("0.011319259720414284905767162827551") < Double
-					.parseDouble(place.getLongitude())) {
-				lng_In_Min = true;
-			}
-			if (cur_location_lng + Double.parseDouble("0.011319259720414284905767162827551") > Double
-					.parseDouble(place.getLongitude())) {
-				lng_In_Max = true;
-			}
-			if (cur_location_lat - Double.parseDouble("0.0090100236513120846942223223335961 ") < Double
-					.parseDouble(place.getLatitude())) {
-				lat_In_Min = true;
-			}
-			if (cur_location_lat + Double.parseDouble("0.0090100236513120846942223223335961 ") > Double
-					.parseDouble(place.getLatitude())) {
-				lat_In_Max = true;
-			}
-			//필터링 조건에 부합하는 결과 찾기
-			if (lat_In_Min && lat_In_Max && lng_In_Min && lng_In_Max) {
-				Boolean check = true;
-				if (disabled_person.equals("true")) {
-					if (!(place.getDisabled_man().equals("있음") || place.getDisabled_woman().equals("있음")))
-						check = false;
-				}
-				if (changing_table_man.equals("true")) {
-					if (!(place.getDiaper().equals("남자") || place.getDisabled_woman().equals("남여")))
-						check = false;
-				}
-				if (changing_table_woman.equals("true")) {
-					if (!(place.getDiaper().equals("여자") || place.getDisabled_woman().equals("남여")))
-						check = false;
-				}
-				if (emergency_bell_disabled.equals("true")) {
-					if (!(place.getEmergency_bell().indexOf("장애") != -1))
-						check = false;
-				}
-				if (emergency_bell_man.equals("true")) {
-					if (!(place.getEmergency_bell().indexOf("남자") != -1))
-						check = false;
-				}
-				if (emergency_bell_woman.equals("true")) {
-					if (!(place.getEmergency_bell().indexOf("여자") != -1))
-						check = false;
-				}
-				if (check)
-					aroundPlaces.add(place);
-			}
-		}
-		return aroundPlaces;
-	}
+	
 
 	@Transactional(readOnly = true)
-	public List<Place> listSearchByKeyword(String keyword) {
+	public List<Place> placeSearch(String keyword) {
 		List<Place> places = placeRepository.findAll();
 		Comparator<Place> nameComparator = Comparator.comparing(Place::getName);
 		// List를 정렬
@@ -201,4 +204,11 @@ public class PlaceService {
 		}
 		return placeResult;
 	}
+	
+
+	@Transactional // 모든 DB 삭제
+	public void placeDelete(int id) {
+		placeRepository.deleteById(id);
+	}
+	
 }
