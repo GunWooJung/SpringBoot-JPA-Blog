@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class RequestBodyCommentDto {
 	
-	private String userId;
+	private String username;
+	private String password;
 	private String placeId;
 	private String content;
-	private String score;
-
+	
 }

@@ -25,6 +25,9 @@ public class Place {
 	
 	@Column
 	private String name = "정보 없음";	//화장실 이름
+	
+	@Column
+	private String address = "정보 없음";	//화장실 이름
 		
 	@Column
 	private String longitude = "0";
@@ -48,6 +51,11 @@ public class Place {
 	private String emergency_bell = "없음"; 
 	
 	@Column
-	private double average_score = 0; 
-	// 장소에 존재하지 않아 신고한 횟수 3이상이면 delete
+	private double star_average = 0; //프론트에 starRating
+
+	@Column
+	private int star_count = 0; //프론트에 numberOfstarRating
+	
+	@Column
+	private int comment_count = 0; //프론트에 commentcount
 }

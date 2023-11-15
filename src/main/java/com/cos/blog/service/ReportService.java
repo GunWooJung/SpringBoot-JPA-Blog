@@ -6,13 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.cos.blog.model.Place;
 import com.cos.blog.model.Report;
-import com.cos.blog.model.User;
 import com.cos.blog.repository.PlaceRepository;
 import com.cos.blog.repository.ReportRepository;
-import com.cos.blog.repository.UserRepository;
 
 @Service
 public class ReportService {
@@ -22,9 +19,6 @@ public class ReportService {
 	
 	@Autowired
 	private PlaceRepository placeRepository;
-	
-	@Autowired
-	private UserRepository userRepository;
 	
 	public List<Report> reportShow(int placeId) {
 		Optional<Place> place = placeRepository.findById(placeId);
@@ -38,19 +32,16 @@ public class ReportService {
 	}
 	
 	@Transactional
-	public void reportEnroll(String userId,String placeId, String content) {
+	public void reportEnroll(String placeId, String content) {
 		Optional<Place> place = placeRepository.findById(Integer.parseInt(placeId));
 		if (place.isPresent()) {
-			Optional<User> user = userRepository.findById(Integer.parseInt(userId));
-			if (user.isPresent()) {
 			Report report = new Report();
-			report.setUser(user.get());
 			report.setPlace(place.get());
 			report.setContent(content);
+			report.setCount(0);
 			reportRepository.save(report);
-			}
-		} 
-	}
+		}
+	} 
 
 
 

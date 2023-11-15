@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class RequestBodyReportDto {
 
-	private String userId;
 	private String placeId;
 	private String content;
 }

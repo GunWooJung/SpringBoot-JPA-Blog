@@ -15,11 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.blog.dto.RequestBodyCommentDto;
 import com.cos.blog.dto.RequestBodyReportDto;
-import com.cos.blog.dto.RequestBodyUserDto;
 import com.cos.blog.dto.ResponseDto;
 import com.cos.blog.model.Comment;
 import com.cos.blog.model.Report;
-import com.cos.blog.model.User;
 import com.cos.blog.service.CommentService;
 import com.cos.blog.service.PlaceService;
 import com.cos.blog.service.ReportService;
@@ -43,7 +41,7 @@ public class ReportApiController {
 
 	@PostMapping("/report/enroll")
 	public void reportEnroll(@RequestBody RequestBodyReportDto request) {
-		reportService.reportEnroll(request.getUserId(),request.getPlaceId(),request.getContent());
+		reportService.reportEnroll(request.getPlaceId(),request.getContent());
 	}
 	
 	//미개발

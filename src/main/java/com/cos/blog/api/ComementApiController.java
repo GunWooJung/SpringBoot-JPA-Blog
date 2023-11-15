@@ -36,7 +36,7 @@ public class ComementApiController {
 	// 댓글 등록시 place의 평균 score값이 자동으로 갱신됨
 	@PostMapping("/comment/enroll")
 	public void commentEnroll(@RequestBody RequestBodyCommentDto request) {
-		commentService.commentEnroll(request.getUserId(),request.getPlaceId(),request.getScore(),request.getContent());
+		commentService.commentEnroll(request.getUsername(),request.getPassword(),request.getPlaceId(),request.getContent());
 	}
 	
 	//아직 미개발

@@ -32,13 +32,12 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id; 	//식별자
 	
-	@ManyToOne
-    @JoinColumn(name = "userId")
-	private User user;
+	@Column
+	private String username;
 	
 	@Column
-	private int score = 0;	
-	
+	private String password;
+
 	@Lob // 대용량 데이터
 	private String content;
 	

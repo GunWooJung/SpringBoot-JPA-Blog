@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
-public class ControllerTest {
+public class MainController {
 	@GetMapping("/test")
 	public String saveForm() {
 		return "index";

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -210,5 +211,14 @@ public class PlaceService {
 	public void placeDelete(int id) {
 		placeRepository.deleteById(id);
 	}
+	
+	@Transactional
+	public Place placeDetail(int id) {
+		Optional<Place> places = placeRepository.findById(id);
+		Place place = places.get();
+		return place;
+	}
+	
+	
 	
 }

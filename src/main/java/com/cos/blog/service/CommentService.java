@@ -10,11 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cos.blog.model.Comment;
 import com.cos.blog.model.Place;
 import com.cos.blog.model.Report;
-import com.cos.blog.model.User;
 import com.cos.blog.repository.CommentRepository;
 import com.cos.blog.repository.PlaceRepository;
 import com.cos.blog.repository.ReportRepository;
-import com.cos.blog.repository.UserRepository;
 
 @Service
 public class CommentService {
@@ -24,9 +22,6 @@ public class CommentService {
 	
 	@Autowired
 	private PlaceRepository placeRepository;
-	
-	@Autowired
-	private UserRepository userRepository;
 	
 	@Transactional
 	public List<Comment> commentShow(int placeId) {
@@ -40,27 +35,19 @@ public class CommentService {
 		}
 	}
 
-	public void commentEnroll(String userId, String placeId, String score, String content) {
-		Optional<Place> place = placeRepository.findById(Integer.parseInt(placeId));
-		if (place.isPresent()) {
-			Optional<User> user = userRepository.findById(Integer.parseInt(userId));
-			if (user.isPresent()) {
+	public void commentEnroll(String username,String password, String placeId, String content) {
+		Optional<Place> places = placeRepository.findById(Integer.parseInt(placeId));
+		if (places.isPresent()) {
 			Comment comment = new Comment();
-			comment.setPlace(place.get());
-			comment.setUser(user.get());
+			comment.setPlace(places.get());
+			comment.setUsername(username);
+			comment.setPassword(password);
 			comment.setContent(content);
-			comment.setScore(Integer.parseInt(score));
 			commentRepository.save(comment);
-			List<Comment> calcomment = commentRepository.findByPlace(place.get());
-			double result = 0;
-			for (int i = 0; i < calcomment.size(); i++) {
-			  result += calcomment.get(i).getScore();
+			Place place = places.get();
+			place.setComment_count(place.getComment_count()+1);
+			placeRepository.save(place);
 			}
-			result /= calcomment.size();
-			place.get().setAverage_score(result);
-			placeRepository.save(place.get());
-			}
-		} 
 	}
 
 

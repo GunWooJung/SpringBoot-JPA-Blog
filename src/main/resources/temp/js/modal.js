@@ -82,8 +82,8 @@ document.getElementById('apply-filter').addEventListener('click', function () {
         emergency_bell_man: document.getElementById('emergency_bell_man').checked,
         emergency_bell_woman: document.getElementById('emergency_bell_woman').checked,
         emergency_bell_disabled: document.getElementById('emergency_bell_disabled').checked,
-        lat: center.getLat(),
-        lng: center.getLng()
+                lat: center.getLat(),
+                lng: center.getLng()
         })
     })
     .then(response => response.json())

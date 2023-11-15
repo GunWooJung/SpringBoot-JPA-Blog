@@ -54,7 +54,14 @@ public class PlaceApiController {
 	
 	// API 요청 방식 : GET,  주소 : /place/delete?id=${id} , 설명 : 댓글id값으로 댓글 삭제
 	@GetMapping("/place/delete")
-	public void placeDelete(@RequestParam("id") int id) {
-		placeService.placeDelete(id);
+	public void placeDelete(@RequestParam("id") String id) {
+		placeService.placeDelete(Integer.parseInt(id));
 	}	
+	
+	// API 요청 방식 : GET,  주소 : /place/detail?id=${id} , 설명 : 특정 place값
+		@GetMapping("/place/detail")
+		public Place placeDetail(@RequestParam("id") String id) {
+			Place place = placeService.placeDetail(Integer.parseInt(id));
+			return place;
+		}	
 }
