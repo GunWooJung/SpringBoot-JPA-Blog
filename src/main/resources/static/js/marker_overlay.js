@@ -8,7 +8,7 @@ function createOverlayContent(place) {
                 <p>Average of StarRating: ${place.averageOfStarRating}</p>
                 <p>Number of StarRating: ${place.numberOfStarRating}</p>
                 <p>Number of Comments: ${place.numberOfComments}</p>
-                <a href="view_details.html?id=${place.id}" target="_blank">More details</a>
+                <a href="/viewdetails?id=${place.id}" target="_blank">More details</a>
                 <button class="overlay-close-btn" onclick="closeCurrentOverlay()">Close</button>
             </div>
         </div>

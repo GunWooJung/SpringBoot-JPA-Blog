@@ -1,0 +1,29 @@
+
+.review-prompt {
+    margin-top: 20px;
+}
+
+.review-prompt input[type="text"],
+.review-prompt input[type="password"],
+.review-prompt textarea {
+    width: 80%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.review-prompt button {
+    width: 80%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.review-prompt button:hover {
+    background-color: #0056b3;
+}
