@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.blog.model.Comment;
@@ -13,6 +14,7 @@ import com.cos.blog.repository.CommentRepository;
 import com.cos.blog.repository.PlaceRepository;
 import com.cos.blog.repository.StarRatingRepository;
 
+@Service
 public class StarRatingService {
 	@Autowired
 	private PlaceRepository placeRepository;

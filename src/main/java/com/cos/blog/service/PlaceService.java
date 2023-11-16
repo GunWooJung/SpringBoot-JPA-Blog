@@ -65,24 +65,44 @@ public class PlaceService {
 					if (!(place.getDisabled_man().equals("있음") || place.getDisabled_woman().equals("있음")))
 						check = false;
 				}
-				if (changing_table_man.equals("true")) {
-					if (!(place.getDiaper().equals("남자") || place.getDisabled_woman().equals("남여")))
+				if (changing_table_man.equals("true")&&changing_table_woman.equals("true")) {
+					if (!(place.getDiaper().equals("남자") ||place.getDiaper().equals("여자") || place.getDisabled_woman().equals("남여")))
 						check = false;
 				}
-				if (changing_table_woman.equals("true")) {
+				if (!changing_table_man.equals("true")&&changing_table_woman.equals("true")) {
 					if (!(place.getDiaper().equals("여자") || place.getDisabled_woman().equals("남여")))
 						check = false;
 				}
-				if (emergency_bell_disabled.equals("true")) {
+				if (changing_table_man.equals("true")&&!changing_table_woman.equals("true")) {
+					if (!(place.getDiaper().equals("남자") || place.getDisabled_woman().equals("남여")))
+						check = false;
+				}
+				if (emergency_bell_disabled.equals("true")&&emergency_bell_man.equals("true")&&emergency_bell_woman.equals("true")) {
+					if (!(place.getEmergency_bell().indexOf("장애") != -1||place.getEmergency_bell().indexOf("남자") != -1||place.getEmergency_bell().indexOf("여자") != -1))
+						check = false;
+				}
+				if (!emergency_bell_disabled.equals("true")&&emergency_bell_man.equals("true")&&emergency_bell_woman.equals("true")) {
+					if (!(place.getEmergency_bell().indexOf("남자") != -1||place.getEmergency_bell().indexOf("여자") != -1))
+						check = false;
+				}
+				if (emergency_bell_disabled.equals("true")&&!emergency_bell_man.equals("true")&&emergency_bell_woman.equals("true")) {
+					if (!(place.getEmergency_bell().indexOf("장애") != -1||place.getEmergency_bell().indexOf("여자") != -1))
+						check = false;
+				}
+				if (emergency_bell_disabled.equals("true")&&emergency_bell_man.equals("true")&&!emergency_bell_woman.equals("true")) {
+					if (!(place.getEmergency_bell().indexOf("장애") != -1||place.getEmergency_bell().indexOf("남자") != -1))
+						check = false;
+				}
+				if (!emergency_bell_disabled.equals("true")&&!emergency_bell_man.equals("true")&&emergency_bell_woman.equals("true")) {
+					if (!(place.getEmergency_bell().indexOf("여자") != -1))
+						check = false;
+				}
+				if (emergency_bell_disabled.equals("true")&&!emergency_bell_man.equals("true")&&!emergency_bell_woman.equals("true")) {
 					if (!(place.getEmergency_bell().indexOf("장애") != -1))
 						check = false;
 				}
-				if (emergency_bell_man.equals("true")) {
+				if (!emergency_bell_disabled.equals("true")&&emergency_bell_man.equals("true")&&!emergency_bell_woman.equals("true")) {
 					if (!(place.getEmergency_bell().indexOf("남자") != -1))
-						check = false;
-				}
-				if (emergency_bell_woman.equals("true")) {
-					if (!(place.getEmergency_bell().indexOf("여자") != -1))
 						check = false;
 				}
 				if (check)
