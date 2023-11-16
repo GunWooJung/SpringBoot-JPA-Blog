@@ -68,22 +68,22 @@ document.getElementById('reset-filter').addEventListener('click', function () {
 // 적용 버튼
 document.getElementById('apply-filter').addEventListener('click', function () {
     // Create an object to hold the state of the checkboxes
-    var center = map.getCenter();
+   var center = map.getCenter();
     clearMarkers();
-    fetch(`/showplace`, {
+    fetch(`/place/show`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-         disabled_person: document.getElementById('disabled_person').checked,
+        disabled_person: document.getElementById('disabled_person').checked,
         changing_table_man: document.getElementById('changing_table_man').checked,
         changing_table_woman: document.getElementById('changing_table_woman').checked,
         emergency_bell_man: document.getElementById('emergency_bell_man').checked,
         emergency_bell_woman: document.getElementById('emergency_bell_woman').checked,
         emergency_bell_disabled: document.getElementById('emergency_bell_disabled').checked,
-                lat: center.getLat(),
-                lng: center.getLng()
+        lat: center.getLat(),
+        lng: center.getLng()
         })
     })
     .then(response => response.json())
