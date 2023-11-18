@@ -1,37 +1,4 @@
-// var modal = document.getElementById("filter-modal");
-// var btn = document.getElementById("filter");
-// var span = document.getElementsByClassName("close-button")[0];
-
-// var mapContainer = document.getElementById("map-container");
-
-// btn.onclick = function() {
-//   modal.style.display = "block";
-//   modal.style.height = mapContainer.offsetHeight + 'px'; // 맵 컨테이너의 높이에 맞춥니다.
-//   modal.style.width = mapContainer.offsetWidth + 'px'; // 맵 컨테이너의 너비에 맞춥니다.
-//   document.querySelector('.modal-content').style.bottom = '0';
-// }
-
-
-// span.onclick = function() {
-//   modal.style.display = "none";
-//   document.querySelector('.modal-content').style.bottom = '-100%';
-// }
-
-// window.onclick = function(event) {
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//     document.querySelector('.modal-content').style.bottom = '-100%';
-//   }
-// }
-
-// document.getElementById('apply-filters').addEventListener('click', function () {
-//   // 필터 적용 로직 추가
-//   console.log('필터가 적용되었습니다.');
-//   modal.style.display = "none";
-//   document.querySelector('.modal-content').style.bottom = '-100%';
-// });
-
-
+// 변경 사항 없음 11-16, 20시 45분
 // 모달 가져오기
 var modal = document.getElementById('myModal');
 
@@ -68,7 +35,7 @@ document.getElementById('reset-filter').addEventListener('click', function () {
 // 적용 버튼
 document.getElementById('apply-filter').addEventListener('click', function () {
     // Create an object to hold the state of the checkboxes
-   var center = map.getCenter();
+    var center = map.getCenter();
     clearMarkers();
     fetch(`/place/show`, {
         method: 'POST',

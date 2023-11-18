@@ -1,14 +1,13 @@
-
 var mapContainer = document.getElementById('map'),
     mapOption = {
         center: new kakao.maps.LatLng(37.504937827895866, 126.9576790776909),
         level: 2
     };
-
+// 준원
 var map = new kakao.maps.Map(mapContainer, mapOption);
 var currentInfowindow = null;
 var markers = [];
-
+// var overlays = [];
 
 // 지도에 마커와 인포윈도우를 표시
 function displayMarker(locPosition, message) {
@@ -32,7 +31,6 @@ function displayMarker(locPosition, message) {
 
     // 지도 중심좌표를 접속위치로 변경
     map.setCenter(locPosition);
-
 }
 
 function clearMarkers() {
@@ -40,8 +38,23 @@ function clearMarkers() {
         markers[i].setMap(null);
     }
     markers = [];
+    // closeCurrentOverlay(); // 이거 없애면 일단 오버레이는 안없어짐
 }
 
+
+
+
+// function convertToPlaceFormat(dbData) {
+//     return dbData.map(entry => {
+//         return {
+//             name: entry.name,
+//             lat: parseFloat(entry.latitude),
+//             lng: parseFloat(entry.longitude)
+//         };
+//     });
+// }
+
+//위 주석 처리는 프론트에서 쓰던거, 아래 부분은 백엔드 코드
 function convertToPlaceFormat(dbData) {
     return dbData.map(place => {
 	return{
@@ -97,9 +110,6 @@ function convertToPlaceFormat(dbData) {
 //         });
 //     });
 // }
-
-
-/////////////////오버레이 부분
 
 const mockData = { // 이건 그냥 내가 보려고 넣은 가상 데이터, 학교 앞 중앙대점 누르면 볼 수 있음
     id: 'mock1', 
@@ -169,8 +179,110 @@ function markPlaces(places) {
         });
     });
 }
-////////// 오버레이 끝
 
+
+// function handleMarkerClick(place) {
+
+//     closeCurrentOverlay();
+
+//     const useBackend = false; // 백엔드 쓸때는 true로 바꿔
+
+//     if (useBackend) {
+//         fetch(`/place/detail?id=${place.id}`)
+//             .then(response => response.json())
+//             .then(data => {
+//                 createAndShowOverlay(data, map); //data에서 data, map으로 달라졌는데 백엔드에서 달라지는거 있나?
+//             })
+//             .catch(error => {
+//                 console.error('Error fetching place details:', error);
+//             });
+//     } else {
+//         createAndShowOverlay(place, map);
+//     }
+// }
+
+
+// function createAndShowOverlay(placeData) {
+//     const overlay = createPlaceOverlay(placeData, map);
+//     if (window.currentOverlay) {
+//         window.currentOverlay.setMap(null);
+//     }
+//     overlay.setMap(map);
+//     window.currentOverlay = overlay;
+// }
+
+
+// function adjustOverlayPosition(markers, overlays) {
+//     markers.forEach((marker, index) => {
+//         if (overlays[index]) {
+//             overlays[index].setPosition(marker.getPosition());
+//         }
+//     });
+// }
+
+
+
+// // 줌 변경 이벤트 리스너 등록
+// kakao.maps.event.addListener(map, 'zoom_changed', function() {
+//     adjustOverlayPosition(markers, overlays);
+// });
+
+// function markPlaces(places) {
+//     clearMarkers();
+
+//     places.forEach(function (place) {
+//         var markerPosition = new kakao.maps.LatLng(place.lat, place.lng);
+//         var marker = new kakao.maps.Marker({
+//             position: markerPosition,
+//             title: place.name
+//         });
+//         marker.setMap(map);
+//         markers.push(marker);
+
+//         kakao.maps.event.addListener(marker, 'click', function () {
+//             handleMarkerClick(place);
+//         });
+//     });
+// }
+
+// function searchNearby(keyword, location, page = 1) {
+//     var ps = new kakao.maps.services.Places();
+//     ps.keywordSearch(keyword, function (data, status, pagination) {
+//         if (status === kakao.maps.services.Status.OK) {
+//             var placesWithCoordinates = data.map(function (item) {
+//                 return {
+//                     name: item.place_name,
+//                     lat: parseFloat(item.y),
+//                     lng: parseFloat(item.x)
+//                 };
+//             });
+//             console.log(placesWithCoordinates);
+
+//             markPlaces(placesWithCoordinates);
+
+//             // 부드럽게 지도를 첫 번째 마커 위치로 이동시키기, 근데 첫 페이지에서만
+//             if (!initialSearchDone && placesWithCoordinates.length > 0) {
+//                 map.panTo(new kakao.maps.LatLng(placesWithCoordinates[0].lat, placesWithCoordinates[0].lng));
+//                 initialSearchDone = true; // Set the flag so map doesn't re-center on subsequent data fetches
+//             }
+
+//             // 다음 페이지가 있다면 다음 검색 결과도 로드
+//             if (pagination.hasNextPage) {
+//                 setTimeout(() => {
+//                  //   searchNearby(keyword, location, page + 1);
+//                 }, 300);
+//             }
+
+//         } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+//             alert('No results found');
+//         } else {
+//             console.error('Search result error: ' + status);
+//         }
+//     }, { location: location, page: page, radius: 20000 });
+// }
+
+
+// 위에건 프론트에 있던 코드 11-16, 21시 30분 
 
 var initialSearchDone = false;
 
@@ -216,8 +328,8 @@ function fetchPlacesFromBackend(lat, lng) {
         emergency_bell_man: document.getElementById('emergency_bell_man').checked,
         emergency_bell_woman: document.getElementById('emergency_bell_woman').checked,
         emergency_bell_disabled: document.getElementById('emergency_bell_disabled').checked,
-        lat: center.getLat(),
-        lng: center.getLng()
+                lat: center.getLat(),
+                lng: center.getLng()
         })
     })
     .then(response => response.json())
@@ -237,8 +349,9 @@ function updateCenterAndSearch(keyword) {
     var center = map.getCenter();
     clearMarkers();
     fetchPlacesFromBackend(center.getLat(), center.getLng());
-  // searchNearby(keyword || 'StarBucks', center); // Use the provided keyword or default to 'StarBucks'
-   //searchNearby(keyword , center); 
+    // 스타벅스 부분, 프론트 개발시 주석 해제
+    // searchNearby(keyword || 'StarBucks', center); 
+    // searchNearby(keyword , center); 
 }
 
 
@@ -254,14 +367,13 @@ document.getElementById('search-button').addEventListener('click', function () {
 function fetchAndUpdatePlaces() {
     var center = map.getCenter();
     clearMarkers();
-    // Fetch new places without changing the map's center.
-    //searchNearby('Starbucks', center); // Replace 'Starbucks' with your desired default or dynamic keyword.
+    // 스타벅스, 프론트 개발시 주석 해제
+    //searchNearby('Starbucks', center); 
 }
       kakao.maps.event.addListener(map, 'dragend', function() {
             updateCenterAndSearch();
         });
 
-// When you want to update the center without a new search, simply clear the markers and fetch new ones
 // kakao.maps.event.addListener(map, 'dragend', function () {
 //     var center = map.getCenter();
 //     clearMarkers();

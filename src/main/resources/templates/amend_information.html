@@ -7,22 +7,83 @@
     <link rel="stylesheet" href="styles/amend_information.css">
 </head>
 <body>
-    <div class="amend-info-container">
-        <header class="header">
-            <span class="close-button">&times;</span>
-            <h1>정보 수정 제안</h1>
-        </header>
-        <ul class="suggestion-list">
-            <li>해당 장소에 대한 정보를 제안해주세요!</li>
-            <li>장소명 및 위치</li>
-            <li>장애인 화장실 정보 수정</li>
-            <li>기저귀 교환대 정보 수정</li>
-            <li>비상벨 정보 수정</li>
-            <li>장소삭제</li>
-        </ul>
-        <footer class="footer">
-            <button class="submit-button">수정 제안하기</button>
-        </footer>
+    <div class="amend_info_container">
+        <div class="container_header">
+            <div class="close">&times;</div>
+            <div class="header_title">정보 수정 제안</div>
+        </div>
+
+        <div class="container_body">
+            <div class="body_content"> 
+                <div class="body_content_title">해당 장소에 대한 정보를 제안해주세요!</div>
+                <div class="body_content_submit">
+                    <div class="submit_icon">@</div>
+                    <div class="submit_text">장소명 및 위치</div>
+                    <div class="submit_arrow"> > </div>
+                </div>
+                <div class="body_content_submit">
+                    <div class="submit_icon">@</div>
+                    <div class="submit_text">장애인 화장실 정보 수정</div>
+                    <div class="submit_arrow"> > </div>
+                </div>
+                <div class="body_content_submit">
+                    <div class="submit_icon">@</div>
+                    <div class="submit_text">기저귀 교환대 정보 수정</div>
+                    <div class="submit_arrow"> > </div>
+                </div>
+                <div class="body_content_submit">
+                    <div class="submit_icon">@</div>
+                    <div class="submit_text">비상벨 정보 수정</div>
+                    <div class="submit_arrow"> > </div>
+                </div>
+                <div class="body_content_submit">
+                    <div class="submit_icon">@</div>
+                    <div class="submit_text">장소 삭제</div>
+                    <div class="submit_arrow"> > </div>
+                </div>
+            </div>
+
+            <div class="body_content">
+                <div class="body_content_title">기타 정보를 공유해주세요!</div>
+                <div class="body_content_submit">
+                    <div class="submit_icon"></div>
+                    <div class="submit_text">@원하는대로 정보 작성</div>
+                    <div class="submit_arrow"> > </div>
+                </div>
+            </div>
+
+            <div class="body_content">
+                <div class="body_content_title">이전 신고 내용</div>
+                <!-- 여기서부터는 텍스트는 일단 넣어놓지만 백엔드에서 무슨 내용일지 받아와야함 -->
+                <div class="body_content_recent"> 
+                    <div class="recent_textbox">
+                        <div class="recent_textbox_title">기저귀 교환대 정보 수정</div>
+                        <div class="recent_textbox_detail">
+                            <div class="textbox_detail_text">남자 화장실에 기저귀 교환대가 없거나 파손됨</div>
+                            <div class="textbox_detail_date">2023.10.20</div>
+                        </div>
+                    </div>
+                    <div class="recent_likeButton">
+                        <div class="recent_likeButton_number">+ 1</div>
+                        <div class="recent_likeButton_heart">♡</div>
+                    </div>
+                </div>
+
+                <div class="body_content_recent"> 
+                    <div class="recent_textbox">
+                        <div class="recent_textbox_title">비상벨 정보 수정</div>
+                        <div class="recent_textbox_detail">
+                            <div class="textbox_detail_text">여자 화장실 비상벨이 있음</div>
+                            <div class="textbox_detail_date">2023.09.17</div>
+                        </div>
+                    </div>
+                    <div class="recent_likeButton">
+                        <div class="recent_likeButton_number">+ 4</div>
+                        <div class="recent_likeButton_heart">♡</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
