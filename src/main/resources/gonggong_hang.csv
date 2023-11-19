@@ -1,4 +1,4 @@
-﻿번호,name,address,disabled_man,disabled_woman,opentime,latitude,longitude,diaper,error_count,emergency_bell
+번호,name,address,disabled_man,disabled_woman,opentime,latitude,longitude,diaper,error_count,emergency_bell
 1058,(주)가재울뉴타운주유소 화장실,서울특별시 서대문구 모래내로 205,없음,없음,00:00~24:00,37.5732673,126.9224318,없음,0,없음
 152,(주)매트로백화점 화장실,서울특별시 은평구 불광동 311-13 메트로타워,없음,없음,24시간,37.6196342,126.9214784,없음,0,없음
 4250,(주)삼표에너지 목동주유소,목5동 905-30,없음,없음,정시(06:00~18:00),37.5361674,126.8797993,없음,0,여자화장실
