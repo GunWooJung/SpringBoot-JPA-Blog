@@ -1,0 +1,41 @@
+/* report_bell.html의 스타일 */
+.report_container {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    border-radius: 5px;
+}
+
+.report_container_header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.report_container_header_title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.report_container_body {
+    margin-top: 20px;
+}
+
+.report_container_body_category,
+.report_container_body_choice {
+    margin-bottom: 10px;
+}
+
+.report_container_footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.report_container_footer_left,
+.report_container_footer_right {
+    cursor: pointer;
+    font-weight: bold;
+}

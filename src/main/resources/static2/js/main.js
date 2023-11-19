@@ -287,7 +287,7 @@ function markPlaces(places) {
 var initialSearchDone = false;
 
 function searchNearby(keyword, location, page = 1) {
-    fetch(`/place/search?keyword=${keyword}`)
+    fetch(`/place/search?keyword=${keyword}&lat=${location.getLat()}&lng=${location.getLng()}`)
         .then(response => response.json())
         .then(data => {
             const convertedData = convertToPlaceFormat(data);

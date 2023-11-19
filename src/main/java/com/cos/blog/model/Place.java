@@ -36,16 +36,16 @@ public class Place {
 	private String latitude = "0";
 	
 	@Column
-	private String disabled_man = "정보 없음"; //남자장애인용 엑셀정보
+	private String disabled_man = "없음"; //남자장애인용 엑셀정보
 	
 	@Column
-	private String disabled_woman = "정보 없음"; //여자장애인용 엑셀정보
+	private String disabled_woman = "없음"; //여자장애인용 엑셀정보
 	
 	@Column
-	private String diaper = "정보 없음"; //기저귀교환대 유무 엑셀정보
+	private String diaper = "없음"; //기저귀교환대 유무 엑셀정보
 
 	@Column
-	private String opentime = "정보 없음"; 
+	private String opentime = ":~:"; 
 	
 	@Column
 	private String emergency_bell = "없음"; 
@@ -58,4 +58,5 @@ public class Place {
 	
 	@Column
 	private int comment_count = 0; //프론트에 commentcount
+	
 }

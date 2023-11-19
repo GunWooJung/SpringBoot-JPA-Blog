@@ -3,12 +3,12 @@
 
 <head>
     <meta charset="utf-8">
-    <title>11-16, 21:30 버전</title>
+    <title>11-18, 16:02 버전</title>
     <link rel="stylesheet" href="./styles/main_page.css">
     <link rel="stylesheet" href="./styles/filter_modal.css">
     <link rel="stylesheet" href="./styles/marker_overlay.css">
     <script type="text/javascript"
-        src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=18df5f7360b940777477a594ac97dc4f&libraries=services">
+        src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=b40d65bf57c29f2e2ee811fc923049c9&libraries=services">
         </script>
     <script src="js/search_place.js"></script>
     <script src="js/marker_overlay.js"></script>
@@ -41,6 +41,12 @@
 
             <div class="modal_content_body">
                 <div class="content_body_container">
+                    <div class="content_body_category">평점</div>
+                    <div class="content_body_slider">
+                    </div>
+                </div>
+
+                <div class="content_body_container">
                     <div class="content_body_category">장애인 화장실</div>
                     <div class="content_body_choice">
                         <input type="checkbox" id="disabled_person" name="disabled_person">
@@ -65,12 +71,10 @@
                         <input type="checkbox" id="emergency_bell_man" name="emergency_bell" value="emergency_bell_man">
                         <label for="emergency_bell_man">남자 화장실</label>
 
-                        <input type="checkbox" id="emergency_bell_woman" name="emergency_bell"
-                            value="emergency_bell_woman">
+                        <input type="checkbox" id="emergency_bell_woman" name="emergency_bell" value="emergency_bell_woman">
                         <label for="emergency_bell_woman">여자 화장실</label>
                         
-                        <input type="checkbox" id="emergency_bell_disabled" name="emergency_bell"
-                            value="emergency_bell_disabled">
+                        <input type="checkbox" id="emergency_bell_disabled" name="emergency_bell" value="emergency_bell_disabled">
                         <label for="emergency_bell_disabled">장애인 화장실</label>
                     </div>
                 </div>
@@ -84,11 +88,10 @@
     </div>
 
 
-
-
     <script src="js/main.js"></script>
     <script src="js/my_location.js"></script>
     <script src="js/filter_modal.js"></script>
+    
 </body>
 
 </html>

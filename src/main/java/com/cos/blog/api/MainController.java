@@ -21,8 +21,5 @@ public class MainController {
 		return "amend_information";
 	}
 	
-	@GetMapping({"","/ "})
-	public String test() {
-		return "index";
-	}
+
 }

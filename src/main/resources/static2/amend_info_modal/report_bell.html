@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/report_modal.css">
+    <title>비상벨 정보 수정</title>
+</head>
+<body>
+    
+    <div class="close">&times;</div>
+    
+    <div class="report_container">
+        <div class="report_container_header">
+            <div class="report_container_header_title">비상벨 정보 수정</div>
+        </div>
+
+        <!-- 
+        내가 생각하기에 남자 여자 화장실 부분을 동시에 보고하는 경우는 없을거같아서
+        6개의 값 중에 하나만 체크가 가능하도록 name을 일치시켰는데 
+        사양에 따라서 남자 여자 둘다 가능하게 할 수도 있음
+        -->
+        
+        <div class="report_container_body">
+            <div class="report_container_body_category">남자 화장실 비상벨</div>
+            <div class="report_container_body_choice">
+                <input type="radio" id="man_bell_option_yes" name="bell" value="man_bell_yes">
+                <label for="man_bell_option_yes">비상벨이 있음</label>
+
+                <input type="radio" id="man_bell_option_no" name="bell" value="man_bell_no">
+                <label for="man_bell_option_no">비상벨이 없거나 파손됨</label>
+
+                <!-- <input type="radio" id="man_bell_option_broken" name="bell" value="man_bell_broken">
+                <label for="man_bell_option_broken">비상벨이 파손됨</label> -->
+            </div>
+            <div class="report_container_body_category">여자 화장실 비상벨</div>
+            <div class="report_container_body_choice">
+                <input type="radio" id="woman_bell_option_yes" name="bell" value="woman_bell_yes">
+                <label for="woman_bell_option_yes">비상벨이 있음</label>
+
+                <input type="radio" id="woman_bell_option_no" name="bell" value="woman_bell_no">
+                <label for="woman_bell_option_no">비상벨이 없거나 파손됨</label>
+
+                <!-- <input type="radio" id="woman_bell_option_broken" name="bell" value="woman_bell_broken">
+                <label for="woman_bell_option_broken">비상벨이 파손됨</label> -->
+            </div>
+        </div>
+        <div class="report_container_footer">
+            <div class="report_container_footer_left">닫기</div>
+            <div class="report_container_footer_right">제출하기</div>
+        </div>
+    </div> 
+    <!-- <script src="/js/reports.js"></script>   -->
+</body>
+</html>

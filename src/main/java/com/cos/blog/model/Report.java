@@ -28,7 +28,10 @@ public class Report {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id; 	//식별자
 	
-	@Lob // 대용량 데이터
+	@Column
+	private String type;
+	
+	@Column 
 	private String content;
 	
 	@ManyToOne

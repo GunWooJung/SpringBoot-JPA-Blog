@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.blog.dto.RequestBodyCommentDto;
 import com.cos.blog.dto.RequestBodyReportDto;
+import com.cos.blog.dto.RequestString;
 import com.cos.blog.dto.ResponseDto;
 import com.cos.blog.model.Comment;
 import com.cos.blog.model.Report;
@@ -40,8 +41,33 @@ public class ReportApiController {
 	// String으로 userId, placeId , content 요청으로 신고 등록하기
 
 	@PostMapping("/report/enroll")
-	public void reportEnroll(@RequestBody RequestBodyReportDto request) {
-		reportService.reportEnroll(request.getPlaceId(),request.getContent());
+	public void reportEnroll(@RequestBody RequestString request) {
+		String type = "null";
+		System.out.println(request.getPlaceId());
+		if(request.getDelete_location()!=null) {
+			type = "Delete_location";
+			reportService.reportEnroll(request.getPlaceId(),type,request.getDelete_location());
+		}
+		if(request.getBell()!=null) {
+			type = "Bell";
+			reportService.reportEnroll(request.getPlaceId(),type,request.getBell());
+		}
+		if(request.getDiaper_change()!=null) {
+			type = "Diaper_change";
+			reportService.reportEnroll(request.getPlaceId(),type,request.getDiaper_change());
+		}
+		if(request.getDisabled()!=null) {
+			type = "Disabled";
+			reportService.reportEnroll(request.getPlaceId(),type,request.getDisabled());
+		}
+		if(request.getReport_location_name()!=null) {
+			type = "Report_location_name";
+			reportService.reportEnroll(request.getPlaceId(),type,request.getDisabled());
+		}
+		if(request.getReport_location_point()!=null) {	
+			type = "Report_location_point";
+			reportService.reportEnroll(request.getPlaceId(),type,request.getDisabled());
+		}
 	}
 	
 	//미개발

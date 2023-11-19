@@ -32,7 +32,7 @@ public class ReportService {
 	}
 	
 	@Transactional
-	public void reportEnroll(String placeId, String content) {
+	public void reportEnroll(String placeId, String type, String content) {
 		Optional<Place> place = placeRepository.findById(Integer.parseInt(placeId));
 		if (place.isPresent()) {
 			Report report = new Report();

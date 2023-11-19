@@ -24,16 +24,9 @@ public class PlaceService {
 	private PlaceRepository placeRepository;
 
 	@Transactional(readOnly = true)
-	public List<Place> placeShow(
-		double cur_location_lat,
-		double cur_location_lng, 
-		String changing_table_man,
-		String changing_table_woman, 
-		String disabled_person,
-		String emergency_bell_disabled, 
-		String emergency_bell_man, 
-		String emergency_bell_woman
-		) {
+	public List<Place> placeShow(double cur_location_lat, double cur_location_lng, String changing_table_man,
+			String changing_table_woman, String disabled_person, String emergency_bell_disabled,
+			String emergency_bell_man, String emergency_bell_woman) {
 		List<Place> places = placeRepository.findAll();
 		List<Place> aroundPlaces = new ArrayList<Place>();
 		for (Place place : places) {
@@ -58,50 +51,62 @@ public class PlaceService {
 					.parseDouble(place.getLatitude())) {
 				lat_In_Max = true;
 			}
-			//필터링 조건에 부합하는 결과 찾기
+			// 필터링 조건에 부합하는 결과 찾기
 			if (lat_In_Min && lat_In_Max && lng_In_Min && lng_In_Max) {
 				Boolean check = true;
 				if (disabled_person.equals("true")) {
 					if (!(place.getDisabled_man().equals("있음") || place.getDisabled_woman().equals("있음")))
 						check = false;
 				}
-				if (changing_table_man.equals("true")&&changing_table_woman.equals("true")) {
-					if (!(place.getDiaper().equals("남자") ||place.getDiaper().equals("여자") || place.getDisabled_woman().equals("남여")))
+				if (changing_table_man.equals("true") && changing_table_woman.equals("true")) {
+					if (!(place.getDiaper().equals("남자") || place.getDiaper().equals("여자")
+							|| place.getDisabled_woman().equals("남여")))
 						check = false;
 				}
-				if (!changing_table_man.equals("true")&&changing_table_woman.equals("true")) {
+				if (!changing_table_man.equals("true") && changing_table_woman.equals("true")) {
 					if (!(place.getDiaper().equals("여자") || place.getDisabled_woman().equals("남여")))
 						check = false;
 				}
-				if (changing_table_man.equals("true")&&!changing_table_woman.equals("true")) {
+				if (changing_table_man.equals("true") && !changing_table_woman.equals("true")) {
 					if (!(place.getDiaper().equals("남자") || place.getDisabled_woman().equals("남여")))
 						check = false;
 				}
-				if (emergency_bell_disabled.equals("true")&&emergency_bell_man.equals("true")&&emergency_bell_woman.equals("true")) {
-					if (!(place.getEmergency_bell().indexOf("장애") != -1||place.getEmergency_bell().indexOf("남자") != -1||place.getEmergency_bell().indexOf("여자") != -1))
+				if (emergency_bell_disabled.equals("true") && emergency_bell_man.equals("true")
+						&& emergency_bell_woman.equals("true")) {
+					if (!(place.getEmergency_bell().indexOf("장애") != -1 || place.getEmergency_bell().indexOf("남자") != -1
+							|| place.getEmergency_bell().indexOf("여자") != -1))
 						check = false;
 				}
-				if (!emergency_bell_disabled.equals("true")&&emergency_bell_man.equals("true")&&emergency_bell_woman.equals("true")) {
-					if (!(place.getEmergency_bell().indexOf("남자") != -1||place.getEmergency_bell().indexOf("여자") != -1))
+				if (!emergency_bell_disabled.equals("true") && emergency_bell_man.equals("true")
+						&& emergency_bell_woman.equals("true")) {
+					if (!(place.getEmergency_bell().indexOf("남자") != -1
+							|| place.getEmergency_bell().indexOf("여자") != -1))
 						check = false;
 				}
-				if (emergency_bell_disabled.equals("true")&&!emergency_bell_man.equals("true")&&emergency_bell_woman.equals("true")) {
-					if (!(place.getEmergency_bell().indexOf("장애") != -1||place.getEmergency_bell().indexOf("여자") != -1))
+				if (emergency_bell_disabled.equals("true") && !emergency_bell_man.equals("true")
+						&& emergency_bell_woman.equals("true")) {
+					if (!(place.getEmergency_bell().indexOf("장애") != -1
+							|| place.getEmergency_bell().indexOf("여자") != -1))
 						check = false;
 				}
-				if (emergency_bell_disabled.equals("true")&&emergency_bell_man.equals("true")&&!emergency_bell_woman.equals("true")) {
-					if (!(place.getEmergency_bell().indexOf("장애") != -1||place.getEmergency_bell().indexOf("남자") != -1))
+				if (emergency_bell_disabled.equals("true") && emergency_bell_man.equals("true")
+						&& !emergency_bell_woman.equals("true")) {
+					if (!(place.getEmergency_bell().indexOf("장애") != -1
+							|| place.getEmergency_bell().indexOf("남자") != -1))
 						check = false;
 				}
-				if (!emergency_bell_disabled.equals("true")&&!emergency_bell_man.equals("true")&&emergency_bell_woman.equals("true")) {
+				if (!emergency_bell_disabled.equals("true") && !emergency_bell_man.equals("true")
+						&& emergency_bell_woman.equals("true")) {
 					if (!(place.getEmergency_bell().indexOf("여자") != -1))
 						check = false;
 				}
-				if (emergency_bell_disabled.equals("true")&&!emergency_bell_man.equals("true")&&!emergency_bell_woman.equals("true")) {
+				if (emergency_bell_disabled.equals("true") && !emergency_bell_man.equals("true")
+						&& !emergency_bell_woman.equals("true")) {
 					if (!(place.getEmergency_bell().indexOf("장애") != -1))
 						check = false;
 				}
-				if (!emergency_bell_disabled.equals("true")&&emergency_bell_man.equals("true")&&!emergency_bell_woman.equals("true")) {
+				if (!emergency_bell_disabled.equals("true") && emergency_bell_man.equals("true")
+						&& !emergency_bell_woman.equals("true")) {
 					if (!(place.getEmergency_bell().indexOf("남자") != -1))
 						check = false;
 				}
@@ -111,6 +116,7 @@ public class PlaceService {
 		}
 		return aroundPlaces;
 	}
+
 	// 모든 place를 jpa에 등록하기
 	@Transactional
 	public void placeAdd(String fileName) {
@@ -209,36 +215,46 @@ public class PlaceService {
 	}
 	// 모든 place를 불러오기
 
-	
-
 	@Transactional(readOnly = true)
-	public List<Place> placeSearch(String keyword) {
+	public List<Place> placeSearch(String keyword, String latitude, String longitude) {
 		List<Place> places = placeRepository.findAll();
-		Comparator<Place> nameComparator = Comparator.comparing(Place::getName);
-		// List를 정렬
-		Collections.sort(places, nameComparator);
 		List<Place> placeResult = new ArrayList<Place>();
 		for (Place place : places) {
 			if (place.getName().replaceAll("\\s", "").indexOf(keyword.replaceAll("\\s", "")) != -1) {
-				placeResult.add(place); //키워드가 이름에 포함되면 add
+				placeResult.add(place); // 키워드가 이름에 포함되면 add
 			}
+		}
+		double lat = Double.parseDouble(latitude);
+		double lng = Double.parseDouble(longitude);
+		if (!placeResult.isEmpty()) {
+			double min = (lat - Double.parseDouble(placeResult.get(0).getLatitude())) * (lat - Double.parseDouble(placeResult.get(0).getLatitude())) + 0.0090100236513120846942223223335961
+					* 0.0090100236513120846942223223335961 * (lng - Double.parseDouble(placeResult.get(0).getLongitude())) * (lng - Double.parseDouble(placeResult.get(0).getLongitude())) ;
+			int min_i = 0;
+			for (Place p : placeResult) {
+				double p_lat = Double.parseDouble(p.getLatitude());
+				double p_lng = Double.parseDouble(p.getLongitude());
+				double distance = (lat - p_lat) * (lat - p_lat) + 0.0090100236513120846942223223335961
+						* 0.0090100236513120846942223223335961 * (lng - p_lng) * (lng - p_lng);
+				if (min > distance) {
+					min = distance;
+					min_i = placeResult.indexOf(p);
+				}
+			}
+			 Collections.swap(placeResult, 0, min_i);
 		}
 		return placeResult;
 	}
-	
 
 	@Transactional // 모든 DB 삭제
 	public void placeDelete(int id) {
 		placeRepository.deleteById(id);
 	}
-	
+
 	@Transactional
 	public Place placeDetail(int id) {
 		Optional<Place> places = placeRepository.findById(id);
 		Place place = places.get();
 		return place;
 	}
-	
-	
-	
+
 }

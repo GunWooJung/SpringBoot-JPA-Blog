@@ -27,3 +27,14 @@
 .review-prompt button:hover {
     background-color: #0056b3;
 }
+
+
+.details-container {
+    /* Your styles for the container */
+}
+
+#map {
+    margin-top: 20px; /* Space above the map */
+    border: 1px solid #ccc; /* Border around the map */
+    border-radius: 4px; /* Rounded corners */
+}

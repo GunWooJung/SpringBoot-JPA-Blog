@@ -29,10 +29,10 @@ public class StarRating {
 	private int id; 	//식별자
 	
 	@Column
-	private String ip;
+	private String ip = "";
 	
 	@Column
-	private int score;
+	private double score;
 	
 	@ManyToOne
 	@JoinColumn(name = "placeId")
