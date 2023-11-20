@@ -18,7 +18,6 @@ spring:
     url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul
     username: root
     password: djsqnr20214
-
     
   jpa:
     open-in-view: true
