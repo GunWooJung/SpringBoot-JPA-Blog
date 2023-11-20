@@ -140,6 +140,7 @@ public class ReportApiController {
 			if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
 			    ipAddress = requestip.getRemoteAddr();
 			}
+	
 		return reportService.reportClickHeart(reportId, ipAddress);
 	}
 }

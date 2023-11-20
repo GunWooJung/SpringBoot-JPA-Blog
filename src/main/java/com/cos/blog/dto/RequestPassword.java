@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class RequestPassword {
+	public String placeId;
 	public String password;
 }

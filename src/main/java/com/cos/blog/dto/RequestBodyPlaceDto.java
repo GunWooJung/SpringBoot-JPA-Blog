@@ -26,4 +26,7 @@ public class RequestBodyPlaceDto {
 	
 	private String emergency_bell_woman;
 
+	private String handle_right;
+	
+	private String handle_left;
 }

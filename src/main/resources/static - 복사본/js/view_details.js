@@ -99,10 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-				placeId : placeId,		//추가
-				 password: password 
-				})
+            body: JSON.stringify({ password: password })
       		})
 			//11.20 수정
 			.then(response => {

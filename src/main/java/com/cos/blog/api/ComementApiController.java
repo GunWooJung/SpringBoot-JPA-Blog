@@ -88,8 +88,9 @@ public class ComementApiController {
 	// API 요청 방식 : GET,  주소 : /comment/delete?id=${id} , 설명 :comment id 값으로 해당 댓글 삭제
 	@PostMapping("/comment/delete")
 	public ResponseEntity<String> commentDelete(@RequestBody RequestPassword request,@RequestParam("id") int commentId) {
+		int placeId = Integer.parseInt(request.getPlaceId());
 		String password = request.getPassword();
-		return commentService.commentDelete(commentId,password);
+		return commentService.commentDelete(placeId,commentId,password);
 	}
 	
 	

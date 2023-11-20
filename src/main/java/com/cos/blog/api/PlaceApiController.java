@@ -32,6 +32,8 @@ public class PlaceApiController {
 		String emergency_bell_disabled = request.getEmergency_bell_disabled();
 		String emergency_bell_man = request.getEmergency_bell_man();
 		String emergency_bell_woman = request.getEmergency_bell_woman();
+	//	System.out.println(request.getHandle_right());
+	//	System.out.println(request.getHandle_left());
 		return placeService.placeShow(lat, lng, changing_table_man, changing_table_woman, disabled_person,
 				emergency_bell_disabled, emergency_bell_man, emergency_bell_woman);
 	}

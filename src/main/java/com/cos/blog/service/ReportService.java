@@ -83,21 +83,31 @@ public class ReportService {
 			Boolean isSame = false;
 			List<Report> calsame = reportRepository.findByPlace(place.get());
 			for (Report r : calsame) {
-				if (!r.getIp().equals(ip) && r.getType().equals(type) && r.getContent().equals(contentKor)) {
+				if(r.getType().equals(type) && r.getContent().equals(contentKor)) {
+				if (r.getIp().equals(ip)){
+					 isSame = true;
+					 return ResponseEntity.status(400).body("ip");	
+				}
+				else if (r.getIp2().equals(ip)){
+					 isSame = true;
+					 return ResponseEntity.status(400).body("ip");	
+				}	
+				else if (r.getIp3().equals(ip)){
+					 isSame = true;
+					 return ResponseEntity.status(400).body("ip");	
+				}
+				else{
 					isSame = true;
 					r.setCount(r.getCount() + 1);
+					if(r.getIp2()==null) r.setIp2(ip);
+					else if(r.getIp3()==null) r.setIp3(ip);
 					reportRepository.save(r);
 					return ResponseEntity.ok("Request successful");
 				}
-				else if (r.getIp().equals(ip) && r.getType().equals(type) && r.getContent().equals(contentKor)) {
-					isSame = true;
-					 return ResponseEntity.status(400).body("ip");
-				}
+			  }
 			}
-			if (!isSame) {
 				reportRepository.save(report);
 				return ResponseEntity.ok("Request successful");
-			}
 		}
 		return ResponseEntity.status(400).body("fail");
 	}
@@ -108,12 +118,23 @@ public class ReportService {
 	
 	@Transactional
 	public ResponseEntity<String> reportClickHeart(int reportId, String ip) {
-		Optional<Report> report = reportRepository.findById(reportId);
-		if(report.get().getIp().equals(ip)){
-				return ResponseEntity.status(400).body("fail");
+		Optional<Report> reports = reportRepository.findById(reportId);
+		System.out.println(reportId);
+		Report report = reports.get();
+		if(ip.equals(report.getIp())){
+				return ResponseEntity.status(400).body("ip");
 		}
-		report.get().setCount(report.get().getCount()+1);
-		reportRepository.save(report.get());
+		else if(ip.equals(report.getIp2())){
+			return ResponseEntity.status(400).body("ip");
+		}
+		else if(ip.equals(report.getIp3())){
+			return ResponseEntity.status(400).body("ip");
+		}
+		System.out.println(ip);
+		if(report.getIp2()==null) report.setIp2(ip);
+		else if(report.getIp3()==null) report.setIp3(ip);
+		report.setCount(report.getCount()+1);
+		reportRepository.save(report);
 		return ResponseEntity.ok("Request successful");
 	}
 

@@ -54,4 +54,10 @@ public class Report {
 	
 	@Column
 	private String ip;
+	
+	@Column
+	private String ip2;
+	
+	@Column
+	private String ip3;
 }

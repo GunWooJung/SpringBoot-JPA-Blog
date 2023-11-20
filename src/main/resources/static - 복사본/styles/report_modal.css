@@ -23,7 +23,13 @@
     margin-top: 20px;
 }
 
-.report_container_body_category,
+.report_container_body_category{
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+
 .report_container_body_choice {
     margin-bottom: 10px;
 }

@@ -6,17 +6,22 @@
     <title>Place Details</title>
     <link rel="stylesheet" href="styles/view_details.css">
     <link rel="stylesheet" href="styles/view_details_star.css">
+    <script type="text/javascript"
+        src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=b40d65bf57c29f2e2ee811fc923049c9&libraries=services">
+    </script>
 </head>
 <body>
+    <div id="map" style="width:100%;height:250px;"></div>
     <div class="details-container">
+        <button id="backButton">뒤로가기</button>
         <h1 class="place-name">
-            Name: <span id="placeName">(backend info)</span>
+            장소명: <span id="placeName">(backend info)</span>
         </h1>
         <div class="rating">
-            StarRating: <span id="starRating">(backend info)</span>
+            별점: <span id="starRating">(backend info)</span>
         </div>
         <div class="info">
-            Address: <span id="address">(backend info)</span><br>
+            주소: <span id="address">(backend info)</span><br>
             <!-- Toilet Info: <span id="toiletInfo">(backend info)</span><br>
             Comments: <span id="comments">(backend info)</span> -->
         </div>
@@ -43,19 +48,19 @@
                     <!-- <input type="radio" id="rating1" name="rating" value="1"><label class="half" for="rating1" title="0.5점"></label> -->
                 </fieldset>
             </div>
-            <button id="submitRating">Submit Star Rating</button>
+            <button id="submitRating">별점 제출</button>
         </div>
         
         <div class="review-section">
-            <h2>Reviews</h2>
+            <h2>리뷰</h2>
             <div id="reviews"></div>
         </div>
         <div class="review-prompt">
-            <p>Leave a periodic visitor review</p>
-            <input type="text" id="username" placeholder="Username" />
-            <input type="password" id="password" placeholder="Password" />
-            <textarea id="reviewText" placeholder="Please leave a review"></textarea>
-            <button id="submitReview">Submit Review</button>
+            <p>이 장소는 어떠셨나요?</p>
+            <input type="text" id="username" placeholder="아이디" />
+            <input type="password" id="password" placeholder="비밀번호" />
+            <textarea id="reviewText" placeholder="리뷰를 남겨주세요!"></textarea>
+            <button id="submitReview">리뷰 제출</button>
         </div>
     </div>
 

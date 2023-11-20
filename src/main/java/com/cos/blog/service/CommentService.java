@@ -61,9 +61,8 @@ public class CommentService {
 			Place place = places.get();
 			place.setComment_count(place.getComment_count()+1);
 			placeRepository.save(place);
-			return ResponseEntity.ok("Request successful");
 		}
-		return ResponseEntity.status(400).body("fail");
+		return ResponseEntity.ok("Request successful");
 	}
 
 	@Transactional
@@ -73,10 +72,12 @@ public class CommentService {
 	}
 	
 	@Transactional
-	public ResponseEntity<String> commentDelete(int commentId,String password) {
+	public ResponseEntity<String> commentDelete(int placeId,int commentId,String password) {
 		Optional<Comment> comment = commentRepository.findById(commentId);
 		if(comment.get().getPassword().equals(password)) {
-			
+			Optional<Place> p = placeRepository.findById(placeId);
+			p.get().setComment_count(p.get().getComment_count()-1);
+			placeRepository.save(p.get());
 			commentRepository.deleteById(commentId);
 			return ResponseEntity.ok("Request successful");
 		}
