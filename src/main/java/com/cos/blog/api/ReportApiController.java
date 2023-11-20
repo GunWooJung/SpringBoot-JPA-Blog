@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,7 +47,7 @@ public class ReportApiController {
 	// String으로 userId, placeId , content 요청으로 신고 등록하기
 
 	@PostMapping("/report/enroll")
-	public void reportEnroll(@RequestBody RequestString request,HttpServletRequest requestip) {
+	public ResponseEntity<String> reportEnroll(@RequestBody RequestString request,HttpServletRequest requestip) {
 		String ipAddress = requestip.getHeader("X-Forwarded-For");
 		  if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
 			  ipAddress = requestip.getHeader("Proxy-Client-ipAddress");
@@ -67,19 +68,19 @@ public class ReportApiController {
 		System.out.println(request.getPlaceId());
 		if(request.getDelete_location()!=null && !request.getDelete_location().equals("")) {
 			type = "장소 삭제";
-			reportService.reportEnroll(request.getPlaceId(),type,request.getDelete_location(),ipAddress);
+			return reportService.reportEnroll(request.getPlaceId(),type,request.getDelete_location(),ipAddress);
 		}
 		if(request.getBell()!=null&& !request.getBell().equals("")) {
 			type = "비상벨 정보 수정";
-			reportService.reportEnroll(request.getPlaceId(),type,request.getBell(),ipAddress);
+			return  reportService.reportEnroll(request.getPlaceId(),type,request.getBell(),ipAddress);
 		}
 		if(request.getDiaper_change()!=null&& !request.getDiaper_change().equals("")) {
 			type = "기저귀 교환대 정보 수정";
-			reportService.reportEnroll(request.getPlaceId(),type,request.getDiaper_change(),ipAddress);
+			return reportService.reportEnroll(request.getPlaceId(),type,request.getDiaper_change(),ipAddress);
 		}
 		if(request.getDisabled()!=null&& !request.getDisabled().equals("")) {
 			type = "장애인 화장실 정보 수정";
-			reportService.reportEnroll(request.getPlaceId(),type,request.getDisabled(),ipAddress);
+			return reportService.reportEnroll(request.getPlaceId(),type,request.getDisabled(),ipAddress);
 		}
 		if((request.getReport_location_name()!=null && !request.getReport_location_name().equals(""))|| 
 				(request.getReport_location_point()!=null&& !request.getReport_location_point().equals(""))) {
@@ -90,24 +91,20 @@ public class ReportApiController {
 				if(request.getReport_location_point()!=null  && !request.getReport_location_point().equals("")) {
 					content += ",  위치 : "+request.getReport_location_point();
 				}
-				reportService.reportEnroll(request.getPlaceId(),type,content,ipAddress);
+				return reportService.reportEnroll(request.getPlaceId(),type,content,ipAddress);
 			}
 			if(request.getReport_location_name() == null || request.getReport_location_name().equals("")) {
 				if(request.getReport_location_point()!=null && !request.getReport_location_point().equals("")) {
 					content += "위치 : "+request.getReport_location_point();
-					reportService.reportEnroll(request.getPlaceId(),type,content,ipAddress);
+					return reportService.reportEnroll(request.getPlaceId(),type,content,ipAddress);
 				}
 			}
 		
 		}
 		if(request.getUser_opinion()!=null&& !request.getUser_opinion().equals("")) {
-			opinionService.saveOpinion(Integer.parseInt(request.getPlaceId()),request.getUser_opinion());
+			return opinionService.saveOpinion(Integer.parseInt(request.getPlaceId()),request.getUser_opinion());
 		}
-		/*
-		 * if(requst.getReport_location_name()!=null) { type = "Report_location_point";
-		 * reportService.reportEnroll(request.getPlaceId(),type,request.getDisabled());
-		 * }
-		 */
+		 return ResponseEntity.status(400).body("fail");
 	}
 	
 	//미개발

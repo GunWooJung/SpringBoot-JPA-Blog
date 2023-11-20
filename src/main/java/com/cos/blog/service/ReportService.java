@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +35,7 @@ public class ReportService {
 	}
 
 	@Transactional
-	public void reportEnroll(String placeId, String type, String content, String ip) {
+	public ResponseEntity<String> reportEnroll(String placeId, String type, String content, String ip) {
 		Optional<Place> place = placeRepository.findById(Integer.parseInt(placeId));
 		if (place.isPresent()) {
 			String contentKor = content;
@@ -83,17 +84,19 @@ public class ReportService {
 					isSame = true;
 					r.setCount(r.getCount() + 1);
 					reportRepository.save(r);
-					break;
+					return ResponseEntity.ok("Request successful");
 				}
 				else if (r.getIp().equals(ip) && r.getType().equals(type) && r.getContent().equals(contentKor)) {
 					isSame = true;
-					break;
+					 return ResponseEntity.status(400).body("ip");
 				}
 			}
 			if (!isSame) {
 				reportRepository.save(report);
+				return ResponseEntity.ok("Request successful");
 			}
 		}
+		return ResponseEntity.status(400).body("fail");
 	}
 
 	public void reportUpdate(int reportId) {

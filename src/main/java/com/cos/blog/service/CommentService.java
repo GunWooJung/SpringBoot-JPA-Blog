@@ -76,6 +76,8 @@ public class CommentService {
 	public ResponseEntity<String> commentDelete(int commentId,String password) {
 		Optional<Comment> comment = commentRepository.findById(commentId);
 		if(comment.get().getPassword().equals(password)) {
+			
+			commentRepository.deleteById(commentId);
 			return ResponseEntity.ok("Request successful");
 		}
 		else {

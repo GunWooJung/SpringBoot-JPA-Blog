@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,11 +21,12 @@ public class OpinionService {
 	private OpinionRepository opinionRepository;
 	
 	@Transactional
-	public void saveOpinion(int placeid, String content) {
+	public ResponseEntity<String> saveOpinion(int placeid, String content) {
 		Opinion o = new Opinion();
 		o.setContent(content);
 		o.setPlaceId(placeid);
 		opinionRepository.save(o);
+		return  ResponseEntity.status(400).body("user_opinion");
 	}
 	
 	@Transactional

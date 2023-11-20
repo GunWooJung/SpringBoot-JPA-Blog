@@ -48,21 +48,28 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     body: JSON.stringify(formData)
                 })
-                .then(response => {
-                    if (response.ok) {
-                        alert("제출되었습니다"); // 성공 알림
-
-                        //잘 안되면 아래에 있는 document~~ 주석 처리하고 reload 사용
-                        // window.location.reload();
-                        document.dispatchEvent(new CustomEvent("reportSubmitted"));
-                    } else {
-                        throw new Error('네트워크와의 통신이 원활하지 않습니다.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Submission error:', error);
-                    alert("제출에 실패했습니다"); // 실패 알림
-                });
+               .then(response => {
+						    return response.text(); // Assuming the server responds with plain text
+			})
+			.then(body => {
+			   if (body.trim().toLowerCase() === "ip") {
+						        // Handle duplicated IP case
+					   alert('이미 신고를 제출하였습니다.');
+				} 
+				else if (body.trim().toLowerCase() === "fail") {
+						        // Handle duplicated IP case
+					   alert('신고 제출에 실패하였습니다.');
+				} 
+				else if (body.trim().toLowerCase() === "user_opinion") {
+						        // Handle duplicated IP case
+					   alert('의견이 전달되었습니다.');
+				} 
+				else {
+				       // Handle successful submission	        // Uncomment the following lines if you want to display an alert and reload the page
+				 alert('신고를 제출하였습니다.');
+				  location.reload();
+			}
+			});
                     
                 modal.style.display = 'none'; // 폼 전송 후 모달 닫기
             });

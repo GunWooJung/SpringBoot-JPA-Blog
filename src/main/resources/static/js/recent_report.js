@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const placeId = new URLSearchParams(window.location.search).get('id');
-  const reportsContainer = document.getElementById('previous_reports_container'); 
+    const reportsContainer = document.getElementById('previous_reports_container');
 
     function fetchLatestReports() {
         fetch(`/report/show?id=${placeId}`) // Adjust this URL to match your backend endpoint
@@ -36,13 +36,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="recent_likeButton_heart">♡</div>
             </div>
         `;
+
+
+        const heartIcon = reportDiv.querySelector('.recent_likeButton_heart');
+        heartIcon.addEventListener('click', function () {
+            fetch(`/report/clickheart?id=${report.id}`)
+                .then(response => {
+                    if (response.ok) {
+                        // Assuming the new count is returned in the response
+                        response.json().then(data => {
+                            const countElement = reportDiv.querySelector('.recent_likeButton_number');
+                            countElement.textContent = `+ ${data.newCount}`;
+                        });
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
         return reportDiv;
     }
 
-    document.addEventListener("reportSubmitted", function() {
+    document.addEventListener("reportSubmitted", function () {
         fetchLatestReports();
     });
 
     fetchLatestReports();
 });
-
