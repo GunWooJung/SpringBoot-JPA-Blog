@@ -123,7 +123,23 @@ public class ReportApiController {
 	// API 요청 방식 : GET,  주소 : /report/clickheart?id=${id} , 설명 : report id값으로 
 	// 하트를 누르면 신고 count값이 1 증가
 	@GetMapping("/report/clickheart")
-	public void reportClickHeart(@RequestParam("id") int reportId) {
-		reportService.reportClickHeart(reportId);
+	public ResponseEntity<String> reportClickHeart(@RequestParam("id") int reportId, HttpServletRequest requestip) {
+		String ipAddress = requestip.getHeader("X-Forwarded-For");
+		  if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+			  ipAddress = requestip.getHeader("Proxy-Client-ipAddress");
+			}
+			if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+			    ipAddress = requestip.getHeader("WL-Proxy-Client-ipAddress");
+			}
+			if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+			    ipAddress = requestip.getHeader("HTTP_CLIENT_ipAddress");
+			}
+			if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+			    ipAddress = requestip.getHeader("HTTP_X_FORWARDED_FOR");
+			}
+			if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+			    ipAddress = requestip.getRemoteAddr();
+			}
+		return reportService.reportClickHeart(reportId, ipAddress);
 	}
 }

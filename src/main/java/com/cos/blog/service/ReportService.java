@@ -3,6 +3,8 @@ package com.cos.blog.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,7 @@ public class ReportService {
 	@Autowired
 	private PlaceRepository placeRepository;
 	
+	@Transactional
 	public List<Report> reportShow(int placeId) {
 		Optional<Place> place = placeRepository.findById(placeId);
 		if (place.isPresent()) {
@@ -98,18 +101,20 @@ public class ReportService {
 		}
 		return ResponseEntity.status(400).body("fail");
 	}
-
-	public void reportUpdate(int reportId) {
-
-	}
-
+	@Transactional
 	public void reportDelete(int reportId) {
 		reportRepository.deleteById(reportId);
 	}
-
-	public void reportClickHeart(int reportId) {
-		// TODO Auto-generated method stub
-
+	
+	@Transactional
+	public ResponseEntity<String> reportClickHeart(int reportId, String ip) {
+		Optional<Report> report = reportRepository.findById(reportId);
+		if(report.get().getIp().equals(ip)){
+				return ResponseEntity.status(400).body("fail");
+		}
+		report.get().setCount(report.get().getCount()+1);
+		reportRepository.save(report.get());
+		return ResponseEntity.ok("Request successful");
 	}
 
 	@Transactional
