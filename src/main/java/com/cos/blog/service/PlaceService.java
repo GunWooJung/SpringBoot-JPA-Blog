@@ -120,7 +120,7 @@ public class PlaceService {
 	// 모든 place를 jpa에 등록하기
 	@Transactional
 	public void placeAdd(String fileName) {
-		String csvFile = "C:\\workspacespring\\project_local\\src\\main\\resources\\" + fileName + ".csv";
+		String csvFile = "/home/ubuntu/SpringBoot-JPA-Blog/src/main/resources/" + fileName + ".csv";
 		Charset.forName("UTF-8");
 
 		try {
@@ -256,5 +256,15 @@ public class PlaceService {
 		Place place = places.get();
 		return place;
 	}
-
+	
+	@Transactional
+	public void DeleteAll() {
+		List<Place> places = placeRepository.findAll();
+		for(Place p : places) {
+			p.setStar_average(0);
+			p.setStar_count(0);
+			p.setComment_count(0);
+		}
+		placeRepository.saveAll(places);
+	}
 }

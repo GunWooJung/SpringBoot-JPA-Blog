@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelector('.amend_info_container .close').addEventListener('click', function () {
     
-        window.location.href = `/view_details?id=${placeId}`;
+        window.location.href = `/viewdetails?id=${placeId}`;
     });
 
     function setupModalEventListeners(modal) {
@@ -42,17 +42,28 @@ document.addEventListener('DOMContentLoaded', function () {
                 // 서버로 폼 데이터 전송
                 console.log('Submitting form data:', Object.fromEntries(formData.entries()));
                 fetch('/report/enroll', {
-                    //fetch('/submit-report', { // '/submit-report'는 예시 URL입니다. 실제 서버의 엔드포인트를 사용하세요.
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(formData)
                 })
-                    .catch(error => {
-                        console.error('Submission error:', error);
-                    });
+                .then(response => {
+                    if (response.ok) {
+                        alert("제출되었습니다"); // 성공 알림
 
+                        //잘 안되면 아래에 있는 document~~ 주석 처리하고 reload 사용
+                        // window.location.reload();
+                        document.dispatchEvent(new CustomEvent("reportSubmitted"));
+                    } else {
+                        throw new Error('네트워크와의 통신이 원활하지 않습니다.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Submission error:', error);
+                    alert("제출에 실패했습니다"); // 실패 알림
+                });
+                    
                 modal.style.display = 'none'; // 폼 전송 후 모달 닫기
             });
         }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,8 +34,8 @@ public class StarRatingApiController {
 
 
 	  @PostMapping("/starrating/enroll") 
-	  public void starRatingEnroll(@RequestBody RequestBodyStarRatingDto request) {
-		/*  String ipAddress = requestip.getHeader("X-Forwarded-For");
+	  public ResponseEntity<String> starRatingEnroll(@RequestBody RequestBodyStarRatingDto request,HttpServletRequest requestip) {
+		 String ipAddress = requestip.getHeader("X-Forwarded-For");
 		  if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
 			  ipAddress = requestip.getHeader("Proxy-Client-ipAddress");
 			}
@@ -49,8 +50,8 @@ public class StarRatingApiController {
 			}
 			if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
 			    ipAddress = requestip.getRemoteAddr();
-			}*/
-		  starRatingtService.starRatingEnroll(request.getPlaceId(),request.getRating());
+			}
+		  return starRatingtService.starRatingEnroll(request.getPlaceId(),request.getRating(),ipAddress);
 	  }
 	
 

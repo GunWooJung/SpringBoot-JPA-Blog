@@ -7,6 +7,8 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,13 +25,13 @@ public class StarRatingService {
 	private PlaceRepository placeRepository;
 
 	@Autowired
-	private StarRatingRepository starRatingServiceRepository;
+	private StarRatingRepository starRatingRepository;
 
 	@Transactional
 	public List<StarRating> starRatingtShow(int placeId) {
 		Optional<Place> place = placeRepository.findById(placeId);
 		if (place.isPresent()) {
-			List<StarRating> starRatings = starRatingServiceRepository.findByPlace(place.get());
+			List<StarRating> starRatings = starRatingRepository.findByPlace(place.get());
 			return starRatings;
 		} else {
 			return null;
@@ -37,7 +39,7 @@ public class StarRatingService {
 	}
 
 	@Transactional
-	public void starRatingEnroll(String placeId, String rating) {
+	public ResponseEntity<String> starRatingEnroll(String placeId, String rating,String ip) {
 		if (rating != null) {
 			Double score = Double.parseDouble(rating);
 			Optional<Place> place = placeRepository.findById(Integer.parseInt(placeId));
@@ -45,8 +47,18 @@ public class StarRatingService {
 				StarRating starRating = new StarRating();
 				starRating.setPlace(place.get());
 				starRating.setScore(score);
-				starRatingServiceRepository.save(starRating);
-				List<StarRating> calstar = starRatingServiceRepository.findByPlace(place.get());
+				List<StarRating> calip = starRatingRepository.findByPlace(place.get());
+				Boolean ipSame = false;
+				for(StarRating s : calip) {
+					if(s.getIp()!=null && s.getIp().equals(ip)){
+						ipSame = true;
+						 return ResponseEntity.status(400).body("fail");
+					}
+				}
+				if(!ipSame) {
+				starRating.setIp(ip);
+				starRatingRepository.save(starRating);
+				List<StarRating> calstar = starRatingRepository.findByPlace(place.get());
 				double result = 0;
 				int count = calstar.size();
 				for (int i = 0; i < calstar.size(); i++) {
@@ -58,9 +70,11 @@ public class StarRatingService {
 				result = Double.parseDouble(df.format(result));
 				place.get().setStar_average(result);
 				placeRepository.save(place.get());
-
+				
+				}
 			}
 		}
+		return ResponseEntity.ok("Request successful");
 	}
 
 	@Transactional
@@ -71,6 +85,11 @@ public class StarRatingService {
 
 	@Transactional
 	public void starRatingDelete(int starRatingId) {
-		starRatingServiceRepository.deleteById(starRatingId);
+		starRatingRepository.deleteById(starRatingId);
+	}
+	
+	@Transactional
+	public void DeleteAll() {
+		starRatingRepository.deleteAll();
 	}
 }

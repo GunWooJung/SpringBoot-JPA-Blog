@@ -1,0 +1,87 @@
+#slider-container {
+    position: relative;
+    top: 40px;
+    width: 300px;
+    height: 80px;
+}
+
+.slider-bar {
+    position: absolute;
+    width: 300px;
+    height: 10px; 
+    background-color: #ddd; 
+    top: 20px;
+    border-radius: 5px;
+}
+
+.slider-bar-filled {
+    position: absolute;
+    height: 10px;
+    background-color: #FFD700; 
+    top: 20px;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.handle {
+    position: absolute;
+    background-color: #ff0000; 
+    width: 20px; 
+    height: 20px; 
+    border-radius: 50%; 
+    top: 15px;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.signLeft {
+    position: absolute;
+    background-color: #555;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    z-index: 3;
+    transform: translateX(-50%); 
+}
+
+.signLeft::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #555 transparent;
+}
+
+.signRight {
+    position: absolute;
+    background-color: #555;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    z-index: 3;
+    transform: translateX(-50%);
+}
+
+.signRight::after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+#handle-left {
+    left: 0;
+}
+
+#handle-right {
+    right: 0;
+  }

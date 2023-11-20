@@ -1,6 +1,9 @@
 package com.cos.blog.api;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,7 +43,18 @@ public class PlaceApiController {
 	  placeSearch(@RequestParam("keyword") String keyword,@RequestParam("lat") String latitude, @RequestParam("lng") String longitude) { 
 		 return placeService.placeSearch(keyword, latitude , longitude); 
 	  }
+	 
+	 @GetMapping("/ipaddress") 
+	 public String showIp(HttpServletRequest  request){
+		   String clientIp = request.getHeader("X-Forwarded-For");
 
+	        // 만약 X-Forwarded-For 헤더가 없으면, 직접 클라이언트의 IP 주소를 얻을 수 있습니다.
+	        if (clientIp == null || clientIp.length() == 0 || "unknown".equalsIgnoreCase(clientIp)) {
+	            clientIp = request.getRemoteAddr();
+	        }
+
+	        return "Client IP Address: " + clientIp;
+	  }
 
 	// 백엔드 개발용 , csv파일을 DB에 등록하는 처리
 	@GetMapping("/place/add")
@@ -50,11 +64,11 @@ public class PlaceApiController {
 		String c = "starbucks";
 		String d = "gonggong_seoul";
 		String e = "toilet_list";
-		placeService.placeAdd(a);
-		placeService.placeAdd(b);
-		placeService.placeAdd(c);
-		placeService.placeAdd(d);
-		placeService.placeAdd(e);
+		//placeService.placeAdd(a);
+		//placeService.placeAdd(b);
+		//placeService.placeAdd(c);
+		//placeService.placeAdd(d);
+		//placeService.placeAdd(e);
 		return "addplace"; // addplace.jsp 결과 페이지로 이동
 	}
 

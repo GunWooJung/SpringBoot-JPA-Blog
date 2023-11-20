@@ -3,19 +3,19 @@
 
 <head>
     <meta charset="utf-8">
-    <title>11-20, 슬라이드바 적용</title>
-    
-
+    <title>11-18, 16:02 버전</title>
     <link rel="stylesheet" href="/styles/main_page.css">
     <link rel="stylesheet" href="/styles/filter_modal.css">
     <link rel="stylesheet" href="/styles/marker_overlay.css">
-    <link rel="stylesheet" href="/styles/slide_bar.css">
-    
     <script type="text/javascript"
         src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=b40d65bf57c29f2e2ee811fc923049c9&libraries=services">
     </script>
+    <script src="js/search_place.js"></script>
+    <script src="js/marker_overlay.js"></script>
 
-</head> 
+
+
+</head>
 
 <body>
     <div id="map-container">
@@ -42,13 +42,9 @@
             <div class="modal_content_body">
                 <div class="content_body_container">
                     <div class="content_body_category">평점</div>
-                        <div id="slider-container">
-                            <div class="slider-bar" id="slider-bar-filled"></div>
-                            <div class="handle" id="handle-left"></div>
-                            <div class="handle" id="handle-right"></div>
-                            <div class="signLeft" id="sign-left"></div>
-                            <div class="signRight" id="sign-right"></div>
-                        </div>
+                    <div class="content_body_slider">
+                        <!-- slide bar here -->
+                    </div>
                 </div>
 
                 <div class="content_body_container">
@@ -92,15 +88,11 @@
         </div>
     </div>
 
-    <script src="js/search_place.js"></script>
-    <script src="js/marker_overlay.js"></script>
+
     <script src="js/main.js"></script>
-    
     <script src="js/my_location.js"></script>
     <script src="js/filter_modal.js"></script>
-    <script src="js/slide_bar.js"></script>
     
-     
 </body>
 
 </html>

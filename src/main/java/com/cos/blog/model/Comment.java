@@ -48,6 +48,7 @@ public class Comment {
 	@CreationTimestamp
 	private Timestamp createDate;
 
-		
+	@Column
+	private String ip;	
 
 }

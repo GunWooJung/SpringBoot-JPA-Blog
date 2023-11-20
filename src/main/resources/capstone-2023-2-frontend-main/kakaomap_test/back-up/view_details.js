@@ -52,71 +52,20 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error:', error);
         });
 
-
-
-
-    
-
-    function displayComments(comments) {
-        const commentsContainer = document.getElementById('reviews');
-        commentsContainer.innerHTML = ''; // Clear existing comments
-        comments.forEach(comment => {
-            const commentElement = document.createElement('div');
-            commentElement.className = 'comment-item';
-            commentElement.innerHTML = `
-                <span>${comment.username} : ${comment.content}</span>
-                <button class="deleteComment" data-comment-id="${comment.id}">X</button>
-            `;
-            commentsContainer.appendChild(commentElement);
-        });
-    }
-
+    // 리뷰 받아오기
     fetch(`/comment/show?id=${placeId}`)
         .then(response => response.json())
         .then(comments => {
-            displayComments(comments);
+            const commentsContainer = document.getElementById('reviews');
+            comments.forEach(comment => {
+                const commentElement = document.createElement('p');
+                commentElement.textContent = `${comment.username} : ${comment.content}`; // Assuming 'content' is a field in your comment object
+                commentsContainer.appendChild(commentElement);
+            });
         })
         .catch(error => {
             console.error('Error:', error);
         });
-
-
-    document.getElementById('reviews').addEventListener('click', function (event) {
-        if (event.target.classList.contains('deleteComment')) {
-            const commentId = event.target.getAttribute('data-comment-id');
-            const userPassword = prompt('비밀번호를 입력해주세요:');
-            if (userPassword !== null && userPassword !== '') {
-                deleteComment(commentId, userPassword);
-            }
-        }
-    });
-
-    // Function to handle comment deletion
-    function deleteComment(commentId, password) {
-        // Call your backend delete endpoint
-        fetch(`/comment/delete?id=${commentId}`, {
-            method: 'POST', // Use POST if your endpoint supports it
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ password: password })
-      		})
-			//11.20 수정
-			.then(response => {
-						    return response.text(); // Assuming the server responds with plain text
-			})
-			.then(body => {
-			    if (body.trim().toLowerCase() === "fail") {
-					   alert('비밀 번호가 안맞습니다.');
-				} 
-				else {
-				       // Handle successful submission	        // Uncomment the following lines if you want to display an alert and reload the page
-				 const commentToDelete = document.querySelector(`[data-comment-id="${commentId}"]`).parentNode;
-            	commentToDelete.remove(); 
-				alert('댓글이 삭제되었습니다.');
-			}
-			});
-    }
 
     // 제출 버튼 클릭
     document.getElementById('submitReview').addEventListener('click', function () {
@@ -142,13 +91,12 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: JSON.stringify(commentData)
         })
-           /* 11.20수정 .then(response => {
+            .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 return response.json();
             })
-
             .then(() => {
                 //리뷰 창 업데이트?
                 const commentsContainer = document.getElementById('reviews');
@@ -159,31 +107,21 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => {
                 console.error('Error:', error);
             });
-*/
-			.then(response => {
-						    return response.text(); // Assuming the server responds with plain text
-			})
-			.then(body => {
-			   if (body.trim().toLowerCase() === "fail") {
-						        // Handle duplicated IP case
-					   alert('이미 작성한 댓글이 있습니다.');
-				} else {
-				       // Handle successful submission	        // Uncomment the following lines if you want to display an alert and reload the page
-				 alert('댓글이 등록되었습니다.');
-			}
-			});
 
         // 리뷰창 비우기
-  			document.getElementById('username').value = '';
-		        document.getElementById('password').value = '';
-		        document.getElementById('reviewText').value = '';
-		        location.reload();
-		        window.onclick = function (event) {
-		            let modal = document.getElementById('amendModal');
-		            if (event.target == modal) {
-		                modal.style.display = 'none';
-		            }
-		        };		 
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('reviewText').value = '';
+
+        location.reload();
+
+        window.onclick = function (event) {
+            let modal = document.getElementById('amendModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+
     });
 
 
@@ -197,6 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         console.log('Selected Star Rating:', selectedRating);
 
+        // 백엔드 경로 설정 필요
         fetch(`/starrating/enroll`, {
             method: 'POST',
             headers: {
@@ -204,13 +143,14 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: JSON.stringify(ratingData)
 
-        })     
-          /*11.20 수정  .then(response => {
+        })
+            /*      
+            .then(response => {
                       if (!response.ok) {
                           throw new Error('Network response was not ok');
                       }
                       return response.json();
-                  })
+                  })*/
             .then(() => {
                 // alert으로 별점 제출 알림
                 alert(`제출된 별점: ${selectedRating}점`);
@@ -219,21 +159,6 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => {
                 console.error('Error:', error);
                 alert('별점 제출 중 오류가 발생했습니다.');
-            });*/
-			.then(response => {
-			    return response.text(); // Assuming the server responds with plain text
-			})
-			.then(body => {
-			    if (body.trim().toLowerCase() === "fail") {
-			        // Handle duplicated IP case
-			        alert('이미 별점을 제출했습니다.');
-			    } else {
-			        // Handle successful submission
-			        // Uncomment the following lines if you want to display an alert and reload the page
-			        alert(`제출된 별점: ${selectedRating}점`);
-			        location.reload();
-			    }
-			});
-
+            });
     });
 });

@@ -17,4 +17,5 @@ public class RequestString {
 	public String disabled;
 	public String report_location_name;
 	public String report_location_point;
+	public String user_opinion;
 }

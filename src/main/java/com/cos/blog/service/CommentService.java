@@ -4,13 +4,17 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.blog.model.Comment;
 import com.cos.blog.model.Place;
 import com.cos.blog.model.Report;
+import com.cos.blog.model.StarRating;
 import com.cos.blog.repository.CommentRepository;
+import com.cos.blog.repository.OpinionRepository;
 import com.cos.blog.repository.PlaceRepository;
 import com.cos.blog.repository.ReportRepository;
 
@@ -23,6 +27,8 @@ public class CommentService {
 	@Autowired
 	private PlaceRepository placeRepository;
 	
+
+	
 	@Transactional
 	public List<Comment> commentShow(int placeId) {
 		Optional<Place> place = placeRepository.findById(placeId);
@@ -34,8 +40,9 @@ public class CommentService {
 			return null;
 		}
 	}
-
-	public void commentEnroll(String username,String password, String placeId, String content) {
+	
+	@Transactional
+	public ResponseEntity<String> commentEnroll(String username,String password, String placeId, String content,String ip) {
 		Optional<Place> places = placeRepository.findById(Integer.parseInt(placeId));
 		if (places.isPresent()) {
 			Comment comment = new Comment();
@@ -43,17 +50,20 @@ public class CommentService {
 			comment.setUsername(username);
 			comment.setPassword(password);
 			comment.setContent(content);
+			comment.setIp(ip);
+			List<Comment> calcomment = commentRepository.findByPlace(places.get());
+			for(Comment c : calcomment) {
+				if(c.getIp().equals(ip)){
+					return ResponseEntity.status(400).body("fail");
+				}
+			}
 			commentRepository.save(comment);
 			Place place = places.get();
 			place.setComment_count(place.getComment_count()+1);
 			placeRepository.save(place);
-			}
-	}
-
-
-	private void save(Place place) {
-		// TODO Auto-generated method stub
-		
+			return ResponseEntity.ok("Request successful");
+		}
+		return ResponseEntity.status(400).body("fail");
 	}
 
 	@Transactional
@@ -63,8 +73,19 @@ public class CommentService {
 	}
 	
 	@Transactional
-	public void commentDelete(int commentId) {
-		commentRepository.deleteById(commentId);
+	public ResponseEntity<String> commentDelete(int commentId,String password) {
+		Optional<Comment> comment = commentRepository.findById(commentId);
+		if(comment.get().getPassword().equals(password)) {
+			return ResponseEntity.ok("Request successful");
+		}
+		else {
+			 return ResponseEntity.status(400).body("fail");
+		}
+	}
+	
+	@Transactional
+	public void DeleteAll() {
+		commentRepository.deleteAll();
 	}
 
 }

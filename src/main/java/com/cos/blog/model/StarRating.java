@@ -29,7 +29,7 @@ public class StarRating {
 	private int id; 	//식별자
 	
 	@Column
-	private String ip = "";
+	private String ip;
 	
 	@Column
 	private double score;

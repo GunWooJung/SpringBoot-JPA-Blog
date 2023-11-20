@@ -38,3 +38,29 @@
     border: 1px solid #ccc; /* Border around the map */
     border-radius: 4px; /* Rounded corners */
 }
+
+
+/* 리뷰 표시 스타일 */
+.comment-container {
+    border-bottom: 1px solid #ccc;
+    padding: 8px;
+    position: relative;
+}
+
+.edit-button, .delete-button {
+    padding: 5px 10px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+}
+
+.edit-button {
+    background-color: #ffc107;
+}
+
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+}

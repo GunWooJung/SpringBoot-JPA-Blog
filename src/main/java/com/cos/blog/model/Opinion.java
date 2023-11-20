@@ -11,9 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,34 +21,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Report {
+public class Opinion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id; 	//식별자
 	
-	@Column
-	private String type;
-	
-	@Column 
+	@Column // 대용량 데이터
 	private String content;
 	
-	@ManyToOne
-	@JoinColumn(name = "placeId")
-	private Place place;
-	
 	@Column
-	private int count = 1;
-	
-	@CreationTimestamp
-	private Timestamp createDate;
-	
-	@UpdateTimestamp
-	private Timestamp updateDate;
-	
-	 public Timestamp getCreateDate() {
-          return createDate;
-     }
-	
-	@Column
-	private String ip;
+	private int placeId;
 }
