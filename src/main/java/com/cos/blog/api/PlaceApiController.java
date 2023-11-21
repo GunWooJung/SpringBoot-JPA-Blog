@@ -46,6 +46,8 @@ public class PlaceApiController {
 		 return placeService.placeSearch(keyword, latitude , longitude); 
 	  }
 	 
+
+	 
 	 @GetMapping("/ipaddress") 
 	 public String showIp(HttpServletRequest  request){
 		   String clientIp = request.getHeader("X-Forwarded-For");
@@ -67,8 +69,8 @@ public class PlaceApiController {
 		String d = "gonggong_seoul";
 		String e = "toilet_list";
 		//placeService.placeAdd(a);
-		//placeService.placeAdd(b);
-		//placeService.placeAdd(c);
+	   // placeService.placeAdd(b);
+		placeService.placeAdd(c);
 		//placeService.placeAdd(d);
 		//placeService.placeAdd(e);
 		return "addplace"; // addplace.jsp 결과 페이지로 이동

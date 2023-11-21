@@ -209,22 +209,24 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Handle duplicated IP case
                     alert('이미 작성한 댓글이 있습니다.');
                 } else {
-                    // Handle successful submission	        // Uncomment the following lines if you want to display an alert and reload the page
-                    alert('댓글이 등록되었습니다.');
+                    // Handle successful submission	 
+				document.getElementById('username').value = '';
+      		    document.getElementById('password').value = '';
+        		document.getElementById('reviewText').value = '';
+       			// Uncomment the following lines if you want to display an alert and reload the page
+                alert('댓글이 등록되었습니다.');
+ 				location.reload();
                 }
             });
 
         // 리뷰창 비우기
-        document.getElementById('username').value = '';
-        document.getElementById('password').value = '';
-        document.getElementById('reviewText').value = '';
-        location.reload();
-        window.onclick = function (event) {
+
+       /* window.onclick = function (event) {
             let modal = document.getElementById('amendModal');
             if (event.target == modal) {
                 modal.style.display = 'none';
             }
-        };
+        };*/
     });
 
 
