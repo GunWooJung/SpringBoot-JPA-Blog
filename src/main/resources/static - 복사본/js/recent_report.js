@@ -30,28 +30,34 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class="textbox_detail_date">${new Date(report.createDate).toLocaleDateString('ko-KR')}</div>
                 </div>
             </div>
-            
             <div class="recent_likeButton">
                 <div class="recent_likeButton_number">+ ${report.count}</div>
-                <div class="recent_likeButton_heart">♡</div>
+                <div class="recent_likeButton_heart" data-report-id="${report.id}">♡</div>
             </div>
         `;
 
 
         const heartIcon = reportDiv.querySelector('.recent_likeButton_heart');
-        heartIcon.addEventListener('click', function () {
-            fetch(`/report/clickheart?id=${report.id}`)
-                .then(response => {
-                    if (response.ok) {
-                        // Assuming the new count is returned in the response
-                        response.json().then(data => {
-                            const countElement = reportDiv.querySelector('.recent_likeButton_number');
-                            countElement.textContent = `+ ${data.newCount}`;
-                        });
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        });
+        heartIcon.addEventListener('click', function (event) {
+            if (event.target.classList.contains('recent_likeButton_heart')) {
+                const reportId = event.target.getAttribute('data-report-id');
+                fetch(`/report/clickheart?id=${reportId}`)
+                    .then(response => {
+                        return response.text(); // Assuming the server responds with plain text
+                    })
+                    .then(body => {
+                        if (body.trim().toLowerCase() === "ip") {
+                            // Handle duplicated IP case
+                            alert('이미 신고 횟수가 추가 되었습니다.');
+                        }
+                        else {
+                            // Handle successful submission	        // Uncomment the following lines if you want to display an alert and reload the page
+                            alert('신고 횟수가 증가되었습니다.');
+                            location.reload();
+                        }
+                    });
+            }
+        });//리스너
 
         return reportDiv;
     }

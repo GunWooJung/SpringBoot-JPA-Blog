@@ -123,7 +123,7 @@ public class ReportApiController {
 	// API 요청 방식 : GET,  주소 : /report/clickheart?id=${id} , 설명 : report id값으로 
 	// 하트를 누르면 신고 count값이 1 증가
 	@GetMapping("/report/clickheart")
-	public ResponseEntity<String> reportClickHeart(@RequestParam("id") int reportId, HttpServletRequest requestip) {
+	public ResponseEntity<String> reportClickHeart(@RequestParam("id") int reportId, @RequestParam("placeid") int placeId,HttpServletRequest requestip) {
 		String ipAddress = requestip.getHeader("X-Forwarded-For");
 		  if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
 			  ipAddress = requestip.getHeader("Proxy-Client-ipAddress");
@@ -141,6 +141,6 @@ public class ReportApiController {
 			    ipAddress = requestip.getRemoteAddr();
 			}
 	
-		return reportService.reportClickHeart(reportId, ipAddress);
+		return reportService.reportClickHeart(reportId,placeId, ipAddress);
 	}
 }

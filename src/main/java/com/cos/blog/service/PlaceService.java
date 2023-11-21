@@ -232,14 +232,14 @@ public class PlaceService {
 		double lat = Double.parseDouble(latitude);
 		double lng = Double.parseDouble(longitude);
 		if (!placeResult.isEmpty()) {
-			double min = (lat - Double.parseDouble(placeResult.get(0).getLatitude())) * (lat - Double.parseDouble(placeResult.get(0).getLatitude())) + 0.0090100236513120846942223223335961
-					* 0.0090100236513120846942223223335961 * (lng - Double.parseDouble(placeResult.get(0).getLongitude())) * (lng - Double.parseDouble(placeResult.get(0).getLongitude())) ;
+			double min = (lat - Double.parseDouble(placeResult.get(0).getLatitude())) * (lat - Double.parseDouble(placeResult.get(0).getLatitude())) + 0.090100236513120846942223223335961
+					* 0.090100236513120846942223223335961 * (lng - Double.parseDouble(placeResult.get(0).getLongitude())) * (lng - Double.parseDouble(placeResult.get(0).getLongitude())) ;
 			int min_i = 0;
 			for (Place p : placeResult) {
 				double p_lat = Double.parseDouble(p.getLatitude());
 				double p_lng = Double.parseDouble(p.getLongitude());
-				double distance = (lat - p_lat) * (lat - p_lat) + 0.0090100236513120846942223223335961
-						* 0.0090100236513120846942223223335961 * (lng - p_lng) * (lng - p_lng);
+				double distance = (lat - p_lat) * (lat - p_lat) + 0.090100236513120846942223223335961
+						* 0.090100236513120846942223223335961 * (lng - p_lng) * (lng - p_lng);
 				if (min > distance) {
 					min = distance;
 					min_i = placeResult.indexOf(p);

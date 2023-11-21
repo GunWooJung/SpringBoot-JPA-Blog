@@ -10,3 +10,15 @@ document.getElementById('search-button').addEventListener('click', function () {
     }
 });
 
+
+//11-21, 04:04 엔터 기능 추가
+document.getElementById('keyword').addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+        var keyword = document.getElementById('keyword').value;
+        if (keyword.trim() !== '') {
+            performNewSearch(keyword);
+        } else {
+            alert('Please enter a keyword to search.');
+        }
+    }
+});
