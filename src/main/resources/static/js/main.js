@@ -152,6 +152,7 @@ function searchNearby(keyword, location, page = 1) {
             markPlaces(convertedData);
             if (!initialSearchDone && convertedData.length > 0) {
                 map.panTo(new kakao.maps.LatLng(convertedData[0].lat, convertedData[0].lng));
+				saveCurrentMapCenter();
                 initialSearchDone = true; // Set the flag so the map doesn't re-center on subsequent data fetches
             }
         })
@@ -234,16 +235,25 @@ function fetchAndUpdatePlaces() {
     // 스타벅스, 프론트 개발시 주석 해제
     //searchNearby('Starbucks', center); 
 }
+
+
+function saveCurrentMapCenter() {
+    var center = map.getCenter();
+    sessionStorage.setItem('lastViewedPlace', JSON.stringify({lat: center.getLat(), lng: center.getLng()}));
+}
+
+// 지도 드래그 이벤트에 대한 리스너 추가
 kakao.maps.event.addListener(map, 'dragend', function () {
+    saveCurrentMapCenter(); // 지도 이동 후 세션 스토리지 업데이트
     updateCenterAndSearch();
 });
 
+// 페이지 로드 시 마지막으로 본 위치로 지도 중심 설정
 document.addEventListener('DOMContentLoaded', function () {
     const lastViewedPlace = JSON.parse(sessionStorage.getItem('lastViewedPlace'));
     if (lastViewedPlace) {
         map.setCenter(new kakao.maps.LatLng(lastViewedPlace.lat, lastViewedPlace.lng));
-    }
-
-    // 나머지 초기화 코드...
+    } 
+    
     updateCenterAndSearch();
 });
