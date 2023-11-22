@@ -1,5 +1,6 @@
 package com.cos.blog.api;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,10 +33,18 @@ public class PlaceApiController {
 		String emergency_bell_disabled = request.getEmergency_bell_disabled();
 		String emergency_bell_man = request.getEmergency_bell_man();
 		String emergency_bell_woman = request.getEmergency_bell_woman();
-	//	System.out.println(request.getHandle_right());
-	//	System.out.println(request.getHandle_left());
+		Double leftValue = Double.parseDouble(request.getLeftValue() == null ? "0" : request.getLeftValue());
+		Double rightValue = Double.parseDouble(request.getRightValue() == null ? "280" : request.getRightValue() );
+		DecimalFormat df = new DecimalFormat("#.#");
+		leftValue = 1 + (leftValue/70);
+		leftValue = Double.parseDouble(df.format(leftValue));
+		rightValue = 1.01 + (rightValue/70);
+		rightValue = Double.parseDouble(df.format(rightValue));
+		Boolean Rated = request.getRated() == "true" ? true : false;
+		System.out.println(leftValue+", "+rightValue+", " + Rated);
 		return placeService.placeShow(lat, lng, changing_table_man, changing_table_woman, disabled_person,
-				emergency_bell_disabled, emergency_bell_man, emergency_bell_woman);
+				emergency_bell_disabled, emergency_bell_man, emergency_bell_woman,
+				leftValue, rightValue, Rated);
 	}
 
 	// API 요청 방식 : GET, 주소 : /place/search?keyword=${keyword} , 설명 : keyword 값으로 장소

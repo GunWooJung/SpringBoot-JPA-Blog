@@ -8,6 +8,23 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = `/`; // 현재 창에서 index.html로 이동
     });
 
+    // document.getElementById('backButton').addEventListener('click', function () {
+    //     const urlParams = new URLSearchParams(window.location.search);
+    //     const placeId = urlParams.get('id');
+    
+    //     fetch(`/place/detail?id=${placeId}`)
+    //         .then(response => response.json())
+    //         .then(place => {
+    //             sessionStorage.setItem('lastViewedPlace', JSON.stringify({lat: place.latitude, lng: place.longitude}));
+    //             window.location.href = '/';
+    //         })
+    //         .catch(error => {
+    //             console.error('Error:', error);
+    //         });
+    // });
+
+
+
     amendLink.addEventListener('click', function (event) {
         // 기본 동작(링크 이동) 방지
         event.preventDefault();

@@ -26,7 +26,7 @@ public class PlaceService {
 	@Transactional(readOnly = true)
 	public List<Place> placeShow(double cur_location_lat, double cur_location_lng, String changing_table_man,
 			String changing_table_woman, String disabled_person, String emergency_bell_disabled,
-			String emergency_bell_man, String emergency_bell_woman) {
+			String emergency_bell_man, String emergency_bell_woman, double leftValue, double rightValue, Boolean Rated) {
 		List<Place> places = placeRepository.findAll();
 		List<Place> aroundPlaces = new ArrayList<Place>();
 		for (Place place : places) {
@@ -110,11 +110,30 @@ public class PlaceService {
 					if (!(place.getEmergency_bell().indexOf("남자") != -1))
 						check = false;
 				}
-				if (check)
+				if (check) {
 					aroundPlaces.add(place);
+				}
 			}
 		}
-		return aroundPlaces;
+		List<Place> starplaces = new ArrayList();
+		for(Place starplace : aroundPlaces) {
+			if(Rated) {
+				if(starplace.getStar_average() == 0) {
+					starplaces.add(starplace);
+				}
+				else {
+					if(leftValue <= starplace.getStar_average() && starplace.getStar_average() <= rightValue) {
+						starplaces.add(starplace);
+					}
+				}
+			}
+			else {
+				if(leftValue <= starplace.getStar_average() && starplace.getStar_average() <= rightValue) {
+					starplaces.add(starplace);
+				}
+			}
+		}
+		return starplaces;
 	}
 
 	// 모든 place를 jpa에 등록하기

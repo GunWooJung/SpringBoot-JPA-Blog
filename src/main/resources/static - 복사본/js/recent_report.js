@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
         heartIcon.addEventListener('click', function (event) {
             if (event.target.classList.contains('recent_likeButton_heart')) {
                 const reportId = event.target.getAttribute('data-report-id');
-                fetch(`/report/clickheart?id=${reportId}`)
+                fetch(`/report/clickheart?id=${reportId}&placeid=${placeId}`)
                     .then(response => {
                         return response.text(); // Assuming the server responds with plain text
                     })
@@ -50,6 +50,10 @@ document.addEventListener('DOMContentLoaded', function () {
                             // Handle duplicated IP case
                             alert('이미 신고 횟수가 추가 되었습니다.');
                         }
+						else if (body.trim().toLowerCase() === "count3") {
+                            alert('신고 누적으로 신고 내용이 반영되었습니다.');
+							location.reload();
+						}
                         else {
                             // Handle successful submission	        // Uncomment the following lines if you want to display an alert and reload the page
                             alert('신고 횟수가 증가되었습니다.');

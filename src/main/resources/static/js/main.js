@@ -171,8 +171,10 @@ function performNewSearch(keyword) {
 
 //백엔드에서 정보 가져오기
 function fetchPlacesFromBackend(lat, lng) {
-
-
+		console.log("별점 min: ", leftValue);
+      console.log("별점 max: ", rightValue);
+ 	  console.log("별점 미평가 포함: ", document.getElementById('rated').checked);
+      console.log("별점 미평가 포함안함: ", document.getElementById('not_rated').checked);
     var center = map.getCenter();
     fetch(`/place/show`, {
         method: 'POST',
@@ -186,8 +188,12 @@ function fetchPlacesFromBackend(lat, lng) {
         emergency_bell_man: document.getElementById('emergency_bell_man').checked,
         emergency_bell_woman: document.getElementById('emergency_bell_woman').checked,
         emergency_bell_disabled: document.getElementById('emergency_bell_disabled').checked,
-                lat: center.getLat(),
-                lng: center.getLng()
+        lat: center.getLat(),
+        lng: center.getLng(),
+		leftValue : leftValue,
+		rightValue : rightValue,
+		rated : document.getElementById('rated').checked,
+		not_rated : document.getElementById('not_rated').checked
         })
     })
     .then(response => response.json())
@@ -228,14 +234,16 @@ function fetchAndUpdatePlaces() {
     // 스타벅스, 프론트 개발시 주석 해제
     //searchNearby('Starbucks', center); 
 }
-      kakao.maps.event.addListener(map, 'dragend', function() {
-            updateCenterAndSearch();
-        });
+kakao.maps.event.addListener(map, 'dragend', function () {
+    updateCenterAndSearch();
+});
 
-// kakao.maps.event.addListener(map, 'dragend', function () {
-//     var center = map.getCenter();
-//     clearMarkers();
-//     fetchPlacesFromBackend(center.getLat(), center.getLng());
-// });
+document.addEventListener('DOMContentLoaded', function () {
+    const lastViewedPlace = JSON.parse(sessionStorage.getItem('lastViewedPlace'));
+    if (lastViewedPlace) {
+        map.setCenter(new kakao.maps.LatLng(lastViewedPlace.lat, lastViewedPlace.lng));
+    }
 
-updateCenterAndSearch();
+    // 나머지 초기화 코드...
+    updateCenterAndSearch();
+});

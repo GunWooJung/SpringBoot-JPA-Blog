@@ -30,6 +30,7 @@ document.getElementById('reset-filter').addEventListener('click', function () {
     document.querySelectorAll('#myModal .content_body_choice input[type="checkbox"]').forEach(function(checkbox) {
         checkbox.checked = false;
     });
+    resetSlider();
 });
 
 // 적용 버튼
@@ -43,15 +44,24 @@ document.getElementById('apply-filter').addEventListener('click', function () {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+        //slider added
+        starLeftValue: document.getElementById('sign-left').innerHTML,
+        starRightValue: document.getElementById('sign-right').innerHTML,
+        //
         disabled_person: document.getElementById('disabled_person').checked,
         changing_table_man: document.getElementById('changing_table_man').checked,
         changing_table_woman: document.getElementById('changing_table_woman').checked,
         emergency_bell_man: document.getElementById('emergency_bell_man').checked,
         emergency_bell_woman: document.getElementById('emergency_bell_woman').checked,
         emergency_bell_disabled: document.getElementById('emergency_bell_disabled').checked,
+
+        rated: document.getElementById('rated').checked,
+        not_rated: document.getElementById('not_rated').checked,
+
         lat: center.getLat(),
         lng: center.getLng()
         })
+        
     })
     .then(response => response.json())
     .then(data => {
@@ -62,6 +72,11 @@ document.getElementById('apply-filter').addEventListener('click', function () {
     .catch(error => {
         console.error('Error fetching filtered places:', error);
     });
+
+
+    //콘솔 필요 없으면 주석 처리해
+    console.log("별점 미평가 포함: ", document.getElementById('rated').checked);
+    console.log("별점 미평가 포함안함: ", document.getElementById('not_rated').checked);
     // Close the modal
     modal.style.display = 'none';
 });

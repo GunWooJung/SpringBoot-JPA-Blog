@@ -16,6 +16,7 @@ import com.cos.blog.model.Place;
 import com.cos.blog.model.Report;
 import com.cos.blog.repository.OpinionRepository;
 import com.cos.blog.repository.PlaceRepository;
+import com.cos.blog.repository.PlaceTrashRepository;
 import com.cos.blog.repository.ReportRepository;
 
 @Service
@@ -26,6 +27,9 @@ public class ReportService {
 
 	@Autowired
 	private PlaceRepository placeRepository;
+	
+	@Autowired
+	private PlaceTrashRepository placetrashRepository;
 
 	@Autowired
 	private OpinionRepository opinionRepository;
@@ -248,6 +252,7 @@ public class ReportService {
 
 		if (r.getCount() >= 3) {
 			if (r.getType().equals("장소 삭제")) {
+				placetrashRepository.save(place.get());
 				placeRepository.deleteById(place.get().getId());
 			} else if (r.getType().equals("비상벨 정보 수정")) {
 

@@ -145,6 +145,14 @@ function handleDrag(e) {
     document.onmouseup = null;
   };
 }
+function resetSlider() {
+  showSignInitial();
+  updateHandlePosition(handleLeft, 0, true);
+  updateHandlePosition(handleRight, 40 * stepWidth, false);
+  rightValue = 40 * stepWidth;
+  leftValue = 0;
+}
+
   showSignInitial();
   // numWindow 필요없을시 삭제
   //updateNumWindow(leftValue, rightValue);

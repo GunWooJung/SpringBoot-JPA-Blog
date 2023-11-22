@@ -70,4 +70,9 @@ body {
     padding: 10px;
 }
 
+.is_rated_container{
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+}
 
