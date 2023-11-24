@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.cos.blog.model.Place;
+import com.cos.blog.model.PlaceContainer;
 import com.cos.blog.model.Similarity;
 import com.cos.blog.repository.PlaceRepository;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -24,11 +25,13 @@ public class PlaceService {
 	private PlaceRepository placeRepository;
 
 	@Transactional(readOnly = true)
-	public List<Place> placeShow(double cur_location_lat, double cur_location_lng, String changing_table_man,
+	public List<PlaceContainer> placeShow(double cur_location_lat, double cur_location_lng, String changing_table_man,
 			String changing_table_woman, String disabled_person, String emergency_bell_disabled,
 			String emergency_bell_man, String emergency_bell_woman, double leftValue, double rightValue, Boolean Rated) {
-		List<Place> places = placeRepository.findAll();
-		List<Place> aroundPlaces = new ArrayList<Place>();
+
+		List<Place> places = placeRepository.findAll(); // 전체
+		List<Place> aroundPlaces = new ArrayList<Place>();  // 별점을 제외한 조건 만족
+		List<PlaceContainer> starplaces = new ArrayList<PlaceContainer>(); //별점까지 만족
 		for (Place place : places) {
 			Boolean lat_In_Min = false;
 			Boolean lat_In_Max = false;
@@ -113,23 +116,36 @@ public class PlaceService {
 				if (check) {
 					aroundPlaces.add(place);
 				}
+				else {  // 0은 회색 , 1은 파란색 , 2는 초록색 , 3은 빨강
+					starplaces.add(new PlaceContainer(place, 0)); // 조건 미만족 회색
+				}
 			}
 		}
-		List<Place> starplaces = new ArrayList();
+	
 		for(Place starplace : aroundPlaces) {
 			if(Rated) {
 				if(starplace.getStar_average() == 0) {
-					starplaces.add(starplace);
+					starplaces.add(new PlaceContainer(starplace, 1)); //미평가는 파란색
 				}
 				else {
 					if(leftValue <= starplace.getStar_average() && starplace.getStar_average() <= rightValue) {
-						starplaces.add(starplace);
+						if(starplace.getStar_average()<= 2.5) starplaces.add(new PlaceContainer(starplace, 3));
+						else if(starplace.getStar_average()<  4) starplaces.add(new PlaceContainer(starplace, 1));
+						else starplaces.add(new PlaceContainer(starplace, 2));
+					}
+					else {
+						starplaces.add(new PlaceContainer(starplace, 0)); //
 					}
 				}
 			}
 			else {
 				if(leftValue <= starplace.getStar_average() && starplace.getStar_average() <= rightValue) {
-					starplaces.add(starplace);
+					if(starplace.getStar_average()<= 2.5) starplaces.add(new PlaceContainer(starplace, 3));
+					else if(starplace.getStar_average()<  4) starplaces.add(new PlaceContainer(starplace, 1));
+					else starplaces.add(new PlaceContainer(starplace, 2));
+				}
+				else {
+					starplaces.add(new PlaceContainer(starplace, 0)); //미평가는 회색
 				}
 			}
 		}

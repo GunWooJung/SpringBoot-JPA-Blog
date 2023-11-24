@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.cos.blog.dto.RequestBodyPlaceDto;
 import com.cos.blog.model.Place;
+import com.cos.blog.model.PlaceContainer;
 import com.cos.blog.service.PlaceService;
 
 @RestController
@@ -24,7 +25,7 @@ public class PlaceApiController {
 	// API 요청 방식 : POST, 주소 : /place/show , 설명 : requestbody에
 	// String으로 아래 여러가지 값 받아오기
 	@PostMapping("/place/show")
-	public List<Place> placeShow(@RequestBody RequestBodyPlaceDto request) {
+	public List<PlaceContainer> placeShow(@RequestBody RequestBodyPlaceDto request) {
 		double lat = Double.parseDouble(request.getLat());
 		double lng = Double.parseDouble(request.getLng());
 		String changing_table_man = request.getChanging_table_man();

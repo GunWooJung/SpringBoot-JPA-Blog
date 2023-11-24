@@ -29,10 +29,10 @@ function initializeMap() {
     } else if (navigator.geolocation) {
         // GeoLocation을 이용해서 접속 위치 얻어오기
         navigator.geolocation.getCurrentPosition(function (position) {
-            var lat = position.coords.latitude, 
-                lon = position.coords.longitude; 
+            var lat = position.coords.latitude,
+                lon = position.coords.longitude;
             var locPosition = new kakao.maps.LatLng(lat, lon),
-                message = '<div style="padding:5px;">여기에 계신가요?!</div>'; 
+                message = '<div style="padding:5px;">여기에 계신가요?!</div>';
             displayMarker(locPosition, message);
             map.setCenter(locPosition);
         });
@@ -62,6 +62,12 @@ function initializeMap() {
 
 var location_marker_displayed = false; // 현재 위치 마커 존재 여부
 var location_marker = null;  // 현재 위치 마커 
+//11.24추가 markerHomeImage
+var imageHomeSrc = 'img/home_marker.png', // 마커이미지의 주소입니다    
+    imageHomeSize = new kakao.maps.Size(30,30), // 마커이미지의 크기입니다
+			 // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+    imageHomeOption = {offset: new kakao.maps.Point(15, 15)};
+       		// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
 
 function moveToCurrentLocation() {
     if (navigator.geolocation) {
@@ -70,27 +76,32 @@ function moveToCurrentLocation() {
                 lng = position.coords.longitude;
             var newCenter = new kakao.maps.LatLng(lat, lng);
             map.setCenter(newCenter);
-			if(location_marker_displayed == false){
-				location_marker = new kakao.maps.Marker({
-      			 	position: newCenter
-				});
-				location_marker.setMap(map);	//현재 위치 마커 생성
-				location_marker_displayed = true;	//현재 위치 마커 존재로 변경
-			}
-			else{  //true
-				location_marker.setMap(null);	// 기존 위치 마커 삭제
-				location_marker = new kakao.maps.Marker({
-      			 	position: newCenter
-				});
-				location_marker.setMap(map); // 새로운 위치 마커 생성
-			}
+			saveCurrentMapCenter(); //11.24 추가
+			//11.24추가 markerImage
+ 			var markerImage = new kakao.maps.MarkerImage(imageHomeSrc, imageHomeSize, imageHomeOption);
+            if (location_marker_displayed == false) {	
+               	location_marker = new kakao.maps.Marker({
+                    position: newCenter,
+					image: markerImage 	//11.24추가 markerImage
+                });
+                location_marker.setMap(map);   //현재 위치 마커 생성
+                location_marker_displayed = true;   //현재 위치 마커 존재로 변경
+            }
+            else {  //true
+                location_marker.setMap(null);   // 기존 위치 마커 삭제
+              	location_marker = new kakao.maps.Marker({
+                    position: newCenter,
+					image: markerImage 	//11.24추가 markerImage
+                });
+                location_marker.setMap(map); // 새로운 위치 마커 생성
+            }
             // 현재 위치를 기반으로 주변 화장실 데이터 불러오기
             fetchPlacesFromBackend(lat, lng)
                 .then(response => response.json())
                 .then(response => {
                     const convertedData = convertToPlaceFormat(data);
-                    clearMarkers(); 
-                    markPlaces(convertedData); 
+                    clearMarkers();
+                    markPlaces(convertedData);
                 });
         }, function (error) {
             console.error("Error: " + error.message);
@@ -103,4 +114,3 @@ function moveToCurrentLocation() {
 document.getElementById('recenter-map').addEventListener('click', function () {
     moveToCurrentLocation();
 });
-

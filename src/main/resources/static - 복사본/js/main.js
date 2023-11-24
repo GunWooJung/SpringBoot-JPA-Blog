@@ -152,6 +152,7 @@ function searchNearby(keyword, location, page = 1) {
             markPlaces(convertedData);
             if (!initialSearchDone && convertedData.length > 0) {
                 map.panTo(new kakao.maps.LatLng(convertedData[0].lat, convertedData[0].lng));
+				saveCurrentMapCenter();
                 initialSearchDone = true; // Set the flag so the map doesn't re-center on subsequent data fetches
             }
         })
@@ -171,8 +172,10 @@ function performNewSearch(keyword) {
 
 //백엔드에서 정보 가져오기
 function fetchPlacesFromBackend(lat, lng) {
-
-
+		console.log("별점 min: ", leftValue);
+      console.log("별점 max: ", rightValue);
+ 	  console.log("별점 미평가 포함: ", document.getElementById('rated').checked);
+      console.log("별점 미평가 포함안함: ", document.getElementById('not_rated').checked);
     var center = map.getCenter();
     fetch(`/place/show`, {
         method: 'POST',
@@ -186,8 +189,12 @@ function fetchPlacesFromBackend(lat, lng) {
         emergency_bell_man: document.getElementById('emergency_bell_man').checked,
         emergency_bell_woman: document.getElementById('emergency_bell_woman').checked,
         emergency_bell_disabled: document.getElementById('emergency_bell_disabled').checked,
-                lat: center.getLat(),
-                lng: center.getLng()
+        lat: center.getLat(),
+        lng: center.getLng(),
+		leftValue : leftValue,
+		rightValue : rightValue,
+		rated : document.getElementById('rated').checked,
+		not_rated : document.getElementById('not_rated').checked
         })
     })
     .then(response => response.json())
@@ -228,14 +235,25 @@ function fetchAndUpdatePlaces() {
     // 스타벅스, 프론트 개발시 주석 해제
     //searchNearby('Starbucks', center); 
 }
-      kakao.maps.event.addListener(map, 'dragend', function() {
-            updateCenterAndSearch();
-        });
 
-// kakao.maps.event.addListener(map, 'dragend', function () {
-//     var center = map.getCenter();
-//     clearMarkers();
-//     fetchPlacesFromBackend(center.getLat(), center.getLng());
-// });
 
-updateCenterAndSearch();
+function saveCurrentMapCenter() {
+    var center = map.getCenter();
+    sessionStorage.setItem('lastViewedPlace', JSON.stringify({lat: center.getLat(), lng: center.getLng()}));
+}
+
+// 지도 드래그 이벤트에 대한 리스너 추가
+kakao.maps.event.addListener(map, 'dragend', function () {
+    saveCurrentMapCenter(); // 지도 이동 후 세션 스토리지 업데이트
+    updateCenterAndSearch();
+});
+
+// 페이지 로드 시 마지막으로 본 위치로 지도 중심 설정
+document.addEventListener('DOMContentLoaded', function () {
+    const lastViewedPlace = JSON.parse(sessionStorage.getItem('lastViewedPlace'));
+    if (lastViewedPlace) {
+        map.setCenter(new kakao.maps.LatLng(lastViewedPlace.lat, lastViewedPlace.lng));
+    } 
+    
+    updateCenterAndSearch();
+});
