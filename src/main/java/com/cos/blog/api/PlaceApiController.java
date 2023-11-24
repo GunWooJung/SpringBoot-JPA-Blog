@@ -51,7 +51,7 @@ public class PlaceApiController {
 	// API 요청 방식 : GET, 주소 : /place/search?keyword=${keyword} , 설명 : keyword 값으로 장소
 
 	 @GetMapping("/place/search") 
-	 public List<Place>
+	 public List<PlaceContainer>
 	  placeSearch(@RequestParam("keyword") String keyword,@RequestParam("lat") String latitude, @RequestParam("lng") String longitude) { 
 		 return placeService.placeSearch(keyword, latitude , longitude); 
 	  }

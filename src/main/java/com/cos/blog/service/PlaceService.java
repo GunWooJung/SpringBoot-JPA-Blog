@@ -256,7 +256,7 @@ public class PlaceService {
 	// 모든 place를 불러오기
 
 	@Transactional(readOnly = true)
-	public List<Place> placeSearch(String keyword, String latitude, String longitude) {
+	public List<PlaceContainer> placeSearch(String keyword, String latitude, String longitude) {
 		List<Place> places = placeRepository.findAll();
 		List<Place> placeResult = new ArrayList<Place>();
 		for (Place place : places) {
@@ -282,7 +282,11 @@ public class PlaceService {
 			}
 			 Collections.swap(placeResult, 0, min_i);
 		}
-		return placeResult;
+		List<PlaceContainer> placecontainerResult = new ArrayList<PlaceContainer>();
+		for(Place place : placeResult) {
+			placecontainerResult.add(new PlaceContainer(place,1));
+		}
+		return placecontainerResult;
 	}
 
 	@Transactional // 모든 DB 삭제
