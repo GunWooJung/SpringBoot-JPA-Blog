@@ -1,7 +1,7 @@
 var mapContainer = document.getElementById('map'),
     mapOption = {
         center: new kakao.maps.LatLng(37.504937827895866, 126.9576790776909),
-        level: 2
+        level: 3
     };
 // 준원
 var map = new kakao.maps.Map(mapContainer, mapOption);

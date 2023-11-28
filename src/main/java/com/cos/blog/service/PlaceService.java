@@ -162,11 +162,20 @@ public class PlaceService {
 
 				List<Place> newPlaces = new CsvToBeanBuilder<Place>(new FileReader(csvFile)).withType(Place.class).build()
 						.parse();
+				List<Place> places = placeRepository.findAll(); // DB의 장소
+				for (Place place : places) { 
+					if(place.getName().indexOf("스타")!=-1&&place.getName().indexOf("벅스")!=-1) {
+						placeRepository.delete(place);
+					}
+				}
 				for (Place newplace : newPlaces) { // 엑셀에 장소
-					List<Place> places = placeRepository.findAll(); // DB의 장소
-					Boolean isUnique = true;
-					for (Place place : places) { //
+					placeRepository.save(newplace);
+				}
+			
+					
+						/*
 						Boolean lat_In_Min = false;
+					
 						Boolean lat_In_Max = false;
 						Boolean lng_In_Min = false;
 						Boolean lng_In_Max = false;
@@ -192,10 +201,7 @@ public class PlaceService {
 							lat_In_Max = true;
 						}
 						if (lat_In_Min && lat_In_Max && lng_In_Min && lng_In_Max) {
-							if (newplace.getName().replaceAll("\\s", "")
-									.indexOf(place.getName().replaceAll("\\s", "")) != -1) {
-								isUnique = false;
-							}
+
 							if (Similarity.CalculateSimilarity(
 									newplace.getName().replaceAll("\\s", "").replaceAll("(개방|화장실)", ""),
 									place.getName().replaceAll("\\s", "").replaceAll("(개방|화장실)", "")) >= 0.5) {
@@ -234,13 +240,12 @@ public class PlaceService {
 							if (lat_In_Min2 && lat_In_Max2 && lng_In_Min2 && lng_In_Max2) {
 								isUnique = false;
 							}
-						}
-					}
-
+							
+						
 					if (isUnique) {
 						placeRepository.save(newplace);
 					}
-				}
+					} */
 				// placeRepository.saveAll(places);
 			} catch (IllegalStateException | FileNotFoundException e) {
 				// TODO Auto-generated catch block

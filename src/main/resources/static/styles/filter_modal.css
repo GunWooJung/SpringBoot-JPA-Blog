@@ -36,6 +36,7 @@
     width: 100%;
     height : 10%;
     gap : 1rem;
+    margin-bottom:3%;
   }
 
 .header_title {
@@ -65,6 +66,7 @@
     height : 80%;
     flex-direction: column;
     width: 100%;
+    margin-bottom : 10px;
 }
 
 .content_body_container{
@@ -73,93 +75,41 @@
     justify-content: center;
     text-align: center;
     height:20%;
+    margin-bottom: 10%;
 }
 
 .content_body_category{
     font-size: 20px;
     font-weight: bold;
-}
+} 
 
 .content_body_choice{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center; 
     justify-content: center; 
     margin-top: 5px;
+    font-size : 13px;
+    gap : 5px;
 }
 
 .content_body_box {
   display:flex ;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center; 
     justify-content: center; 
-  height:70%;
+  margin-bottom:20px;
+  margin-top:20px;
+  height:10vh;
   gap: 7%;
 }
 
-.switch-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 20px; 
-  
-  }
-  
-  .switch-with-label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .switch-label-text {
-    margin-bottom: 5px; 
-    font-size: 10px;
-  }
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 3.4rem;
-    height: 30px; 
-  }
-  
-  .switch-input {
-    display: none;
-  }
-  
-  .switch-label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: gray; 
-    border-radius: 15px; 
-    cursor: pointer;
-    transition: background-color 0.2s;
-    
-  }
-  
-  .switch-label:before {
-    content: "";
-    position: absolute;
-    top: 2px; 
-    left: 2px; 
-    width: 26px; 
-    height: 26px; 
-    background-color: white;
-    border-radius: 50%; 
-    transition: transform 0.2s; 
-  }
-  
-  .switch-input:checked + .switch-label {
-    background-color: blue; 
-  }
-  
-  .switch-input:checked + .switch-label:before {
-    transform: translateX(1.5rem); 
-    background-color: white;
-  }
 
+.check_box{
+  display:flex;
+  flex-direction: column;
+  gap: 4px
+}
 
 .modal_content_footer {
     display: flex;
@@ -181,8 +131,8 @@
 }
 
 .is_rated_container {
-    margin-top: 6%;
-    margin-bottom: 8%;
+    margin-top: 10px;
+    margin-bottom: 20px;
     margin-left: auto; 
     margin-right: auto;
     padding-left : 2rem;
@@ -302,10 +252,11 @@
 
 .content_body_choice{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center; 
     justify-content: center; 
     margin-top: 5px;
+    gap : 1%;
 }
 
 .content_body_box {
@@ -313,72 +264,25 @@
   flex-direction: column;
   align-items: center; 
     justify-content: center; 
-  height:70%;
+  height:30%;
   gap: 7%;
 }
 
-.switch-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 20px; 
-  
-  }
-  
-  .switch-with-label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .switch-label-text {
-    margin-bottom: 5px; 
-    font-size: 13px;
-  }
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 3.4rem;
-    height: 30px; 
-  }
-  
-  .switch-input {
-    display: none;
-  }
-  
-  .switch-label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: gray; 
-    border-radius: 15px; 
-    cursor: pointer;
-    transition: background-color 0.2s;
-    
-  }
-  
-  .switch-label:before {
-    content: "";
-    position: absolute;
-    top: 2px; 
-    left: 2px; 
-    width: 26px; 
-    height: 26px; 
-    background-color: white;
-    border-radius: 50%; 
-    transition: transform 0.2s; 
-  }
-  
-  .switch-input:checked + .switch-label {
-    background-color: blue; 
-  }
-  
-  .switch-input:checked + .switch-label:before {
-    transform: translateX(1.5rem); 
-    background-color: white;
-  }
+
+input[id="cb1"] + label {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #bcbcbc;
+  cursor: pointer;
+}
+input[id="cb1"]:checked + label {
+  background-color: #666666;
+}
+input[id="cb1"] {
+  display: none;
+}
+
 
 
 .modal_content_footer {
@@ -522,10 +426,11 @@
 
 .content_body_choice{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center; 
     justify-content: center; 
     margin-top: 5px;
+    gap : 1%;
 }
 
 .content_body_box {
@@ -533,72 +438,23 @@
   flex-direction: column;
   align-items: center; 
     justify-content: center; 
-  height:70%;
+  height:30%;
   gap: 7%;
 }
 
-.switch-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 20px; 
-  
-  }
-  
-  .switch-with-label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .switch-label-text {
-    margin-bottom: 5px; 
-    font-size: 13px;
-  }
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 3.4rem;
-    height: 30px; 
-  }
-  
-  .switch-input {
-    display: none;
-  }
-  
-  .switch-label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: gray; 
-    border-radius: 15px; 
-    cursor: pointer;
-    transition: background-color 0.2s;
-    
-  }
-  
-  .switch-label:before {
-    content: "";
-    position: absolute;
-    top: 2px; 
-    left: 2px; 
-    width: 26px; 
-    height: 26px; 
-    background-color: white;
-    border-radius: 50%; 
-    transition: transform 0.2s; 
-  }
-  
-  .switch-input:checked + .switch-label {
-    background-color: blue; 
-  }
-  
-  .switch-input:checked + .switch-label:before {
-    transform: translateX(1.5rem); 
-    background-color: white;
-  }
+input[id="cb1"] + label {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #bcbcbc;
+  cursor: pointer;
+}
+input[id="cb1"]:checked + label {
+  background-color: #666666;
+}
+input[id="cb1"] {
+  display: none;
+}
 
 
 .modal_content_footer {
