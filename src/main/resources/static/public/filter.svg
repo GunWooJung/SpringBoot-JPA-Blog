@@ -1,0 +1,12 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
+<svg fill="#6276FF" width="256px" height="256px" viewBox="-5.52 -5.52 35.04 35.04" id="filter-alt" data-name="Line Color" xmlns="http://www.w3.org/2000/svg" class="icon line-color" transform="rotate(90)">
+<g id="SVGRepo_bgCarrier" stroke-width="0">
+<rect x="-5.52" y="-5.52" width="35.04" height="35.04" rx="17.52" fill="#ffffff" strokewidth="0"/>
+</g>
+<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="SVGRepo_iconCarrier">
+<path id="primary" d="M5,3V17M12,7V21m7-7v7m0-11V3" style="fill: none; stroke: #6276FF; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"/>
+<path id="secondary" d="M5,17a2,2,0,1,0,2,2A2,2,0,0,0,5,17ZM12,3a2,2,0,1,0,2,2A2,2,0,0,0,12,3Zm7,7a2,2,0,1,0,2,2A2,2,0,0,0,19,10Z" style="fill: none; stroke: #6276FF; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"/>
+</g>
+</svg>

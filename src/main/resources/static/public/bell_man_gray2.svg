@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<svg width="787.15" height="787.15" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve">
+ <g class="layer">
+  <title>Layer 1</title>
+  <g id="SVGRepo_bgCarrier" stroke-width="0">
+   <rect fill="#a4a4a4" height="783.51" id="svg_1" rx="393.57" width="782.6" x="2.23" y="2.23"/>
+  </g>
+  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+  <use id="svg_45" transform="matrix(0.0692637 0 0 0.0692637 0 0)" x="0" xlink:href="#svg_44" y="0"/>
+  <use id="svg_46" transform="matrix(0.0692637 0 0 0.0692637 0 0)" x="0" xlink:href="#svg_44" y="0"/>
+  <use fill="#ffffff" id="svg_51" transform="matrix(1 0 0 1 0 0) matrix(1.4892 0 0 1.71753 -1178.16 -2446.59)" x="820.72" xlink:href="#svg_50" y="1504.33"/>
+  <use fill="#ffffff" id="svg_146" transform="matrix(2.03651 0 0 2.03609 97.3214 115.694)" x="92.87" xlink:href="#svg_145" y="12.9"/>
+ </g>
+ <defs>
+  <symbol height="4167.000000pt" id="svg_44" preserveAspectRatio="xMidYMid meet" version="1" viewBox="0 0 4167.000000 4167.000000" width="4167.000000pt" xmlns="http://www.w3.org/2000/svg">
+   <g fill="#000000" transform="translate(0.000000,4167.000000) scale(0.100000,-0.100000)"/>
+  </symbol>
+  <symbol class="icon" height="256px" id="svg_50" stroke-width="17.41" viewBox="0 0 1024 1024" width="256px" xmlns="http://www.w3.org/2000/svg">
+   <g id="svg_49" stroke-width="0"/>
+   <g id="svg_48" stroke-linecap="round" stroke-linejoin="round"/>
+   <g id="svg_47">
+    <path d="m193,796c0,17.7 14.3,32 32,32l574,0c17.7,0 32,-14.3 32,-32l0,-233c0,-176.2 -142.8,-319 -319,-319s-319,142.8 -319,319l0,233zm72,-233c0,-136.4 110.6,-247 247,-247s247,110.6 247,247l0,193l-355,0l0,-171c0,-5.5 -4.5,-10 -10,-10l-44,0c-5.5,0 -10,4.5 -10,10l0,171l-75,0l0,-193zm-48.1,-252.5l39.6,-39.6c3.1,-3.1 3.1,-8.2 0,-11.3l-67.9,-67.9a8.03,8.03 0 0 0 -11.3,0l-39.6,39.6a8.03,8.03 0 0 0 0,11.3l67.9,67.9c3.1,3.1 8.1,3.1 11.3,0zm669.6,-79.2l-39.6,-39.6a8.03,8.03 0 0 0 -11.3,0l-67.9,67.9a8.03,8.03 0 0 0 0,11.3l39.6,39.6c3.1,3.1 8.2,3.1 11.3,0l67.9,-67.9c3.1,-3.2 3.1,-8.2 0,-11.3zm-54.5,660.7l-640,0c-17.7,0 -32,14.3 -32,32l0,24c0,4.4 3.6,8 8,8l688,0c4.4,0 8,-3.6 8,-8l0,-24c0,-17.7 -14.3,-32 -32,-32zm-348,-712l56,0c4.4,0 8,-3.6 8,-8l0,-96c0,-4.4 -3.6,-8 -8,-8l-56,0c-4.4,0 -8,3.6 -8,8l0,96c0,4.4 3.6,8 8,8z"/>
+   </g>
+  </symbol>
+  <symbol height="256px" id="svg_145" version="1.2" viewBox="-421 153 117 256" width="256px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <g id="svg_144" stroke-width="0"/>
+   <g id="svg_143" stroke-linecap="round" stroke-linejoin="round"/>
+   <g id="svg_142">
+    <path d="m-362.9,157.9c11.3,0 20.5,9.2 20.5,20.5s-9.2,20.5 -20.5,20.5s-20.5,-9.2 -20.5,-20.5s9.2,-20.5 20.5,-20.5zm25.8,46.3l-51.2,0c-14.2,0 -25.6,11.4 -25.6,25.6l0,62.6c0,4.9 3.9,9 9,9s9,-3.9 9,-9l0,-57.5c0,-1.4 1.2,-2.6 2.6,-2.6c1.4,0 2.6,1.2 2.6,2.6l0,155.2c0,7.7 5.7,14 12.8,14s12.8,-6.3 12.8,-14l0,-88.5c0,-1.4 1.2,-2.6 2.6,-2.6s2.6,1.2 2.6,2.6l0,88.5c0,7.7 5.7,14 12.8,14s12.8,-6.3 12.8,-14l0,-155.2c0,-1.4 1.2,-2.6 2.6,-2.6c1.4,0 2.6,1.2 2.6,2.6l0,57.6c0,4.9 3.9,9 9,9s9,-3.9 9,-9l0,-62.7c-0.4,-14.2 -12.1,-25.6 -26,-25.6z"/>
+   </g>
+  </symbol>
+ </defs>
+</svg>

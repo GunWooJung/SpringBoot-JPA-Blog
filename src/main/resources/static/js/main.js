@@ -7,7 +7,6 @@ var mapContainer = document.getElementById('map'),
 var map = new kakao.maps.Map(mapContainer, mapOption);
 var currentInfowindow = null;
 var markers = [];
-
 //11.24추가 시작
 var imageGraySrc = 'img/gray_marker.png'; // 마커이미지의 주소입니다    
 var imageBlueSrc = 'img/blue_marker.png';
@@ -19,7 +18,6 @@ var imageSize = new kakao.maps.Size(30,30); // 마커이미지의 크기입니�
 var imageOption = {offset: new kakao.maps.Point(15, 30)};
        		// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
 //11.24추가 끝
-
 // var overlays = [];
 
 // 지도에 마커와 인포윈도우를 표시
@@ -87,7 +85,6 @@ function convertToPlaceFormat(dbData) {
 }
 
 
-
 const mockData = { // 이건 그냥 내가 보려고 넣은 가상 데이터, 학교 앞 중앙대점 누르면 볼 수 있음
     id: 'mock1', 
     name: 'Starbucks Coffee Shop',
@@ -140,51 +137,51 @@ function createAndShowOverlay(placeData) {
 
 
 function markPlaces(places) {
-    	clearMarkers();
-		//11.24추가 markerImage
-        var markerImageGray = new kakao.maps.MarkerImage(imageGraySrc, imageSize, imageOption);
-		var markerImageBlue = new kakao.maps.MarkerImage(imageBlueSrc, imageSize, imageOption);
-		var markerImageGreen = new kakao.maps.MarkerImage(imageGreenSrc, imageSize, imageOption);
-		var markerImageRed = new kakao.maps.MarkerImage(imageRedSrc, imageSize, imageOption);
-   		places.forEach(function (place) { //11.24 plcacecontainer로 변경
-        var markerPosition = new kakao.maps.LatLng(place.lat, place.lng);
-		//11.24 마커 색상 조건
-        var marker;// 0은 회색 , 1은 파란색 , 2는 초록색 , 3은 빨강
-		//console.log(place.color);
-		if( place.color == 3){
-			marker =  new kakao.maps.Marker({
-            	position: markerPosition,
-            	title: place.name ,
-				image: markerImageRed 	//11.24추가 markerImage
-        	});
-		}
-		else if(place.color == 2){
-			marker =  new kakao.maps.Marker({
-            	position: markerPosition,
-            	title: place.name ,
-				image: markerImageGreen 	//11.24추가 markerImage
-        	});
-		}
-		else if(parseInt(place.color) == 1){
-			marker =  new kakao.maps.Marker({
-            	position: markerPosition,
-            	title: place.name ,
-				image: markerImageBlue 	//11.24추가 markerImage
-        	});
-		}
-		else if(place.color == 0){
-			marker =  new kakao.maps.Marker({
-            	position: markerPosition,
-            	title: place.name ,
-				image: markerImageGray 	//11.24추가 markerImage
-        	});
-		}
-		else{
-				marker =  new kakao.maps.Marker({
-            	position: markerPosition,
-            	title: place.name 
-        	});
-		}
+    clearMarkers();
+    //11.24추가 markerImage
+    var markerImageGray = new kakao.maps.MarkerImage(imageGraySrc, imageSize, imageOption);
+    var markerImageBlue = new kakao.maps.MarkerImage(imageBlueSrc, imageSize, imageOption);
+    var markerImageGreen = new kakao.maps.MarkerImage(imageGreenSrc, imageSize, imageOption);
+    var markerImageRed = new kakao.maps.MarkerImage(imageRedSrc, imageSize, imageOption);
+       places.forEach(function (place) { //11.24 plcacecontainer로 변경
+    var markerPosition = new kakao.maps.LatLng(place.lat, place.lng);
+    //11.24 마커 색상 조건
+    var marker;// 0은 회색 , 1은 파란색 , 2는 초록색 , 3은 빨강
+    //console.log(place.color);
+    if( place.color == 3){
+        marker =  new kakao.maps.Marker({
+            position: markerPosition,
+            title: place.name ,
+            image: markerImageRed 	//11.24추가 markerImage
+        });
+    }
+    else if(place.color == 2){
+        marker =  new kakao.maps.Marker({
+            position: markerPosition,
+            title: place.name ,
+            image: markerImageGreen 	//11.24추가 markerImage
+        });
+    }
+    else if(parseInt(place.color) == 1){
+        marker =  new kakao.maps.Marker({
+            position: markerPosition,
+            title: place.name ,
+            image: markerImageBlue 	//11.24추가 markerImage
+        });
+    }
+    else if(place.color == 0){
+        marker =  new kakao.maps.Marker({
+            position: markerPosition,
+            title: place.name ,
+            image: markerImageGray 	//11.24추가 markerImage
+        });
+    }
+    else{
+            marker =  new kakao.maps.Marker({
+            position: markerPosition,
+            title: place.name 
+        });
+    }
         marker.setMap(map);
         markers.push(marker);
         marker.data = place;
@@ -201,10 +198,15 @@ function searchNearby(keyword, location, page = 1) {
         .then(response => response.json())
         .then(data => {
             const convertedData = convertToPlaceFormat(data);
+			//11.28 추가
+			if (convertedData.length === 0) {
+                alert("검색 결과가 존재하지 않습니다.");
+            } 
+			//11.28 추가
             markPlaces(convertedData);
             if (!initialSearchDone && convertedData.length > 0) {
                 map.panTo(new kakao.maps.LatLng(convertedData[0].lat, convertedData[0].lng));
-            	saveCurrentMapCenter();
+           		saveCurrentMapCenter();
                 initialSearchDone = true; // Set the flag so the map doesn't re-center on subsequent data fetches
             }
         })
@@ -241,8 +243,8 @@ function fetchPlacesFromBackend(lat, lng) {
             emergency_bell_disabled: document.getElementById('emergency_bell_disabled').checked,
             lat: center.getLat(),
             lng: center.getLng(),
-            leftValue: leftValue,
-            rightValue: rightValue,
+            leftValue: document.getElementById('sign-left').innerHTML,
+            rightValue: document.getElementById('sign-right').innerHTML,
             rated: document.getElementById('rated').checked,
             not_rated: document.getElementById('not_rated').checked
         })
@@ -269,7 +271,7 @@ function updateCenterAndSearch(keyword) {
     // searchNearby(keyword , center); 
 }
 
-
+/* 11.28 삭제
 document.getElementById('search-button').addEventListener('click', function () {
     var keyword = document.getElementById('keyword').value;
     if (keyword.trim() !== '') {
@@ -278,7 +280,7 @@ document.getElementById('search-button').addEventListener('click', function () {
         alert('Please enter a keyword to search.');
     }
 });
-
+*/
 function fetchAndUpdatePlaces() {
     var center = map.getCenter();
     clearMarkers();

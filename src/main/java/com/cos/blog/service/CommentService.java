@@ -44,6 +44,9 @@ public class CommentService {
 	@Transactional
 	public ResponseEntity<String> commentEnroll(String username,String password, String placeId, String content,String ip) {
 		Optional<Place> places = placeRepository.findById(Integer.parseInt(placeId));
+		if(username.equals("")||password.equals("")||content.equals("")) {
+			return ResponseEntity.status(400).body("blank");
+		}
 		if (places.isPresent()) {
 			Comment comment = new Comment();
 			comment.setPlace(places.get());
@@ -52,11 +55,11 @@ public class CommentService {
 			comment.setContent(content);
 			comment.setIp(ip);
 			List<Comment> calcomment = commentRepository.findByPlace(places.get());
-			for(Comment c : calcomment) {
+			/*for(Comment c : calcomment) {
 				if(c.getIp().equals(ip)){
 					return ResponseEntity.status(400).body("fail");
 				}
-			}
+			}*/
 			commentRepository.save(comment);
 			Place place = places.get();
 			place.setComment_count(place.getComment_count()+1);

@@ -96,6 +96,7 @@ public class ReportService {
 			List<Report> calsame = reportRepository.findByPlace(place.get());
 			for (Report r : calsame) {
 				if (r.getType().equals(type) && r.getContent().equals(contentKor)) {
+				/*
 					if (r.getIp().equals(ip)) {
 						isSame = true;
 						return ResponseEntity.status(400).body("ip");
@@ -106,13 +107,13 @@ public class ReportService {
 						isSame = true;
 						return ResponseEntity.status(400).body("ip");
 					} 
-					else {
+					else {*/
 						isSame = true;
 						r.setCount(r.getCount() + 1);
-						if (r.getIp2() == null)
+					/*	if (r.getIp2() == null)
 							r.setIp2(ip);
 						else if (r.getIp3() == null)
-							r.setIp3(ip);
+							r.setIp3(ip);*/
 						System.out.println(r.getCount());
 						if (r.getCount() >= 3) {
 							if (r.getType().equals("장소 삭제")) {
@@ -218,7 +219,7 @@ public class ReportService {
 						}
 					}
 				}
-			}
+			//} ip중복해제
 			reportRepository.save(report);
 			return ResponseEntity.ok("Request successful");
 		}
@@ -236,6 +237,7 @@ public class ReportService {
 		Optional<Report> reports = reportRepository.findById(reportId);
 		System.out.println(reportId);
 		Report r = reports.get();
+		/*
 		if (ip.equals(r.getIp())) {
 			return ResponseEntity.status(400).body("ip");
 		} else if (ip.equals(r.getIp2())) {
@@ -248,6 +250,7 @@ public class ReportService {
 			r.setIp2(ip);
 		else if (r.getIp3() == null)
 			r.setIp3(ip);
+			*/
 		r.setCount(r.getCount() + 1);
 
 		if (r.getCount() >= 3) {

@@ -35,11 +35,11 @@ public class PlaceApiController {
 		String emergency_bell_man = request.getEmergency_bell_man();
 		String emergency_bell_woman = request.getEmergency_bell_woman();
 		Double leftValue = Double.parseDouble(request.getLeftValue() == null ? "0" : request.getLeftValue());
-		Double rightValue = Double.parseDouble(request.getRightValue() == null ? "280" : request.getRightValue() );
+		Double rightValue = Double.parseDouble(request.getRightValue() == null ? "5" : request.getRightValue() );
 		DecimalFormat df = new DecimalFormat("#.#");
-		leftValue = 1 + (leftValue/70);
+		//leftValue = 1 + (leftValue/70);
 		leftValue = Double.parseDouble(df.format(leftValue));
-		rightValue = 1.01 + (rightValue/70);
+		//rightValue = 1.01 + (rightValue/70);
 		rightValue = Double.parseDouble(df.format(rightValue));
 		Boolean Rated = request.getRated() == "true" ? true : false;
 		System.out.println(leftValue+", "+rightValue+", " + Rated);
@@ -97,5 +97,10 @@ public class PlaceApiController {
 	public Place placeDetail(@RequestParam("id") String id) {
 		Place place = placeService.placeDetail(Integer.parseInt(id));
 		return place;
+	}
+	
+	@GetMapping("/place/testall")
+	public List<Place> placetest() {
+		return placeService.placetest();
 	}
 }

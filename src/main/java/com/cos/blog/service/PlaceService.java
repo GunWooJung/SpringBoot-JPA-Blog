@@ -311,4 +311,25 @@ public class PlaceService {
 		}
 		placeRepository.saveAll(places);
 	}
+
+	@Transactional
+	public List<Place> placetest() {
+		List<Place> places = placeRepository.findAll();
+		List<Place> findplace = new ArrayList<>();
+		for(Place p : places) {
+			if(p.getAddress().replaceAll("\\s", "").indexOf("산1")!=-1||
+					p.getAddress().replaceAll("\\s", "").indexOf("산2")!=-1||
+					p.getAddress().replaceAll("\\s", "").indexOf("산3")!=-1||
+					p.getAddress().replaceAll("\\s", "").indexOf("산4")!=-1||
+					p.getAddress().replaceAll("\\s", "").indexOf("산5")!=-1||
+					p.getAddress().replaceAll("\\s", "").indexOf("산6")!=-1||
+					p.getAddress().replaceAll("\\s", "").indexOf("산7")!=-1||
+					p.getAddress().replaceAll("\\s", "").indexOf("산8")!=-1||
+					p.getAddress().replaceAll("\\s", "").indexOf("산9")!=-1||
+					p.getAddress().replaceAll("\\s", "").indexOf("산0")!=-1) {
+				findplace.add(p);
+			}
+		}
+		return findplace;
+	}
 }

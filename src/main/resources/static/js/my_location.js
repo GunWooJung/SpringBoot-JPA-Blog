@@ -64,10 +64,10 @@ var location_marker_displayed = false; // 현재 위치 마커 존재 여부
 var location_marker = null;  // 현재 위치 마커 
 //11.24추가 markerHomeImage
 var imageHomeSrc = 'img/home_marker.png', // 마커이미지의 주소입니다    
-    imageHomeSize = new kakao.maps.Size(30,30), // 마커이미지의 크기입니다
-			 // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-    imageHomeOption = {offset: new kakao.maps.Point(15, 15)};
-       		// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+    imageHomeSize = new kakao.maps.Size(30, 30), // 마커이미지의 크기입니다
+    // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+    imageHomeOption = { offset: new kakao.maps.Point(15, 15) };
+// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
 
 function moveToCurrentLocation() {
     if (navigator.geolocation) {
@@ -76,22 +76,22 @@ function moveToCurrentLocation() {
                 lng = position.coords.longitude;
             var newCenter = new kakao.maps.LatLng(lat, lng);
             map.setCenter(newCenter);
-			saveCurrentMapCenter(); //11.24 추가
-			//11.24추가 markerImage
- 			var markerImage = new kakao.maps.MarkerImage(imageHomeSrc, imageHomeSize, imageHomeOption);
-            if (location_marker_displayed == false) {	
-               	location_marker = new kakao.maps.Marker({
+            saveCurrentMapCenter(); //11.24 추가
+            //11.24추가 markerImage
+            var markerImage = new kakao.maps.MarkerImage(imageHomeSrc, imageHomeSize, imageHomeOption);
+            if (location_marker_displayed == false) {
+                location_marker = new kakao.maps.Marker({
                     position: newCenter,
-					image: markerImage 	//11.24추가 markerImage
+                    image: markerImage 	//11.24추가 markerImage
                 });
                 location_marker.setMap(map);   //현재 위치 마커 생성
                 location_marker_displayed = true;   //현재 위치 마커 존재로 변경
             }
             else {  //true
                 location_marker.setMap(null);   // 기존 위치 마커 삭제
-              	location_marker = new kakao.maps.Marker({
+                location_marker = new kakao.maps.Marker({
                     position: newCenter,
-					image: markerImage 	//11.24추가 markerImage
+                    image: markerImage 	//11.24추가 markerImage
                 });
                 location_marker.setMap(map); // 새로운 위치 마커 생성
             }

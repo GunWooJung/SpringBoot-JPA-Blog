@@ -39,7 +39,7 @@ public class ReportApiController {
 		List<Report> reports = reportService.reportShow(placeId);
 		reports.sort(Comparator.comparing(Report::getCreateDate).reversed());
 		
-		List<Report> firstTwoElements = reports.subList(0, Math.min(reports.size(), 2));
+		List<Report> firstTwoElements = reports.subList(0, Math.min(reports.size(), 3));
 		return firstTwoElements;
 	}
 

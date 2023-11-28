@@ -36,7 +36,7 @@ document.getElementById('search-button').addEventListener('click', function () {
     if (keyword!=null && keyword.trim() !== '') {
         performNewSearch(keyword);
     } else {
-        alert('Please enter a keyword to search.');
+          alert('검색어를 입력해주세요.'); //11.28 수정
     }
 });
 
@@ -47,7 +47,7 @@ document.getElementById('keyword').addEventListener('keypress', function (event)
         if (keyword.trim() !== '') {
             performNewSearch(keyword);
         } else {
-            alert('Please enter a keyword to search.');
+            alert('검색어를 입력해주세요.'); //11.28 수정
         }
     }
 });

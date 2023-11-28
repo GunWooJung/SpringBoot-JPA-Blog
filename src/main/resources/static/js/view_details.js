@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // document.getElementById('backButton').addEventListener('click', function () {
     //     const urlParams = new URLSearchParams(window.location.search);
     //     const placeId = urlParams.get('id');
-    
+
     //     fetch(`/place/detail?id=${placeId}`)
     //         .then(response => response.json())
     //         .then(place => {
@@ -52,57 +52,87 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function updateEmergencyBell(bellString) {
-        const hasBellMan = bellString.indexOf('남자화장실') !== -1;
-        const hasBellWoman = bellString.indexOf('여자화장실') !== -1;
-        const hasBellDisabled = bellString.indexOf('장애인화장실') !== -1;
-    
-        document.getElementById('bell_man').textContent = hasBellMan ? '있음' : '없음';
-        document.getElementById('bell_woman').textContent = hasBellWoman ? '있음' : '없음';
-        document.getElementById('bell_disabled').textContent = hasBellDisabled ? '있음' : '없음';
-    }
+    // function updateEmergencyBell(bellString) {
+    //     const hasBellMan = bellString.indexOf('남자화장실') !== -1;
+    //     const hasBellWoman = bellString.indexOf('여자화장실') !== -1;
+    //     const hasBellDisabled = bellString.indexOf('장애인화장실') !== -1;
+
+    //     document.getElementById('bell_man').textContent = hasBellMan ? '있음' : '없음';
+    //     document.getElementById('bell_woman').textContent = hasBellWoman ? '있음' : '없음';
+    //     document.getElementById('bell_disabled').textContent = hasBellDisabled ? '있음' : '없음';
+    // }
 
     //place details 준원
     fetch(`/place/detail?id=${placeId}`)
         .then(response => response.json())
         .then(place => {
+
+            const average = place.star_average;
+
             document.getElementById('placeName').textContent = place.name;
-            document.getElementById('starRating').textContent = place.star_average;
+            //document.getElementById('starRating').textContent = place.star_average;
+            document.getElementById('starRating').textContent = Number.isInteger(average) ? average + ".0" : average;
             document.getElementById('address').textContent = place.address;
-            document.getElementById('opentime').textContent = place.opentime;
-			document.getElementById('starCount').textContent = place.star_count;	
-			if(place.disabled_man == "있음")             
-				document.getElementById('disabled_man').textContent = 1;
-			else
-				document.getElementById('disabled_man').textContent = 0;
-			if(place.disabled_woman == "있음")             
-				document.getElementById('disabled_woman').textContent = 1;
-			else
-				document.getElementById('disabled_woman').textContent = 0;
-				
-					
- 			if(place.diaper.indexOf("남")!= -1)          
-				document.getElementById('diaper_man').textContent = 1;	
-			else
-				document.getElementById('diaper_man').textContent = 0;	
-			if(place.diaper.indexOf("여")!= -1)          
-				document.getElementById('diaper_woman').textContent = 1;	
-			else
-				document.getElementById('diaper_woman').textContent = 0;	
-				
-					
-			if(place.emergency_bell.indexOf("장애")!= -1)          
-				document.getElementById('bell_disabled').textContent = 1;	
-			else
-				document.getElementById('bell_disabled').textContent = 0;	
-			if(place.emergency_bell.indexOf("여")!= -1)          
-				document.getElementById('bell_woman').textContent = 1;	
-			else
-				document.getElementById('bell_woman').textContent = 0;	
-			if(place.emergency_bell.indexOf("남")!= -1)          
-				document.getElementById('bell_man').textContent = 1;	
-			else
-				document.getElementById('bell_man').textContent = 0;	
+            //document.getElementById('opentime').textContent = place.opentime;
+            document.getElementById('starCount').textContent = place.star_count;
+
+
+            const disabledManIcon = document.getElementById('disabled_man').querySelector('img');
+            disabledManIcon.src = place.disabled_man === "있음" ? '/public/disabled_man_colored.svg' : '/public/disabled_man_gray.svg';
+   
+            const disabledWomanIcon = document.getElementById('disabled_woman').querySelector('img');
+            disabledWomanIcon.src = place.disabled_woman === "있음" ? '/public/disabled_woman_colored2.svg' : '/public/disabled_woman_gray.svg';
+
+
+            const diaperManIcon = document.getElementById('diaper_man').querySelector('img');
+            diaperManIcon.src = place.diaper.indexOf("남") !== -1 ? '/public/diaper_man_colored.svg' : '/public/diaper_man_gray.svg';
+
+            const diaperWomanIcon = document.getElementById('diaper_woman').querySelector('img');
+            diaperWomanIcon.src = place.diaper.indexOf("여") !== -1 ? '/public/diaper_woman_colored2.svg' : '/public/diaper_woman_gray.svg';
+
+
+            const bellManIcon = document.getElementById('bell_man').querySelector('img');
+            bellManIcon.src = place.emergency_bell.indexOf("남") !== -1 ? '/public/bell_man_colored.svg' : '/public/bell_man_gray.svg';
+
+            const bellWomanIcon = document.getElementById('bell_woman').querySelector('img');
+            bellWomanIcon.src = place.emergency_bell.indexOf("여") !== -1 ? '/public/bell_woman_colored2.svg' : '/public/bell_woman_gray.svg';
+
+            const bellDisabledIcon = document.getElementById('bell_disabled').querySelector('img');
+            bellDisabledIcon.src = place.emergency_bell.indexOf("장애") !== -1 ? '/public/bell_disabled_colored3.svg' : '/public/bell_disabled_gray.svg';
+
+
+            // if (place.disabled_man == "있음")
+            //     document.getElementById('disabled_man').textContent = 1;
+            // else
+            //     document.getElementById('disabled_man').textContent = 0;
+            // if (place.disabled_woman == "있음")
+            //     document.getElementById('disabled_woman').textContent = 1;
+            // else
+            //     document.getElementById('disabled_woman').textContent = 0;
+
+
+            // if (place.diaper.indexOf("남") != -1)
+            //     document.getElementById('diaper_man').textContent = 1;
+            // else
+            //     document.getElementById('diaper_man').textContent = 0;
+            // if (place.diaper.indexOf("여") != -1)
+            //     document.getElementById('diaper_woman').textContent = 1;
+            // else
+            //     document.getElementById('diaper_woman').textContent = 0;
+
+
+            // if (place.emergency_bell.indexOf("장애") != -1)
+            //     document.getElementById('bell_disabled').textContent = 1;
+            // else
+            //     document.getElementById('bell_disabled').textContent = 0;
+            // if (place.emergency_bell.indexOf("여") != -1)
+            //     document.getElementById('bell_woman').textContent = 1;
+            // else
+            //     document.getElementById('bell_woman').textContent = 0;
+            // if (place.emergency_bell.indexOf("남") != -1)
+            //     document.getElementById('bell_man').textContent = 1;
+            // else
+            //     document.getElementById('bell_man').textContent = 0;
             initMap(place);
 
         })
@@ -111,16 +141,65 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
 
+    // 프론트 css를 위한 더미 데이터
+    // const dummyComments = [
+    //     { username: "사용자1", content: "댓글 내용 1", id: "1", createDate: "2023-11-25" },
+    //     { username: "사용자2", content: "댓글 내용 2", id: "2", createDate: "2023-11-24" },
+    //     { username: "사용자3", content: "댓글 내용 3", id: "3", createDate: "2023-11-23" },
+    //     { username: "사용자1", content: "댓글 내용 1", id: "1", createDate: "2023-11-25" },
+    //     { username: "사용자2", content: "댓글 내용 2", id: "2", createDate: "2023-11-24" },
+    //     { username: "사용자3", content: "댓글 내용 3", id: "3", createDate: "2023-11-23" },
+    //     { username: "사용자1", content: "댓글 내용 1", id: "1", createDate: "2023-11-25" },
+    //     { username: "사용자2", content: "댓글 내용 2", id: "2", createDate: "2023-11-24" },
+    //     { username: "사용자3", content: "댓글 내용 3", id: "3", createDate: "2023-11-23" },
+    //     { username: "사용자1", content: "댓글 내용 1", id: "1", createDate: "2023-11-25" },
+    //     { username: "사용자2", content: "댓글 내용 2", id: "2", createDate: "2023-11-24" },
+    //     { username: "사용자3", content: "댓글 내용 3", id: "3", createDate: "2023-11-23" },
+        
+    //     // 기타 더미 코멘트
+    // ];
+
+    // displayComments(dummyComments);
+     
+
+
+
+    // function displayComments(comments) {
+    //     const commentsContainer = document.getElementById('reviews');
+    //     commentsContainer.innerHTML = ''; // Clear existing comments
+    //     comments.forEach(comment => {
+    //         const commentElement = document.createElement('div');
+    //         commentElement.className = 'comment-item';
+    //         commentElement.innerHTML = `
+            
+    //             <span>${comment.username} : ${comment.content}</span>
+    //             <button class="deleteComment" data-comment-id="${comment.id}">X</button>
+    //         `;
+    //         commentsContainer.appendChild(commentElement);
+    //     });
+    // }
 
     function displayComments(comments) {
         const commentsContainer = document.getElementById('reviews');
         commentsContainer.innerHTML = ''; // Clear existing comments
         comments.forEach(comment => {
+            const dateOnly = comment.createDate.substring(0, 10);
+
             const commentElement = document.createElement('div');
             commentElement.className = 'comment-item';
             commentElement.innerHTML = `
-                <span>${comment.username} : ${comment.content}</span>
-                <button class="deleteComment" data-comment-id="${comment.id}">X</button>
+            
+            <div class = "review_component">
+                <div class = "review_comment_container">
+                    <div class = "comment_container_detail">
+                        <div class = "review_comment_id">${comment.username}</div>
+                        <div class = "review_comment_bar"></div>
+                        <div class = "review_comment_date">${dateOnly}</div>  
+                    </div>
+                    <div class="deleteComment" data-comment-id="${comment.id}">&times</div>
+                </div>
+                <div class = "comment_container_content">${comment.content}</div>
+            </div>
             `;
             commentsContainer.appendChild(commentElement);
         });
@@ -155,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                placeId: placeId,     
+                placeId: placeId,
                 password: password
             })
         })
@@ -225,25 +304,31 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (body.trim().toLowerCase() === "fail") {
                     // Handle duplicated IP case
                     alert('이미 작성한 댓글이 있습니다.');
-                } else {
+
+                }
+                if (body.trim().toLowerCase() === "blank") {
+                    // 빈칸이 존재
+                    alert('입력하지 않은 칸이 존재합니다.');
+                }
+                else {
                     // Handle successful submission	 
-				document.getElementById('username').value = '';
-      		    document.getElementById('password').value = '';
-        		document.getElementById('reviewText').value = '';
-       			// Uncomment the following lines if you want to display an alert and reload the page
-                alert('댓글이 등록되었습니다.');
- 				location.reload();
+                    document.getElementById('username').value = '';
+                    document.getElementById('password').value = '';
+                    document.getElementById('reviewText').value = '';
+                    // Uncomment the following lines if you want to display an alert and reload the page
+                    alert('댓글이 등록되었습니다.');
+                    location.reload();
                 }
             });
 
         // 리뷰창 비우기
 
-       /* window.onclick = function (event) {
-            let modal = document.getElementById('amendModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        };*/
+        /* window.onclick = function (event) {
+             let modal = document.getElementById('amendModal');
+             if (event.target == modal) {
+                 modal.style.display = 'none';
+             }
+         };*/
     });
 
 

@@ -2,7 +2,8 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=0">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <title>Amend Information</title>
     <link rel="stylesheet" href="styles/amend_information.css">
 </head>
@@ -17,74 +18,47 @@
             <div class="body_content"> 
                 <div class="body_content_title">해당 장소에 대한 정보를 제안해주세요!</div>
                 <div class="body_content_submit" data-target="/amend_info_modal/report_location.html">
-                    <div class="submit_icon">@</div>
+                    <img src="/public/location.svg" class="submit_icon" alt="@">
                     <div class="submit_text">장소명 및 위치</div>
-                    <div class="submit_arrow"> > </div>
+                    <img src="/public/arrow1.svg" class="submit_arrow" alt=">">
                 </div>
                 <div class="body_content_submit" data-target="/amend_info_modal/report_disabled.html">
-                    <div class="submit_icon">@</div>
+                    <img src="/public/disabled1.svg" class="submit_icon" alt="@">
                     <div class="submit_text">장애인 화장실 정보 수정</div>
-                    <div class="submit_arrow"> > </div>
+                    <img src="/public/arrow1.svg" class="submit_arrow" alt=">">
                 </div>
                 <div class="body_content_submit" data-target="/amend_info_modal/report_diaper.html">
-                    <div class="submit_icon">@</div>
+                    <img src="/public/diaper4.svg" class="submit_icon" alt="@">
                     <div class="submit_text">기저귀 교환대 정보 수정</div>
-                    <div class="submit_arrow"> > </div>
+                    <img src="/public/arrow1.svg" class="submit_arrow" alt=">">
                 </div>
                 <div class="body_content_submit" data-target="/amend_info_modal/report_bell.html">
-                    <div class="submit_icon">@</div>
+                    <img src="/public/bell4.svg" class="submit_icon" alt="@">
                     <div class="submit_text">비상벨 정보 수정</div>
-                    <div class="submit_arrow"> > </div>
+                    <img src="/public/arrow1.svg" class="submit_arrow" alt=">">
                 </div>
                 <div class="body_content_submit" data-target="/amend_info_modal/report_delete.html">
-                    <div class="submit_icon">@</div>
+                    <img src="/public/trash.svg" class="submit_icon" alt="@">
                     <div class="submit_text">장소 삭제</div>
-                    <div class="submit_arrow"> > </div>
+                    <img src="/public/arrow1.svg" class="submit_arrow" alt=">">
                 </div>
             </div>
 
             <div class="body_content">
                 <div class="body_content_title">기타 정보를 공유해주세요!</div>
                 <div class="body_content_submit" data-target="/amend_info_modal/report_as_you_want.html">
-                    <div class="submit_icon"></div>
-                    <div class="submit_text">@원하는대로 정보 작성</div>
-                    <div class="submit_arrow"> > </div>
+                    <img src="/public/write.svg" class="submit_icon" alt="@">
+                    <div class="submit_text">원하는대로 정보 작성</div>
+                    <img src="/public/arrow1.svg" class="submit_arrow" alt=">">
                 </div>
             </div>
 
             <div class="body_content">
-                <div class="body_content_title">이전 신고 내용</div>
+                <div class="body_content_title">최근 신고 내용</div>
+
                 <div id="previous_reports_container">
                     <!-- 여기에 들어갈듯? -->
                 </div>
-                <!-- 여기서부터는 텍스트는 일단 넣어놓지만 백엔드에서 무슨 내용일지 받아와야함 -->
-                <!-- <div class="body_content_recent"> 
-                    <div class="recent_textbox">
-                        <div class="recent_textbox_title">기저귀 교환대 정보 수정</div>
-                        <div class="recent_textbox_detail">
-                            <div class="textbox_detail_text">남자 화장실에 기저귀 교환대가 없거나 파손됨</div>
-                            <div class="textbox_detail_date">2023.10.20</div>
-                        </div>
-                    </div>
-                    <div class="recent_likeButton">
-                        <div class="recent_likeButton_number">+ 1</div>
-                        <div class="recent_likeButton_heart">♡</div>
-                    </div>
-                </div>
-
-                <div class="body_content_recent"> 
-                    <div class="recent_textbox">
-                        <div class="recent_textbox_title">비상벨 정보 수정</div>
-                        <div class="recent_textbox_detail">
-                            <div class="textbox_detail_text">여자 화장실 비상벨이 있음</div>
-                            <div class="textbox_detail_date">2023.09.17</div>
-                        </div>
-                    </div>
-                    <div class="recent_likeButton">
-                        <div class="recent_likeButton_number">+ 4</div>
-                        <div class="recent_likeButton_heart">♡</div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
