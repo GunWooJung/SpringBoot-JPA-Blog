@@ -78,11 +78,11 @@ public class PlaceApiController {
 		String c = "starbucks";
 		String d = "gonggong_seoul";
 		String e = "toilet_list";
-		//placeService.placeAdd(a);
-	   // placeService.placeAdd(b);
-		placeService.placeAdd(c);
-		//placeService.placeAdd(d);
-		//placeService.placeAdd(e);
+		placeService.placeAdd(a);
+	    placeService.placeAdd(c);
+		placeService.placeAdd(b);
+		placeService.placeAdd(d);
+		placeService.placeAdd(e);
 		return "addplace"; // addplace.jsp 결과 페이지로 이동
 	}
 
@@ -99,8 +99,5 @@ public class PlaceApiController {
 		return place;
 	}
 	
-	@GetMapping("/place/testall")
-	public List<Place> placetest() {
-		return placeService.placetest();
-	}
+
 }

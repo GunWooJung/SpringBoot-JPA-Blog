@@ -153,107 +153,102 @@ public class PlaceService {
 	}
 
 	// 모든 place를 jpa에 등록하기
-	@Transactional
-	public void placeAdd(String fileName) {
-		String csvFile = "/home/ubuntu/SpringBoot-JPA-Blog/src/main/resources/" + fileName + ".csv";
-		Charset.forName("UTF-8");
+		@Transactional
+		public void placeAdd(String fileName) {
+			String csvFile = "/home/ubuntu/SpringBoot-JPA-Blog/src/main/resources/" + fileName + ".csv";
+			Charset.forName("UTF-8");
 
-		try {
+			try {
 
-			List<Place> newPlaces = new CsvToBeanBuilder<Place>(new FileReader(csvFile)).withType(Place.class).build()
-					.parse();
-			List<Place> places = placeRepository.findAll(); // DB의 장소
-			for (Place place : places) { 
-				if(place.getName().indexOf("스타")!=-1&&place.getName().indexOf("벅스")!=-1) {
-					placeRepository.delete(place);
-				}
-			}
-			for (Place newplace : newPlaces) { // 엑셀에 장소
-				placeRepository.save(newplace);
-			}
-		
-				
-					/*
-					Boolean lat_In_Min = false;
-				
-					Boolean lat_In_Max = false;
-					Boolean lng_In_Min = false;
-					Boolean lng_In_Max = false;
-					if (Double // 1km안에 유사도가 0.5이상
-							.parseDouble(place.getLongitude())
-							- Double.parseDouble("0.011319259720414284905767162827551") < Double
-									.parseDouble(newplace.getLongitude())) {
-						lng_In_Min = true;
-					}
-					if (Double.parseDouble(place.getLongitude())
-							+ Double.parseDouble("0.011319259720414284905767162827551") > Double
-									.parseDouble(newplace.getLongitude())) {
-						lng_In_Max = true;
-					}
-					if (Double.parseDouble(place.getLatitude())
-							- Double.parseDouble("0.0090100236513120846942223223335961 ") < Double
-									.parseDouble(newplace.getLatitude())) {
-						lat_In_Min = true;
-					}
-					if (Double.parseDouble(place.getLatitude())
-							+ Double.parseDouble("0.0090100236513120846942223223335961 ") > Double
-									.parseDouble(newplace.getLatitude())) {
-						lat_In_Max = true;
-					}
-					if (lat_In_Min && lat_In_Max && lng_In_Min && lng_In_Max) {
-
-						if (Similarity.CalculateSimilarity(
-								newplace.getName().replaceAll("\\s", "").replaceAll("(개방|화장실)", ""),
-								place.getName().replaceAll("\\s", "").replaceAll("(개방|화장실)", "")) >= 0.5) {
-							isUnique = false;
-						}
-						if (newplace.getLatitude().equals(place.getLatitude())
-								&& newplace.getLongitude().equals(place.getLongitude())) {
-							isUnique = false;
-						}
-
-						Boolean lat_In_Min2 = false;
-						Boolean lat_In_Max2 = false;
-						Boolean lng_In_Min2 = false;
-						Boolean lng_In_Max2 = false;
-						if (Double // 10m안에 장소가 있으면 제외
+				List<Place> newPlaces = new CsvToBeanBuilder<Place>(new FileReader(csvFile)).withType(Place.class).build()
+						.parse();
+				for (Place newplace : newPlaces) { // 엑셀에 장소
+					List<Place> places = placeRepository.findAll(); // DB의 장소
+					Boolean isUnique = true;
+					for (Place place : places) { //
+						Boolean lat_In_Min = false;
+						Boolean lat_In_Max = false;
+						Boolean lng_In_Min = false;
+						Boolean lng_In_Max = false;
+						if (Double // 1km안에 유사도가 0.5이상
 								.parseDouble(place.getLongitude())
-								- Double.parseDouble("0.00011319259720414284905767162827551") < Double
+								- Double.parseDouble("0.011319259720414284905767162827551") < Double
 										.parseDouble(newplace.getLongitude())) {
-							lng_In_Min2 = true;
+							lng_In_Min = true;
 						}
 						if (Double.parseDouble(place.getLongitude())
-								+ Double.parseDouble("0.00011319259720414284905767162827551") > Double
+								+ Double.parseDouble("0.011319259720414284905767162827551") > Double
 										.parseDouble(newplace.getLongitude())) {
-							lng_In_Max2 = true;
+							lng_In_Max = true;
 						}
 						if (Double.parseDouble(place.getLatitude())
-								- Double.parseDouble("0.000090100236513120846942223223335961 ") < Double
+								- Double.parseDouble("0.0090100236513120846942223223335961 ") < Double
 										.parseDouble(newplace.getLatitude())) {
-							lat_In_Min2 = true;
+							lat_In_Min = true;
 						}
 						if (Double.parseDouble(place.getLatitude())
-								+ Double.parseDouble("0.000090100236513120846942223223335961 ") > Double
+								+ Double.parseDouble("0.0090100236513120846942223223335961 ") > Double
 										.parseDouble(newplace.getLatitude())) {
-							lat_In_Max2 = true;
+							lat_In_Max = true;
 						}
-						if (lat_In_Min2 && lat_In_Max2 && lng_In_Min2 && lng_In_Max2) {
-							isUnique = false;
-						}
-						
-					
-				if (isUnique) {
-					placeRepository.save(newplace);
-				}
-				} */
-			// placeRepository.saveAll(places);
-		} catch (IllegalStateException | FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+						if (lat_In_Min && lat_In_Max && lng_In_Min && lng_In_Max) {
+							if (newplace.getName().replaceAll("\\s", "")
+									.indexOf(place.getName().replaceAll("\\s", "")) != -1) {
+								isUnique = false;
+							}
+							if (Similarity.CalculateSimilarity(
+									newplace.getName().replaceAll("\\s", "").replaceAll("(개방|화장실)", ""),
+									place.getName().replaceAll("\\s", "").replaceAll("(개방|화장실)", "")) >= 0.5) {
+								isUnique = false;
+							}
+							if (newplace.getLatitude().equals(place.getLatitude())
+									&& newplace.getLongitude().equals(place.getLongitude())) {
+								isUnique = false;
+							}
 
-	}
-	// 모든 place를 불러오기
+							Boolean lat_In_Min2 = false;
+							Boolean lat_In_Max2 = false;
+							Boolean lng_In_Min2 = false;
+							Boolean lng_In_Max2 = false;
+							if (Double // 10m안에 장소가 있으면 제외
+									.parseDouble(place.getLongitude())
+									- Double.parseDouble("0.00011319259720414284905767162827551") < Double
+											.parseDouble(newplace.getLongitude())) {
+								lng_In_Min2 = true;
+							}
+							if (Double.parseDouble(place.getLongitude())
+									+ Double.parseDouble("0.00011319259720414284905767162827551") > Double
+											.parseDouble(newplace.getLongitude())) {
+								lng_In_Max2 = true;
+							}
+							if (Double.parseDouble(place.getLatitude())
+									- Double.parseDouble("0.000090100236513120846942223223335961 ") < Double
+											.parseDouble(newplace.getLatitude())) {
+								lat_In_Min2 = true;
+							}
+							if (Double.parseDouble(place.getLatitude())
+									+ Double.parseDouble("0.000090100236513120846942223223335961 ") > Double
+											.parseDouble(newplace.getLatitude())) {
+								lat_In_Max2 = true;
+							}
+							if (lat_In_Min2 && lat_In_Max2 && lng_In_Min2 && lng_In_Max2) {
+								isUnique = false;
+							}
+						}
+					}
+
+					if (isUnique) {
+						placeRepository.save(newplace);
+					}
+				}
+				// placeRepository.saveAll(places);
+			} catch (IllegalStateException | FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		// 모든 place를 불러오기
 
 	@Transactional(readOnly = true)
 	public List<PlaceContainer> placeSearch(String keyword, String latitude, String longitude) {
@@ -310,6 +305,11 @@ public class PlaceService {
 			p.setComment_count(0);
 		}
 		placeRepository.saveAll(places);
+	}
+	
+	@Transactional
+	public void Delete() {
+		placeRepository.deleteAll();
 	}
 
 	@Transactional

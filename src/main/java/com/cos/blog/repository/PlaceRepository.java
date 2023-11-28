@@ -5,4 +5,6 @@ import com.cos.blog.model.Place;
 
 public interface PlaceRepository extends JpaRepository<Place, Integer> {
 
+	Place findByName(String string);
+
 }

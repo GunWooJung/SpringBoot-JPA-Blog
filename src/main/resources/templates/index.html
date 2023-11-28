@@ -4,10 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=0">
-    <title>모두의 화장실</title>
+    <title>11-20, 슬라이드바 적용</title>
     
     <link rel="stylesheet" href="/styles/main_page.css">
-    <!--link rel="stylesheet" href="/styles/main_page.css"-->
     <link rel="stylesheet" href="/styles/filter_modal.css">
     <link rel="stylesheet" href="/styles/marker_overlay.css">
     <link rel="stylesheet" href="/styles/slide_bar.css">
@@ -22,15 +21,17 @@
     <div id="map-container">
         <div id="map">
             <div>
-                <img src="public/filter.svg" id = "filter">
+                <img src="public/filter.png" id = "filter">
             </div>
+        
             <div id="search-box">
                 <div class="search-container">
-                    <input type="text" id="keyword" class="search-input" placeholder="검색어를 입력해주세요.">
-                    <!-- 위에 placeholder 수정 11.28 -->
                     <img src="public/search.svg" id="search-button">
+                    <input type="text" id="keyword" class="search-input" placeholder="Search places">
+                    <img src="public/close_index_html.svg" id="close-button">
                 </div>
             </div>
+            
             <img src = "public/gps.svg" id = "recenter-map">
         </div>
     </div>
@@ -38,7 +39,7 @@
     <div id="myModal" class="modal">
         <div class="modal_content">
             <div class="modal_content_header">
-                <img src="/public/close_index_html.svg" class="close">
+                <div class = "close">&times;</div>
                 <div class="header_title">필터</div>
             </div>
 
@@ -46,20 +47,21 @@
                 <div class="content_body_container">
                     <div class="content_body_category">평점</div>
                         <div id="slider-container">
+                                <div class="signLeft" id="sign-left"></div>
+                                <div class="signRight" id="sign-right"></div>
                             <div class="slider-bar" id="slider-bar-filled"></div>
                             <div class="handle" id="handle-left"></div>
                             <div class="handle" id="handle-right"></div>
-                            <div class="signLeft" id="sign-left"></div>
-                            <div class="signRight" id="sign-right"></div>
+                            
                         </div>
                         <div class="is_rated_container">
                                 <input type="radio" id="rated" name="is_rated" value="rated" checked>
-                                <label for="rated" class="radio-custom">별점 미평가 장소 포함</label>                                
+                                <label for="rated" class="radio-custom">별점 미평가<br />장소 포함</label>                                
                                 <input type="radio" id="not_rated" name="is_rated" value="not_rated">
-                                <label for="not_rated" class="radio-custom">별점 미평가 장소 미포함</label>
+                                <label for="not_rated" class="radio-custom">별점 미평가 <br />장소 미포함</label>
                         </div>
                 </div>
-
+            <div class = "content_body_box">
                 <div class="content_body_container">
                     <div class="content_body_category">장애인 화장실</div>
                     <div class="content_body_choice">
@@ -122,7 +124,7 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
             </div>
             <div class="modal_content_footer">
                 <div class="content_footer_left" id="reset-filter">초기화</div>
