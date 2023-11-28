@@ -4,39 +4,39 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=0">
-    <title>모두의 화장실</title>
-
+    <title>11-20, 슬라이드바 적용</title>
+    
     <link rel="stylesheet" href="/styles/main_page.css">
     <link rel="stylesheet" href="/styles/filter_modal.css">
     <link rel="stylesheet" href="/styles/marker_overlay.css">
     <link rel="stylesheet" href="/styles/slide_bar.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-        rel="stylesheet">
-
+    
     <script type="text/javascript"
         src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=b40d65bf57c29f2e2ee811fc923049c9&libraries=services">
-        </script>
-    <script src="js/filter_modal.js"></script>
-</head>
+    </script>
+     <script src="js/filter_modal.js"></script>
+</head> 
 
 <body>
     <div id="map-container">
         <div id="map">
-            <div class="map_header">
-                <div><img src="public/filter.png" id="filter"></div>
-                <div id="search-box">
-                    <div class="search-container">
-                        <img src="public/search.svg" id="search-button">
-                        <input type="text" id="keyword" class="search-input" placeholder="장소를 검색하세요">
-                        <img src="public/close_index_html.svg" id="close-button">
-                    </div>
+            <div>
+                <img src="public/filter.png" id = "filter">
+            </div>
+        
+            <div id="search-box">
+                <div class="search-container">
+                    <img src="public/search.svg" id="search-button">
+                    <input type="text" id="keyword" class="search-input" placeholder="Search places">
+                    <img src="public/close_index_html.svg" id="close-button">
                 </div>
             </div>
-            <img src="public/gps.svg" id="recenter-map">
+            
+            <img src = "public/gps.svg" id = "recenter-map">
         </div>
     </div>
 
-   <div id="myModal" class="modal">
+    <div id="myModal" class="modal">
         <div class="modal_content">
             <div class="modal_content_header">
                 <div class = "close">&times;</div>

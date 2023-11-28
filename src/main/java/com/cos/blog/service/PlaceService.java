@@ -307,10 +307,7 @@ public class PlaceService {
 		placeRepository.saveAll(places);
 	}
 	
-	@Transactional
-	public void Delete() {
-		placeRepository.deleteAll();
-	}
+	
 
 	@Transactional
 	public List<Place> placetest() {
