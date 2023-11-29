@@ -242,7 +242,7 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    height:20%;
+    height:33%;
 }
 
 .content_body_category{
@@ -339,6 +339,10 @@ input[id="cb1"] {
   .is_rated_container input[type="radio"]:checked + .radio-custom {
     background-color: yellow; 
   }
+  .check-box-container{
+    margin-top: 10px;
+    height:100%;
+  }
 }
 
 @media (min-width : 769px) {
@@ -416,7 +420,7 @@ input[id="cb1"] {
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    height:20%;
+    height:33%;
 }
 
 .content_body_category{
@@ -510,5 +514,9 @@ input[id="cb1"] {
   }
   .is_rated_container input[type="radio"]:checked + .radio-custom {
     background-color: yellow; 
+  }
+  .check-box-container{
+    margin-top: 10px;
+    height:100%;
   }
 }
