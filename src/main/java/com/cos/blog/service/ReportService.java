@@ -96,7 +96,7 @@ public class ReportService {
 			List<Report> calsame = reportRepository.findByPlace(place.get());
 			for (Report r : calsame) {
 				if (r.getType().equals(type) && r.getContent().equals(contentKor)) {
-				/*
+				
 					if (r.getIp().equals(ip)) {
 						isSame = true;
 						return ResponseEntity.status(400).body("ip");
@@ -107,13 +107,13 @@ public class ReportService {
 						isSame = true;
 						return ResponseEntity.status(400).body("ip");
 					} 
-					else {*/
+					else {
 						isSame = true;
 						r.setCount(r.getCount() + 1);
-					/*	if (r.getIp2() == null)
+						if (r.getIp2() == null)
 							r.setIp2(ip);
 						else if (r.getIp3() == null)
-							r.setIp3(ip);*/
+							r.setIp3(ip);
 						System.out.println(r.getCount());
 						if (r.getCount() >= 3) {
 							if (r.getType().equals("장소 삭제")) {
@@ -135,7 +135,7 @@ public class ReportService {
 									placeRepository.save(place.get());
 								} else if (r.getContent().equals("여자 화장실 비상벨이 없거나 파손됨")) {
 									String inputString = place.get().getEmergency_bell();
-									String s = inputString.replaceAll("(?i)" + "남자", "");
+									String s = inputString.replaceAll("(?i)" + "여자", "");
 									place.get().setEmergency_bell(s);
 									placeRepository.save(place.get());
 								} else if (r.getContent().equals("장애인 화장실 비상벨이 있음")) {
@@ -219,7 +219,7 @@ public class ReportService {
 						}
 					}
 				}
-			//} ip중복해제
+			} 
 			reportRepository.save(report);
 			return ResponseEntity.ok("Request successful");
 		}
@@ -274,7 +274,7 @@ public class ReportService {
 					placeRepository.save(place.get());
 				} else if (r.getContent().equals("여자 화장실 비상벨이 없거나 파손됨")) {
 					String inputString = place.get().getEmergency_bell();
-					String s = inputString.replaceAll("(?i)" + "남자", "");
+					String s = inputString.replaceAll("(?i)" + "여자", "");
 					place.get().setEmergency_bell(s);
 					placeRepository.save(place.get());
 				} else if (r.getContent().equals("장애인 화장실 비상벨이 있음")) {

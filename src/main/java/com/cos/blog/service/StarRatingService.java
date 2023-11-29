@@ -49,10 +49,13 @@ public class StarRatingService {
 				starRating.setScore(score);
 				List<StarRating> calip = starRatingRepository.findByPlace(place.get());
 				Boolean ipSame = false;
-				/*
-				 * for(StarRating s : calip) { if(s.getIp()!=null && s.getIp().equals(ip)){
-				 * ipSame = true; return ResponseEntity.status(400).body("fail"); } }
-				 */
+				
+				  for(StarRating s : calip) { 
+					  if(s.getIp()!=null && s.getIp().equals(ip)){
+				  ipSame = true; return ResponseEntity.status(400).body("fail"); 
+					  }
+				  }
+				
 				if(!ipSame) {
 				starRating.setIp(ip);
 				starRatingRepository.save(starRating);

@@ -63,15 +63,15 @@ public class PlaceService {
 				}
 				if (changing_table_man.equals("true") && changing_table_woman.equals("true")) {
 					if (!(place.getDiaper().equals("남자") || place.getDiaper().equals("여자")
-							|| place.getDisabled_woman().equals("남여")))
+							|| place.getDiaper().equals("남여")))
 						check = false;
 				}
-				if (!changing_table_man.equals("true") && changing_table_woman.equals("true")) {
-					if (!(place.getDiaper().equals("여자") || place.getDisabled_woman().equals("남여")))
+				else if (!changing_table_man.equals("true") && changing_table_woman.equals("true")) {
+					if (!(place.getDiaper().equals("여자") || place.getDiaper().equals("남여")))
 						check = false;
 				}
-				if (changing_table_man.equals("true") && !changing_table_woman.equals("true")) {
-					if (!(place.getDiaper().equals("남자") || place.getDisabled_woman().equals("남여")))
+				else if (changing_table_man.equals("true") && !changing_table_woman.equals("true")) {
+					if (!(place.getDiaper().equals("남자") || place.getDiaper().equals("남여")))
 						check = false;
 				}
 				if (emergency_bell_disabled.equals("true") && emergency_bell_man.equals("true")
@@ -80,35 +80,35 @@ public class PlaceService {
 							|| place.getEmergency_bell().indexOf("여자") != -1))
 						check = false;
 				}
-				if (!emergency_bell_disabled.equals("true") && emergency_bell_man.equals("true")
+				else if (!emergency_bell_disabled.equals("true") && emergency_bell_man.equals("true")
 						&& emergency_bell_woman.equals("true")) {
 					if (!(place.getEmergency_bell().indexOf("남자") != -1
 							|| place.getEmergency_bell().indexOf("여자") != -1))
 						check = false;
 				}
-				if (emergency_bell_disabled.equals("true") && !emergency_bell_man.equals("true")
+				else if (emergency_bell_disabled.equals("true") && !emergency_bell_man.equals("true")
 						&& emergency_bell_woman.equals("true")) {
 					if (!(place.getEmergency_bell().indexOf("장애") != -1
 							|| place.getEmergency_bell().indexOf("여자") != -1))
 						check = false;
 				}
-				if (emergency_bell_disabled.equals("true") && emergency_bell_man.equals("true")
+				else if (emergency_bell_disabled.equals("true") && emergency_bell_man.equals("true")
 						&& !emergency_bell_woman.equals("true")) {
 					if (!(place.getEmergency_bell().indexOf("장애") != -1
 							|| place.getEmergency_bell().indexOf("남자") != -1))
 						check = false;
 				}
-				if (!emergency_bell_disabled.equals("true") && !emergency_bell_man.equals("true")
+				else if (!emergency_bell_disabled.equals("true") && !emergency_bell_man.equals("true")
 						&& emergency_bell_woman.equals("true")) {
 					if (!(place.getEmergency_bell().indexOf("여자") != -1))
 						check = false;
 				}
-				if (emergency_bell_disabled.equals("true") && !emergency_bell_man.equals("true")
+				else if (emergency_bell_disabled.equals("true") && !emergency_bell_man.equals("true")
 						&& !emergency_bell_woman.equals("true")) {
 					if (!(place.getEmergency_bell().indexOf("장애") != -1))
 						check = false;
 				}
-				if (!emergency_bell_disabled.equals("true") && emergency_bell_man.equals("true")
+				else if (!emergency_bell_disabled.equals("true") && emergency_bell_man.equals("true")
 						&& !emergency_bell_woman.equals("true")) {
 					if (!(place.getEmergency_bell().indexOf("남자") != -1))
 						check = false;
@@ -129,7 +129,7 @@ public class PlaceService {
 				}
 				else {
 					if(leftValue <= starplace.getStar_average() && starplace.getStar_average() <= rightValue) {
-						if(starplace.getStar_average()<= 2.5) starplaces.add(new PlaceContainer(starplace, 3));
+						if(starplace.getStar_average()>=1 && starplace.getStar_average()<= 2.5) starplaces.add(new PlaceContainer(starplace, 3));
 						else if(starplace.getStar_average()<  4) starplaces.add(new PlaceContainer(starplace, 1));
 						else starplaces.add(new PlaceContainer(starplace, 2));
 					}
@@ -140,7 +140,7 @@ public class PlaceService {
 			}
 			else {
 				if(leftValue <= starplace.getStar_average() && starplace.getStar_average() <= rightValue) {
-					if(starplace.getStar_average()<= 2.5) starplaces.add(new PlaceContainer(starplace, 3));
+					if(starplace.getStar_average()>=1 && starplace.getStar_average()<= 2.5) starplaces.add(new PlaceContainer(starplace, 3));
 					else if(starplace.getStar_average()<  4) starplaces.add(new PlaceContainer(starplace, 1));
 					else starplaces.add(new PlaceContainer(starplace, 2));
 				}
