@@ -75,12 +75,16 @@
     font-size: 15px;
     border-bottom: 1px solid #ccc;
     color: red;
+    word-wrap: break-word;
+    white-space: normal; 
 }
 
 .overlay-address{
     background-color: white;
     padding: 5px;
     font-size: 13px;
+    word-wrap: break-word;
+    white-space: normal; 
 }
 
 .overlay-star-container{
@@ -123,4 +127,9 @@
     border: none;
     border-radius: 3px;
     cursor: pointer;
+}
+
+p{
+    text-align:center;
+    padding-top:10px;
 }
