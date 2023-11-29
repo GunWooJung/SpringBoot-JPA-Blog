@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     alert('이미 작성한 댓글이 있습니다.');
 
                 }
-                if (body.trim().toLowerCase() === "blank") {
+                else if (body.trim().toLowerCase() === "blank") {
                     // 빈칸이 존재
                     alert('입력하지 않은 칸이 존재합니다.');
                 }

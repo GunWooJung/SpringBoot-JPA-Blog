@@ -12,7 +12,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        font-size: 16px; /* 모바일 기기에 맞게 폰트 크기 조정 */
+        font-size: 16px; 
         font-family: 'Noto Sans KR', sans-serif;
         overflow-x: hidden;
     }

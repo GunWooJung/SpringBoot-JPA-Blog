@@ -31,7 +31,7 @@ function createOverlayContent(place) {
        </div>
        <div class="button-container">
        <div class="overlay-close-btn" onclick="closeCurrentOverlay()">닫기</div>
-       <a href="/viewdetails?id=${place.id}" target="_self" onclick="saveLastViewedPlace(${place.lat}, ${place.lng})">상세보기</a>
+       <p><a href="/viewdetails?id=${place.id}" target="_self" onclick="saveLastViewedPlace(${place.lat}, ${place.lng})">상세보기</a></p>
            </div>
        </div>
    </div>

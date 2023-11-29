@@ -1,17 +1,18 @@
 var mapContainer = document.getElementById('map'),
     mapOption = {
         center: new kakao.maps.LatLng(37.504937827895866, 126.9576790776909),
-        level: 2
+        level: 3
     };
 // 준원
 var map = new kakao.maps.Map(mapContainer, mapOption);
 var currentInfowindow = null;
 var markers = [];
 //11.24추가 시작
-var imageGraySrc = 'img/gray_marker.png'; // 마커이미지의 주소입니다    
-var imageBlueSrc = 'img/blue_marker.png';
-var imageGreenSrc = 'img/green_marker.png';
-var imageRedSrc = 'img/red_marker.png';
+var imageGraySrc = 'img/gray_marker.svg';   
+var imageBlueSrc = 'img/blue_marker.svg';
+var imageGreenSrc = 'img/green_marker.svg';
+var imageRedSrc = 'img/red_marker.svg';
+var imageYellowSrc = 'img/yellow_marker.svg'; //11.29 3:39 추가
 
 var imageSize = new kakao.maps.Size(30,30); // 마커이미지의 크기입니다
 			 // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
@@ -143,12 +144,20 @@ function markPlaces(places) {
     var markerImageBlue = new kakao.maps.MarkerImage(imageBlueSrc, imageSize, imageOption);
     var markerImageGreen = new kakao.maps.MarkerImage(imageGreenSrc, imageSize, imageOption);
     var markerImageRed = new kakao.maps.MarkerImage(imageRedSrc, imageSize, imageOption);
+ 	var markerImageYellow = new kakao.maps.MarkerImage(imageYellowSrc, imageSize, imageOption);
        places.forEach(function (place) { //11.24 plcacecontainer로 변경
     var markerPosition = new kakao.maps.LatLng(place.lat, place.lng);
     //11.24 마커 색상 조건
-    var marker;// 0은 회색 , 1은 파란색 , 2는 초록색 , 3은 빨강
+    var marker;// 0은 회색 , 1은 파란색 , 2는 초록색 , 3은 빨강 ,4는 노란색
     //console.log(place.color);
-    if( place.color == 3){
+    if( place.color == 4){
+        marker =  new kakao.maps.Marker({
+            position: markerPosition,
+            title: place.name ,
+            image: markerImageYellow 	//11.24추가 markerImage
+        });
+    }
+    else if( place.color == 3){
         marker =  new kakao.maps.Marker({
             position: markerPosition,
             title: place.name ,
@@ -198,7 +207,7 @@ function searchNearby(keyword, location, page = 1) {
         .then(response => response.json())
         .then(data => {
             const convertedData = convertToPlaceFormat(data);
-			//11.28 추가
+            //11.28 추가
 			if (convertedData.length === 0) {
                 alert("검색 결과가 존재하지 않습니다.");
             } 
@@ -206,7 +215,7 @@ function searchNearby(keyword, location, page = 1) {
             markPlaces(convertedData);
             if (!initialSearchDone && convertedData.length > 0) {
                 map.panTo(new kakao.maps.LatLng(convertedData[0].lat, convertedData[0].lng));
-           		saveCurrentMapCenter();
+            saveCurrentMapCenter();
                 initialSearchDone = true; // Set the flag so the map doesn't re-center on subsequent data fetches
             }
         })

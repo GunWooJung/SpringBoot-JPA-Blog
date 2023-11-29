@@ -116,7 +116,6 @@
     flex-direction: row;
     justify-content: space-around; 
     width: 100%; 
-    padding: 10px; 
     font-size: 15px;
 }
 
@@ -290,7 +289,6 @@ input[id="cb1"] {
     flex-direction: row;
     justify-content: space-around; 
     width: 100%; 
-    padding: 10px; 
     font-size: 15px;
 }
 
@@ -462,7 +460,6 @@ input[id="cb1"] {
     flex-direction: row;
     justify-content: space-around; 
     width: 100%; 
-    padding: 10px; 
     font-size: 15px;
 }
 

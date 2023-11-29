@@ -1,17 +1,22 @@
+@media (max-width: 480px) {
 #slider-container {
     position: relative;
-    top: 40px;
-    width: 300px;
+    top: 10px;
+    left: 20%;
+    margin-bottom:40px;
+    width: 60%;
     height: 80px;
+    
 }
 
 .slider-bar {
     position: absolute;
-    width: 300px;
+    width: 100%;
     height: 10px; 
     background-color: #ddd; 
     top: 20px;
     border-radius: 5px;
+    transform: translateY(-50%); 
 }
 
 .slider-bar-filled {
@@ -25,14 +30,17 @@
 
 .handle {
     position: absolute;
-    background-color: #ff0000; 
-    width: 20px; 
-    height: 20px; 
+    background-color: blue; 
+    width: 1.5rem; 
+    height: 1.5rem; 
     border-radius: 50%; 
-    top: 15px;
     z-index: 2;
     cursor: pointer;
+    
+    transform: translateY(30%); /* Handle을 세로 중앙으로 정렬 */
+
 }
+
 
 .signLeft {
     position: absolute;
@@ -45,16 +53,7 @@
     transform: translateX(-50%); 
 }
 
-.signLeft::after {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent #555 transparent;
-}
+
 
 .signRight {
     position: absolute;
@@ -67,16 +66,6 @@
     transform: translateX(-50%);
 }
 
-.signRight::after {
-    content: " ";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-}
 
 #handle-left {
     left: 0;
@@ -85,3 +74,237 @@
 #handle-right {
     right: 0;
   }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    #slider-container {
+        position: relative;
+        top: 10px;
+        left: 20%;
+        margin-bottom:40px;
+        width: 60%;
+        height: 80px;
+        
+    }
+    
+    .slider-bar {
+        position: absolute;
+        width: 100%;
+        height: 10px; 
+        background-color: #ddd; 
+        top: 20px;
+        border-radius: 5px;
+        transform: translateY(-50%); 
+    }
+    
+    .slider-bar-filled {
+        position: absolute;
+        height: 10px;
+        background-color: #FFD700; 
+        top: 20px;
+        border-radius: 5px;
+        z-index: 1;
+    }
+    
+    .handle {
+        position: absolute;
+        background-color: blue; 
+        width: 1.5rem; 
+        height: 1.5rem; 
+        border-radius: 50%; 
+        z-index: 2;
+        cursor: pointer;
+        
+        transform: translateY(30%); /* Handle을 세로 중앙으로 정렬 */
+    
+    }
+    
+    
+    .signLeft {
+        position: absolute;
+        background-color: #555;
+        color: white;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 10px;
+        z-index: 3;
+        transform: translateX(-50%); 
+    }
+    
+    
+    
+    .signRight {
+        position: absolute;
+        background-color: #555;
+        color: white;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 10px;
+        z-index: 3;
+        transform: translateX(-50%);
+    }
+    
+    
+    #handle-left {
+        left: 0;
+    }
+    
+    #handle-right {
+        right: 0;
+      }
+    }
+    @media (min-width: 481px) and (max-width: 768px) {
+    #slider-container {
+        position: relative;
+        top: 10px;
+        left: 20%;
+        margin-bottom:40px;
+        width: 60%;
+        height: 80px;
+        
+    }
+    
+    .slider-bar {
+        position: absolute;
+        width: 100%;
+        height: 10px; 
+        background-color: #ddd; 
+        top: 20px;
+        border-radius: 5px;
+        transform: translateY(-50%); 
+    }
+    
+    .slider-bar-filled {
+        position: absolute;
+        height: 10px;
+        background-color: #FFD700; 
+        top: 20px;
+        border-radius: 5px;
+        z-index: 1;
+    }
+    
+    .handle {
+        position: absolute;
+        background-color: blue; 
+        width: 1.5rem; 
+        height: 1.5rem; 
+        border-radius: 50%; 
+        z-index: 2;
+        cursor: pointer;
+        
+        transform: translateY(30%); /* Handle을 세로 중앙으로 정렬 */
+    
+    }
+    
+    
+    .signLeft {
+        position: absolute;
+        background-color: #555;
+        color: white;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 10px;
+        z-index: 3;
+        transform: translateX(-50%); 
+    }
+    
+    
+    
+    .signRight {
+        position: absolute;
+        background-color: #555;
+        color: white;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 10px;
+        z-index: 3;
+        transform: translateX(-50%);
+    }
+    
+    
+    #handle-left {
+        left: 0;
+    }
+    
+    #handle-right {
+        right: 0;
+      }
+    }
+
+    @media (min-width: 769px) {
+        #slider-container {
+            position: relative;
+            top: 10px;
+            left: 20%;
+            margin-bottom:40px;
+            width: 60%;
+            height: 80px;
+            
+        }
+        
+        .slider-bar {
+            position: absolute;
+            width: 100%;
+            height: 10px; 
+            background-color: #ddd; 
+            top: 20px;
+            border-radius: 5px;
+            transform: translateY(-50%); 
+        }
+        
+        .slider-bar-filled {
+            position: absolute;
+            height: 10px;
+            background-color: #FFD700; 
+            top: 20px;
+            border-radius: 5px;
+            z-index: 1;
+        }
+        
+        .handle {
+            position: absolute;
+            background-color: blue; 
+            width: 1.5rem; 
+            height: 1.5rem; 
+            border-radius: 50%; 
+            z-index: 2;
+            cursor: pointer;
+            
+            transform: translateY(30%); /* Handle을 세로 중앙으로 정렬 */
+        
+        }
+        
+        
+        .signLeft {
+            position: absolute;
+            background-color: #555;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 10px;
+            z-index: 3;
+            transform: translateX(-50%); 
+        }
+        
+        
+        
+        .signRight {
+            position: absolute;
+            background-color: #555;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 10px;
+            z-index: 3;
+            transform: translateX(-50%);
+        }
+        
+        
+        #handle-left {
+            left: 0;
+        }
+        
+        #handle-right {
+            right: 0;
+          }
+        }

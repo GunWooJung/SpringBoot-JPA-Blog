@@ -3,7 +3,7 @@
 function createOverlayContent(place) {
 
     const starRating = Number.isInteger(place.averageOfStarRating) ? `${place.averageOfStarRating}.0` : place.averageOfStarRating;
-
+/*
     return `
         <div class="custom-overlay">
             <div class="overlay-inner">
@@ -17,9 +17,27 @@ function createOverlayContent(place) {
             </div>
         </div>
     `;
+    */
+   /*test*/
+   return `
+   <div class="custom-overlay">
+   <div class="overlay-inner">
+       <div class="overlay-header">${place.name}</div> 
+       <div class="overlay-address">${place.address}</div>
+       <div class="overlay-star-container">
+           <div class="overlay-star-rating">평점 : ${starRating}</div>
+           <div class="overlay-star-rating-count">(${place.numberOfStarRating})</div>
+           <div class="overlay-comment-count">댓글 : ${place.numberOfComments}</div>
+       </div>
+       <div class="button-container">
+       <div class="overlay-close-btn" onclick="closeCurrentOverlay()">닫기</div>
+       <a href="/viewdetails?id=${place.id}" target="_self" onclick="saveLastViewedPlace(${place.lat}, ${place.lng})">상세보기</a>
+           </div>
+       </div>
+   </div>
+</div>
+    `;
 }
-
-
 
 function createPlaceOverlay(place, map) {
     var overlayContent = createOverlayContent(place);

@@ -78,27 +78,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
             const disabledManIcon = document.getElementById('disabled_man').querySelector('img');
-            disabledManIcon.src = place.disabled_man === "있음" ? '/public/disabled_man_colored.svg' : '/public/disabled_man_gray.svg';
+            disabledManIcon.src = place.disabled_man === "있음" ? '/public/disabled_man_colored.png' : '/public/disabled_man_gray.png';
    
             const disabledWomanIcon = document.getElementById('disabled_woman').querySelector('img');
-            disabledWomanIcon.src = place.disabled_woman === "있음" ? '/public/disabled_woman_colored2.svg' : '/public/disabled_woman_gray.svg';
+            disabledWomanIcon.src = place.disabled_woman === "있음" ? '/public/disabled_woman_colored2.png' : '/public/disabled_woman_gray.png';
 
 
             const diaperManIcon = document.getElementById('diaper_man').querySelector('img');
-            diaperManIcon.src = place.diaper.indexOf("남") !== -1 ? '/public/diaper_man_colored.svg' : '/public/diaper_man_gray.svg';
+            diaperManIcon.src = place.diaper.indexOf("남") !== -1 ? '/public/diaper_man_colored.png' : '/public/diaper_man_gray.png';
 
             const diaperWomanIcon = document.getElementById('diaper_woman').querySelector('img');
-            diaperWomanIcon.src = place.diaper.indexOf("여") !== -1 ? '/public/diaper_woman_colored2.svg' : '/public/diaper_woman_gray.svg';
+            diaperWomanIcon.src = place.diaper.indexOf("여") !== -1 ? '/public/diaper_woman_colored2.png' : '/public/diaper_woman_gray.png';
 
 
             const bellManIcon = document.getElementById('bell_man').querySelector('img');
-            bellManIcon.src = place.emergency_bell.indexOf("남") !== -1 ? '/public/bell_man_colored.svg' : '/public/bell_man_gray.svg';
+            bellManIcon.src = place.emergency_bell.indexOf("남") !== -1 ? '/public/bell_man_colored.png' : '/public/bell_man_gray.png';
 
             const bellWomanIcon = document.getElementById('bell_woman').querySelector('img');
-            bellWomanIcon.src = place.emergency_bell.indexOf("여") !== -1 ? '/public/bell_woman_colored2.svg' : '/public/bell_woman_gray.svg';
+            bellWomanIcon.src = place.emergency_bell.indexOf("여") !== -1 ? '/public/bell_woman_colored2.png' : '/public/bell_woman_gray.png';
 
             const bellDisabledIcon = document.getElementById('bell_disabled').querySelector('img');
-            bellDisabledIcon.src = place.emergency_bell.indexOf("장애") !== -1 ? '/public/bell_disabled_colored3.svg' : '/public/bell_disabled_gray.svg';
+            bellDisabledIcon.src = place.emergency_bell.indexOf("장애") !== -1 ? '/public/bell_disabled_colored3.png' : '/public/bell_disabled_gray.png';
 
 
             // if (place.disabled_man == "있음")
@@ -251,6 +251,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const commentToDelete = document.querySelector(`[data-comment-id="${commentId}"]`).parentNode;
                     commentToDelete.remove();
                     alert('댓글이 삭제되었습니다.');
+   					location.reload(); //11.29 수정
                 }
             });
     }
@@ -306,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     alert('이미 작성한 댓글이 있습니다.');
 
                 }
-                if (body.trim().toLowerCase() === "blank") {
+                else if (body.trim().toLowerCase() === "blank") {
                     // 빈칸이 존재
                     alert('입력하지 않은 칸이 존재합니다.');
                 }

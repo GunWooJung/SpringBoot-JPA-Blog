@@ -6,9 +6,11 @@ const valueLeft = document.getElementById('value-left');
 const valueRight = document.getElementById('value-right');
 const signRight = document.getElementById('sign-right')
 const signLeft = document.getElementById('sign-left')
+  const a = window.innerWidth;
+  const maxValue = 43;
+  screenWidth = (window.innerWidth * 0.8 - 42 )* 0.6;
+  const stepWidth = screenWidth / (maxValue - 1);
 
-  const maxValue = 41; 
-  const stepWidth = 280 / (maxValue - 1); 
   let leftValue = 0 * stepWidth;
   let rightValue = 40 * stepWidth;
 
@@ -24,24 +26,27 @@ const signLeft = document.getElementById('sign-left')
   }
 
   function showSignLeft(handle, sign, value) { //좌sign위치
+    if (value > 4.9)
+      value = (4.9).toFixed(1);
     sign.innerHTML = value; 
-    sign.style.left = (handle.offsetLeft + handle.offsetWidth / 2) + 'px'; 
-    sign.style.top = (handle.offsetTop + handle.offsetHeight + 5) + 'px'; 
+   // sign.style.left = (handle.offsetLeft + handle.offsetWidth / 2) + 'px'; 
+    //sign.style.top = (handle.offsetTop + handle.offsetHeight + 5) + 'px'; 
   }
 
   function showSignRight(handle, sign, value) { //우sign위치
+    if (value > 5.0)
+      value = (5.0).toFixed(1);
     sign.innerHTML = value; 
-    sign.style.left = (handle.offsetLeft + handle.offsetWidth / 2) + 'px'; 
-    sign.style.top = (handle.offsetTop - sign.offsetHeight - 10) + 'px'; 
+   // sign.style.left = (handle.offsetLeft + handle.offsetWidth / 2) + 'px'; 
+    //sign.style.top = (handle.offsetTop - sign.offsetHeight - 10) + 'px'; 
+    
   }
 
   function showSignInitial(){
     signLeft.innerHTML = (1).toFixed(1);
     signRight.innerHTML = (5).toFixed(1);
-    signLeft.style.left = 10 + 'px'; 
-    signRight.style.left = 290 + 'px'; 
-    signLeft.style.top = 40 + 'px'; 
-    signRight.style.top = -26 + 'px'; 
+    signLeft.style.left = -2 + 'rem';
+    signRight.style.right = -4.5 + 'rem'; 
   }
 
   function updateSignValueLeft(handle, sign) {
@@ -49,19 +54,10 @@ const signLeft = document.getElementById('sign-left')
     showSignLeft(handle, sign, value.toFixed(1)); 
   }
   function updateSignValueRight(handle, sign) {
-  const value = 1.01 + rightValue / stepWidth / 10; // rightValue를 바탕으로 계산
+  const value = 1.0 + rightValue / stepWidth / 10; // rightValue를 바탕으로 계산
   showSignRight(handle, sign, value.toFixed(1)); 
 }
-/*
-  // numWindow 필요없을시 삭제
-  function updateNumWindow(leftValue, rightValue) {
-  const leftValDisplay = document.getElementById('leftValDisplay');
-  const rightValDisplay = document.getElementById('rightValDisplay');
-  leftValDisplay.textContent = Math.round(leftValue / stepWidth + 1)/10;
-  rightValDisplay.textContent = Math.round(rightValue / stepWidth + 1)/10;
-}
-  //numWindow 필요없을시 삭제
-*/
+
 function updateHandlePosition(handle, newX, isLeftHandle) {
   let newStepPosition;
   newStepPosition = newX;
@@ -70,6 +66,7 @@ function updateHandlePosition(handle, newX, isLeftHandle) {
     // leftHandle이 rightHandle 위치까지 이동할 수 있도록 제한 제거
     newStepPosition = Math.max(newStepPosition, 0);
     newStepPosition = Math.min(newStepPosition, rightValue); // 겹칠 수 있음
+    
   } else {
     // rightHandle이 leftHandle 위치까지 이동할 수 있도록 제한 제거
     newStepPosition = Math.max(newStepPosition, leftValue); // 겹칠 수 있음
@@ -96,6 +93,7 @@ function handleTouch(e) {
         newX = 0.1;
       }
       leftValue = updateHandlePosition(handleLeft, newX, isLeftHandle);
+
     } else {
       newX = Math.max(newX, leftValue + stepWidth);
       rightValue = updateHandlePosition(handleRight, newX, isLeftHandle);
@@ -135,7 +133,7 @@ function handleDrag(e) {
       rightValue = updateHandlePosition(handleRight, newX, isLeftHandle);
     }
     // 업데이트된 leftValue와 rightValue를 사용하여 사인 업데이트
-    updateSignValueLeft(handleLeft, signLeft, true);
+   updateSignValueLeft(handleLeft, signLeft, true);
     updateSignValueRight(handleRight, signRight, false);
 
   };
@@ -143,20 +141,19 @@ function handleDrag(e) {
   document.onmouseup = () => {
     document.onmousemove = null;
     document.onmouseup = null;
+    
   };
+
 }
+
 function resetSlider() {
   showSignInitial();
   updateHandlePosition(handleLeft, 0, true);
-  updateHandlePosition(handleRight, 40 * stepWidth, false);
+  updateHandlePosition(handleRight, 44 * stepWidth, false);
   rightValue = 40 * stepWidth;
   leftValue = 0;
 }
-
-  showSignInitial();
-  // numWindow 필요없을시 삭제
-  //updateNumWindow(leftValue, rightValue);
-  // numWindow 필요없을시 삭제
+   showSignInitial();
   handleLeft.onmousedown = handleDrag;
   handleRight.onmousedown = handleDrag;
   handleLeft.ontouchstart = handleTouch;

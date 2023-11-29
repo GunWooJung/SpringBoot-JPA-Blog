@@ -63,10 +63,10 @@ function initializeMap() {
 var location_marker_displayed = false; // 현재 위치 마커 존재 여부
 var location_marker = null;  // 현재 위치 마커 
 //11.24추가 markerHomeImage
-var imageHomeSrc = 'img/home_marker.png', // 마커이미지의 주소입니다    
-    imageHomeSize = new kakao.maps.Size(30, 30), // 마커이미지의 크기입니다
-    // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-    imageHomeOption = { offset: new kakao.maps.Point(15, 15) };
+var imageHomeSrc = 'img/home_marker.png',   
+    imageHomeSize = new kakao.maps.Size(50, 50), //이전 값 30, 30
+    
+    imageHomeOption = { offset: new kakao.maps.Point(0, 30) }; // 이전값 15, 15
 // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
 
 function moveToCurrentLocation() {

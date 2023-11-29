@@ -1,4 +1,4 @@
-
+/*
 .custom-overlay {
     position: absolute;
     bottom: 50px;
@@ -53,4 +53,74 @@
 
 .custom-overlay .overlay-close-btn:hover {
     background-color: #d32f2f;
+}*/
+
+/*test*/
+
+.custom-overlay {
+    position: absolute;
+    bottom: 50px;
+    left: -50px;
+    width: 200px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    z-index: 2;
+}
+.overlay-header{
+    background-color: white;
+    padding: 5px;
+    font-size: 15px;
+    border-bottom: 1px solid #ccc;
+    color: red;
+}
+
+.overlay-address{
+    background-color: white;
+    padding: 5px;
+    font-size: 13px;
+}
+
+.overlay-star-container{
+    display: flex;
+}
+
+.overlay-star-rating{
+    background-color: white;
+    padding: 5px;
+    font-size: 13px;
+    color: #6276FF;
+}
+
+.overlay-star-rating-count{
+    background-color: white;
+    padding: 5px;
+    font-size: 13px;
+}
+
+.overlay-comment-count{
+    background-color: white;
+    padding: 5px;
+    font-size: 13px;
+}
+.button-container{
+    display: flex;
+    justify-content: space-between;
+}
+.detail-view-link {
+    text-align: right;
+}
+
+.overlay-close-btn {
+    display: block;
+    text-align: center;
+    margin-top: 8px;
+    padding: 3px 8px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
 }

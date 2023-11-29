@@ -8,10 +8,11 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var currentInfowindow = null;
 var markers = [];
 //11.24추가 시작
-var imageGraySrc = 'img/gray_marker.png';   
-var imageBlueSrc = 'img/blue_marker.png';
-var imageGreenSrc = 'img/green_marker.png';
-var imageRedSrc = 'img/red_marker.png';
+var imageGraySrc = 'img/gray_marker.svg';   
+var imageBlueSrc = 'img/blue_marker.svg';
+var imageGreenSrc = 'img/green_marker.svg';
+var imageRedSrc = 'img/red_marker.svg';
+var imageYellowSrc = 'img/yellow_marker.svg'; //11.29 3:39 추가
 
 var imageSize = new kakao.maps.Size(30,30); // 마커이미지의 크기입니다
 			 // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
@@ -143,12 +144,20 @@ function markPlaces(places) {
     var markerImageBlue = new kakao.maps.MarkerImage(imageBlueSrc, imageSize, imageOption);
     var markerImageGreen = new kakao.maps.MarkerImage(imageGreenSrc, imageSize, imageOption);
     var markerImageRed = new kakao.maps.MarkerImage(imageRedSrc, imageSize, imageOption);
+ 	var markerImageYellow = new kakao.maps.MarkerImage(imageYellowSrc, imageSize, imageOption);
        places.forEach(function (place) { //11.24 plcacecontainer로 변경
     var markerPosition = new kakao.maps.LatLng(place.lat, place.lng);
     //11.24 마커 색상 조건
-    var marker;// 0은 회색 , 1은 파란색 , 2는 초록색 , 3은 빨강
+    var marker;// 0은 회색 , 1은 파란색 , 2는 초록색 , 3은 빨강 ,4는 노란색
     //console.log(place.color);
-    if( place.color == 3){
+    if( place.color == 4){
+        marker =  new kakao.maps.Marker({
+            position: markerPosition,
+            title: place.name ,
+            image: markerImageYellow 	//11.24추가 markerImage
+        });
+    }
+    else if( place.color == 3){
         marker =  new kakao.maps.Marker({
             position: markerPosition,
             title: place.name ,

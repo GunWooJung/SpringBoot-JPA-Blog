@@ -116,7 +116,7 @@ public class PlaceService {
 				if (check) {
 					aroundPlaces.add(place);
 				}
-				else {  // 0은 회색 , 1은 파란색 , 2는 초록색 , 3은 빨강
+				else {  // 0은 회색 , 1은 파란색 , 2는 초록색 , 3은 빨강, 4는 노란색
 					starplaces.add(new PlaceContainer(place, 0)); // 조건 미만족 회색
 				}
 			}
@@ -130,7 +130,7 @@ public class PlaceService {
 				else {
 					if(leftValue <= starplace.getStar_average() && starplace.getStar_average() <= rightValue) {
 						if(starplace.getStar_average()>=1 && starplace.getStar_average()<= 2.5) starplaces.add(new PlaceContainer(starplace, 3));
-						else if(starplace.getStar_average()<  4) starplaces.add(new PlaceContainer(starplace, 1));
+						else if(starplace.getStar_average()<  4) starplaces.add(new PlaceContainer(starplace, 4));
 						else starplaces.add(new PlaceContainer(starplace, 2));
 					}
 					else {
@@ -141,7 +141,7 @@ public class PlaceService {
 			else {
 				if(leftValue <= starplace.getStar_average() && starplace.getStar_average() <= rightValue) {
 					if(starplace.getStar_average()>=1 && starplace.getStar_average()<= 2.5) starplaces.add(new PlaceContainer(starplace, 3));
-					else if(starplace.getStar_average()<  4) starplaces.add(new PlaceContainer(starplace, 1));
+					else if(starplace.getStar_average()<  4) starplaces.add(new PlaceContainer(starplace, 4));
 					else starplaces.add(new PlaceContainer(starplace, 2));
 				}
 				else {
