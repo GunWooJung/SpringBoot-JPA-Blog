@@ -63,8 +63,6 @@ document.getElementById('apply-filter').addEventListener('click', function () {
         .then(data => {
             // convertToPlaceFormat 함수를 이용해 백엔드로부터 받은 데이터를 마커로 변환
             const convertedData = convertToPlaceFormat(data);
- console.log("별점 미평가 포함: ", document.getElementById('rated').checked);
-    console.log("별점 미평가 포함안함: ", document.getElementById('not_rated').checked);
             markPlaces(convertedData);
         })
         .catch(error => {
@@ -72,6 +70,9 @@ document.getElementById('apply-filter').addEventListener('click', function () {
         });
 
 
+    //콘솔 필요 없으면 주석 처리해
+    console.log("별점 미평가 포함: ", document.getElementById('rated').checked);
+    console.log("별점 미평가 포함안함: ", document.getElementById('not_rated').checked);
     // Close the modal
     modal.style.display = 'none';
 });

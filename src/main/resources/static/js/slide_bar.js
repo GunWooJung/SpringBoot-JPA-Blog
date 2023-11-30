@@ -1,4 +1,5 @@
 const sliderContainer = document.getElementById('slider-container');
+const sliderBar = document.getElementById('slider-bar');
 const sliderBarFilled = document.getElementById('slider-bar-filled');
 const handleLeft = document.getElementById('handle-left');
 const handleRight = document.getElementById('handle-right');
@@ -77,10 +78,18 @@ function updateHandlePosition(handle, newX, isLeftHandle) {
   return newStepPosition;
 }
 
+
+function updateSliderBar() {
+  const leftPos = handleLeft.offsetLeft;
+  const rightPos = handleRight.offsetLeft + handleRight.offsetWidth;
+  sliderBarFilled.style.left = leftPos + 'px';
+  sliderBarFilled.style.width = (rightPos - leftPos) + 'px';
+}
+
 function handleTouch(e) {
   e.preventDefault();
   const handle = e.target;
-  const rect = sliderBarFilled.getBoundingClientRect();
+  const rect = sliderBar.getBoundingClientRect();
   const isLeftHandle = handle === handleLeft;
 
 
@@ -101,6 +110,7 @@ function handleTouch(e) {
 
     updateSignValueLeft(handleLeft, signLeft, true);
     updateSignValueRight(handleRight, signRight, false);
+    updateSliderBar();
   };
 
   document.ontouchstart = (event) => {
@@ -115,7 +125,7 @@ function handleTouch(e) {
 function handleDrag(e) {
 
   const handle = e.target;
-  const rect = sliderBarFilled.getBoundingClientRect();
+  const rect = sliderBar.getBoundingClientRect();
   const isLeftHandle = handle === handleLeft;
 
   document.onmousemove = (event) => {
@@ -135,6 +145,7 @@ function handleDrag(e) {
     // 업데이트된 leftValue와 rightValue를 사용하여 사인 업데이트
    updateSignValueLeft(handleLeft, signLeft, true);
     updateSignValueRight(handleRight, signRight, false);
+    updateSliderBar();  
 
   };
 

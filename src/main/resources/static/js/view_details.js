@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const commentToDelete = document.querySelector(`[data-comment-id="${commentId}"]`).parentNode;
                     commentToDelete.remove();
                     alert('댓글이 삭제되었습니다.');
-   					location.reload(); //11.29 수정
+                    location.reload();
                 }
             });
     }
