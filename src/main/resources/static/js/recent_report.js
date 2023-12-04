@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
             reportsContainer.appendChild(reportElement);
         });
     }
-    displayDummyData(); // 더미 데이터 표시 함수 호출
+    //displayDummyData(); // 더미 데이터 표시 함수 호출
 
     ///////////////////////////////////////////////////
 

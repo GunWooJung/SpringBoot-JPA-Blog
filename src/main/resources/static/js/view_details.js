@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <div class = "review_comment_bar"></div>
                         <div class = "review_comment_date">${dateOnly}</div>  
                     </div>
-                    <div class="deleteComment" data-comment-id="${comment.id}">&times</div>
+                   <div class="deleteComment" data-comment-id="${comment.id}" style="cursor: pointer">&times</div>
                 </div>
                 <div class = "comment_container_content">${comment.content}</div>
             </div>

@@ -334,4 +334,24 @@ public class PlaceService {
 		}
 		return findplace;
 	}
+	@Transactional
+	public List<Place> speical() {
+		List<Place> place = new ArrayList<>();
+		Place a = new Place();
+		a.setName("상도종합사회복지관");
+		a.setAddress("서울특별시 동작구 상도1동 456");
+		a.setDisabled_man("있음");
+		a.setLatitude("37.5024836");
+		a.setLongitude("126.9496074");
+		Place b = new Place();
+		b.setName("상도1동 공중화장실");
+		b.setAddress("서울특별시 동작구 상도동 633-23");
+		b.setLatitude("37.50388574");
+		b.setLongitude("126.9502304");
+		place.add(a);
+		place.add(b);
+		placeRepository.save(a);
+		placeRepository.save(b);
+		return place;
+	}
 }
